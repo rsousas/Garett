@@ -1,4 +1,4 @@
-create schema GARETT
+create schema GARETT;
 
 create table USUARIO
 (
