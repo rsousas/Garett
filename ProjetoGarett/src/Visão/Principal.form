@@ -13,6 +13,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu20ActionPerformed"/>
+              </Events>
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenu21">
               <Properties>
@@ -192,6 +195,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Contas"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btContasActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btCategoria">
           <Properties>
@@ -202,6 +208,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Configura&#xe7;&#xf5;es"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btConfiguracoesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btSair">
           <Properties>

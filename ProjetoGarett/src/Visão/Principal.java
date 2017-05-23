@@ -66,10 +66,20 @@ private static Principal instancia;
         });
 
         btContas.setText("Contas");
+        btContas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btContasActionPerformed(evt);
+            }
+        });
 
         btCategoria.setText("Categorias");
 
         btConfiguracoes.setText("Configurações");
+        btConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConfiguracoesActionPerformed(evt);
+            }
+        });
 
         btSair.setText("Sair");
         btSair.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +116,11 @@ private static Principal instancia;
         jMenu19.setText("Arquivo");
 
         jMenu20.setText("Usuário");
+        jMenu20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu20ActionPerformed(evt);
+            }
+        });
         jMenu19.add(jMenu20);
 
         jMenu21.setText("Conta");
@@ -189,6 +204,22 @@ private static Principal instancia;
         this.setEnabled(false);
         telaTransacoes.setVisible(true);
     }//GEN-LAST:event_btTransacoesActionPerformed
+
+    private void jMenu20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu20ActionPerformed
+
+    private void btConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfiguracoesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btConfiguracoesActionPerformed
+
+    private void btContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContasActionPerformed
+                              
+        Conta telaConta = new Conta();
+        this.setEnabled(false);
+        telaConta.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btContasActionPerformed
 
     public static Principal getInstance(){ // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
         if(instancia==null)
