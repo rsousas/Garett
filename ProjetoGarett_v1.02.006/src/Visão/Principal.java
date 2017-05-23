@@ -5,6 +5,8 @@
  */
 package Visão;
 
+import java.net.URL;
+
 /**
  *
  * @author renat
@@ -506,7 +508,7 @@ private static Principal instancia;
         jMenu28.add(jRadioButtonMenuItem9);
 
         jRadioButtonMenuItem10.setSelected(true);
-        jRadioButtonMenuItem10.setText("Contas");
+        jRadioButtonMenuItem10.setText("Transações");
         jRadioButtonMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem10ActionPerformed(evt);
@@ -682,27 +684,27 @@ private static Principal instancia;
     }//GEN-LAST:event_jRadioButtonMenuItem4ActionPerformed
 
     private void jRadioButtonMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem9ActionPerformed
-        // TODO add your handling code here:
+        URL jasper = this.getClass().getResource("/Relatorios/Categorias.jasper");  
     }//GEN-LAST:event_jRadioButtonMenuItem9ActionPerformed
 
     private void jRadioButtonMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem10ActionPerformed
-        // TODO add your handling code here:
+        URL jasper = this.getClass().getResource("/Relatorios/Transacoes.jasper");  
     }//GEN-LAST:event_jRadioButtonMenuItem10ActionPerformed
 
     private void jRadioButtonMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem11ActionPerformed
-        // TODO add your handling code here:
+        URL jasper = this.getClass().getResource("/Relatorios/Receitas.jasper");  
     }//GEN-LAST:event_jRadioButtonMenuItem11ActionPerformed
 
     private void jRadioButtonMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem8ActionPerformed
-        // TODO add your handling code here:
+        URL jasper = this.getClass().getResource("/Relatorios/Usuarios.jasper");  
     }//GEN-LAST:event_jRadioButtonMenuItem8ActionPerformed
 
     private void jRadioButtonMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem12ActionPerformed
-        // TODO add your handling code here:
+        URL jasper = this.getClass().getResource("/Relatorios/Despesas.jasper");  
     }//GEN-LAST:event_jRadioButtonMenuItem12ActionPerformed
 
     private void jRadioButtonMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem13ActionPerformed
-        // TODO add your handling code here:
+        URL jasper = this.getClass().getResource("/Relatorios/Transferencias.jasper");  
     }//GEN-LAST:event_jRadioButtonMenuItem13ActionPerformed
 
     private void jRadioButtonMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem14ActionPerformed
