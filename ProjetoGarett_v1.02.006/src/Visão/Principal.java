@@ -74,6 +74,8 @@ private static Principal instancia;
         jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem15 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem16 = new javax.swing.JRadioButtonMenuItem();
         jMenu24 = new javax.swing.JMenu();
         jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem6 = new javax.swing.JRadioButtonMenuItem();
@@ -447,6 +449,24 @@ private static Principal instancia;
         });
         jMenu19.add(jRadioButtonMenuItem4);
 
+        jRadioButtonMenuItem15.setSelected(true);
+        jRadioButtonMenuItem15.setText("Configurações");
+        jRadioButtonMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu19.add(jRadioButtonMenuItem15);
+
+        jRadioButtonMenuItem16.setSelected(true);
+        jRadioButtonMenuItem16.setText("Sair");
+        jRadioButtonMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu19.add(jRadioButtonMenuItem16);
+
         jMenuBar3.add(jMenu19);
 
         jMenu24.setText("Editar");
@@ -689,6 +709,14 @@ private static Principal instancia;
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonMenuItem14ActionPerformed
 
+    private void jRadioButtonMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonMenuItem15ActionPerformed
+
+    private void jRadioButtonMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem16ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonMenuItem16ActionPerformed
+
     public static Principal getInstance(){ // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
         if(instancia==null)
             instancia = new Principal();        
@@ -769,6 +797,8 @@ private static Principal instancia;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem12;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem13;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem14;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem15;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem16;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;

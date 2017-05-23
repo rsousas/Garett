@@ -47,6 +47,7 @@ public class Categoria extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(725, 295));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
