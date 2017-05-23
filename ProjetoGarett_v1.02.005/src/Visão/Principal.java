@@ -246,7 +246,7 @@ private static Principal instancia;
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btSalvarNovo)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -263,8 +263,8 @@ private static Principal instancia;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(337, 337, 337)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(349, 349, 349)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -446,9 +446,19 @@ private static Principal instancia;
         jMenu28.setText("Relatório");
 
         jMenu31.setText("Usuário");
+        jMenu31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu31ActionPerformed(evt);
+            }
+        });
         jMenu28.add(jMenu31);
 
         jMenu29.setText("Categoria");
+        jMenu29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu29ActionPerformed(evt);
+            }
+        });
         jMenu28.add(jMenu29);
 
         jMenu30.setText("Conta");
@@ -485,7 +495,7 @@ private static Principal instancia;
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 393, Short.MAX_VALUE))
+                .addGap(0, 390, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -499,11 +509,11 @@ private static Principal instancia;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
-        setSize(new java.awt.Dimension(1116, 723));
+        setSize(new java.awt.Dimension(1116, 770));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -576,6 +586,14 @@ private static Principal instancia;
     private void btSalvarNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarNovoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btSalvarNovoActionPerformed
+
+    private void jMenu31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu31ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu31ActionPerformed
+
+    private void jMenu29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu29ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu29ActionPerformed
 
     public static Principal getInstance(){ // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
         if(instancia==null)
