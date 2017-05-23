@@ -188,10 +188,10 @@ private static Principal instancia;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 590, Short.MAX_VALUE))
+                .addGap(0, 559, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(1116, 754));
+        setSize(new java.awt.Dimension(1116, 723));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
