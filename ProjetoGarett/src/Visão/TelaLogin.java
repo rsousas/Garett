@@ -73,9 +73,11 @@ public class TelaLogin extends javax.swing.JFrame {
         getContentPane().add(jPasswordField1);
         jPasswordField1.setBounds(60, 120, 220, 30);
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Esqueceu a senha?");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(160, 150, 120, 14);
+        jLabel2.setBounds(170, 150, 110, 14);
 
         jButton1.setBackground(new java.awt.Color(51, 51, 255));
         jButton1.setText("Cadastrar?");

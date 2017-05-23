@@ -34,9 +34,25 @@ private static Principal instancia;
         btCategoria = new javax.swing.JButton();
         btConfiguracoes = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
-        jMenuBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu19 = new javax.swing.JMenu();
+        jMenu20 = new javax.swing.JMenu();
+        jMenu21 = new javax.swing.JMenu();
+        jMenu22 = new javax.swing.JMenu();
+        jMenu23 = new javax.swing.JMenu();
+        jMenu24 = new javax.swing.JMenu();
+        jMenu25 = new javax.swing.JMenu();
+        jMenu26 = new javax.swing.JMenu();
+        jMenu27 = new javax.swing.JMenu();
+        jMenu28 = new javax.swing.JMenu();
+        jMenu31 = new javax.swing.JMenu();
+        jMenu29 = new javax.swing.JMenu();
+        jMenu30 = new javax.swing.JMenu();
+        jMenu32 = new javax.swing.JMenu();
+        jMenu34 = new javax.swing.JMenu();
+        jMenu33 = new javax.swing.JMenu();
+        jMenu35 = new javax.swing.JMenu();
+        jMenu36 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,13 +103,65 @@ private static Principal instancia;
             .addComponent(btSair, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
-        jMenuBar.add(jMenu1);
+        jMenu19.setText("Arquivo");
 
-        jMenu3.setText("Edit");
-        jMenuBar.add(jMenu3);
+        jMenu20.setText("Usuário");
+        jMenu19.add(jMenu20);
 
-        setJMenuBar(jMenuBar);
+        jMenu21.setText("Conta");
+        jMenu19.add(jMenu21);
+
+        jMenu22.setText("Categoria");
+        jMenu19.add(jMenu22);
+
+        jMenu23.setText("Transação");
+        jMenu19.add(jMenu23);
+
+        jMenuBar3.add(jMenu19);
+
+        jMenu24.setText("Editar");
+
+        jMenu25.setText("Novo");
+        jMenu24.add(jMenu25);
+
+        jMenu26.setText("Alterar");
+        jMenu24.add(jMenu26);
+
+        jMenu27.setText("Excluir");
+        jMenu24.add(jMenu27);
+
+        jMenuBar3.add(jMenu24);
+
+        jMenu28.setText("Relatório");
+
+        jMenu31.setText("Usuário");
+        jMenu28.add(jMenu31);
+
+        jMenu29.setText("Categoria");
+        jMenu28.add(jMenu29);
+
+        jMenu30.setText("Conta");
+        jMenu28.add(jMenu30);
+
+        jMenu32.setText("Receita");
+        jMenu28.add(jMenu32);
+
+        jMenu34.setText("Despesa");
+        jMenu28.add(jMenu34);
+
+        jMenu33.setText("Transferência");
+        jMenu28.add(jMenu33);
+
+        jMenuBar3.add(jMenu28);
+
+        jMenu35.setText("Ajuda");
+
+        jMenu36.setText("Sobre");
+        jMenu35.add(jMenu36);
+
+        jMenuBar3.add(jMenu35);
+
+        setJMenuBar(jMenuBar3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,9 +237,25 @@ private static Principal instancia;
     private javax.swing.JButton btContas;
     private javax.swing.JButton btSair;
     private javax.swing.JButton btTransacoes;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenu jMenu19;
+    private javax.swing.JMenu jMenu20;
+    private javax.swing.JMenu jMenu21;
+    private javax.swing.JMenu jMenu22;
+    private javax.swing.JMenu jMenu23;
+    private javax.swing.JMenu jMenu24;
+    private javax.swing.JMenu jMenu25;
+    private javax.swing.JMenu jMenu26;
+    private javax.swing.JMenu jMenu27;
+    private javax.swing.JMenu jMenu28;
+    private javax.swing.JMenu jMenu29;
+    private javax.swing.JMenu jMenu30;
+    private javax.swing.JMenu jMenu31;
+    private javax.swing.JMenu jMenu32;
+    private javax.swing.JMenu jMenu33;
+    private javax.swing.JMenu jMenu34;
+    private javax.swing.JMenu jMenu35;
+    private javax.swing.JMenu jMenu36;
+    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanelMenuPrincipal;
     // End of variables declaration//GEN-END:variables
 }
