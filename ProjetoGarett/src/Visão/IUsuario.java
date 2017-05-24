@@ -87,7 +87,7 @@ public class IUsuario extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fundotelaLogin.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 390, 280);
+        jLabel1.setBounds(0, 0, 390, 250);
 
         setSize(new java.awt.Dimension(402, 285));
         setLocationRelativeTo(null);
