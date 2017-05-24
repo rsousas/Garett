@@ -31,28 +31,30 @@ private static Principal instancia;
         jPanelMenuPrincipal = new javax.swing.JPanel();
         btTransacoes = new javax.swing.JButton();
         btContas = new javax.swing.JButton();
-        btCategoria = new javax.swing.JButton();
         btConfiguracoes = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
+        btContas1 = new javax.swing.JButton();
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu19 = new javax.swing.JMenu();
-        jMenu20 = new javax.swing.JMenu();
-        jMenu21 = new javax.swing.JMenu();
-        jMenu22 = new javax.swing.JMenu();
-        jMenu23 = new javax.swing.JMenu();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem15 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem16 = new javax.swing.JRadioButtonMenuItem();
         jMenu24 = new javax.swing.JMenu();
-        jMenu25 = new javax.swing.JMenu();
-        jMenu26 = new javax.swing.JMenu();
-        jMenu27 = new javax.swing.JMenu();
+        jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem6 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem7 = new javax.swing.JRadioButtonMenuItem();
         jMenu28 = new javax.swing.JMenu();
-        jMenu31 = new javax.swing.JMenu();
-        jMenu29 = new javax.swing.JMenu();
-        jMenu30 = new javax.swing.JMenu();
-        jMenu32 = new javax.swing.JMenu();
-        jMenu34 = new javax.swing.JMenu();
-        jMenu33 = new javax.swing.JMenu();
+        jRadioButtonMenuItem8 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem9 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem10 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem11 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem12 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem13 = new javax.swing.JRadioButtonMenuItem();
         jMenu35 = new javax.swing.JMenu();
-        jMenu36 = new javax.swing.JMenu();
+        jRadioButtonMenuItem14 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,8 +74,6 @@ private static Principal instancia;
             }
         });
 
-        btCategoria.setText("Categorias");
-
         btConfiguracoes.setText("Configurações");
         btConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +88,13 @@ private static Principal instancia;
             }
         });
 
+        btContas1.setText("Categorias");
+        btContas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btContas1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelMenuPrincipalLayout = new javax.swing.GroupLayout(jPanelMenuPrincipal);
         jPanelMenuPrincipal.setLayout(jPanelMenuPrincipalLayout);
         jPanelMenuPrincipalLayout.setHorizontalGroup(
@@ -97,7 +104,7 @@ private static Principal instancia;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btContas, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btContas1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btConfiguracoes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -107,72 +114,155 @@ private static Principal instancia;
         jPanelMenuPrincipalLayout.setVerticalGroup(
             jPanelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btTransacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btContas, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-            .addComponent(btCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addGroup(jPanelMenuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btContas, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(btContas1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
             .addComponent(btConfiguracoes, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
             .addComponent(btSair, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
 
         jMenu19.setText("Arquivo");
 
-        jMenu20.setText("Usuário");
-        jMenu20.addActionListener(new java.awt.event.ActionListener() {
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("Usuário");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu20ActionPerformed(evt);
+                jRadioButtonMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu19.add(jMenu20);
+        jMenu19.add(jRadioButtonMenuItem1);
 
-        jMenu21.setText("Conta");
-        jMenu19.add(jMenu21);
+        jRadioButtonMenuItem3.setSelected(true);
+        jRadioButtonMenuItem3.setText("Conta");
+        jRadioButtonMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu19.add(jRadioButtonMenuItem3);
 
-        jMenu22.setText("Categoria");
-        jMenu19.add(jMenu22);
+        jRadioButtonMenuItem2.setSelected(true);
+        jRadioButtonMenuItem2.setText("Categoria");
+        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu19.add(jRadioButtonMenuItem2);
 
-        jMenu23.setText("Transação");
-        jMenu19.add(jMenu23);
+        jRadioButtonMenuItem4.setSelected(true);
+        jRadioButtonMenuItem4.setText("Transação");
+        jRadioButtonMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu19.add(jRadioButtonMenuItem4);
+
+        jRadioButtonMenuItem15.setSelected(true);
+        jRadioButtonMenuItem15.setText("Configurações");
+        jRadioButtonMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu19.add(jRadioButtonMenuItem15);
+
+        jRadioButtonMenuItem16.setSelected(true);
+        jRadioButtonMenuItem16.setText("Sair");
+        jRadioButtonMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu19.add(jRadioButtonMenuItem16);
 
         jMenuBar3.add(jMenu19);
 
         jMenu24.setText("Editar");
 
-        jMenu25.setText("Novo");
-        jMenu24.add(jMenu25);
+        jRadioButtonMenuItem5.setSelected(true);
+        jRadioButtonMenuItem5.setText("Novo");
+        jMenu24.add(jRadioButtonMenuItem5);
 
-        jMenu26.setText("Alterar");
-        jMenu24.add(jMenu26);
+        jRadioButtonMenuItem6.setSelected(true);
+        jRadioButtonMenuItem6.setText("Alterar");
+        jMenu24.add(jRadioButtonMenuItem6);
 
-        jMenu27.setText("Excluir");
-        jMenu24.add(jMenu27);
+        jRadioButtonMenuItem7.setSelected(true);
+        jRadioButtonMenuItem7.setText("Excluir");
+        jMenu24.add(jRadioButtonMenuItem7);
 
         jMenuBar3.add(jMenu24);
 
         jMenu28.setText("Relatório");
 
-        jMenu31.setText("Usuário");
-        jMenu28.add(jMenu31);
+        jRadioButtonMenuItem8.setSelected(true);
+        jRadioButtonMenuItem8.setText("Usuários");
+        jRadioButtonMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu28.add(jRadioButtonMenuItem8);
 
-        jMenu29.setText("Categoria");
-        jMenu28.add(jMenu29);
+        jRadioButtonMenuItem9.setSelected(true);
+        jRadioButtonMenuItem9.setText("Categorias");
+        jRadioButtonMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu28.add(jRadioButtonMenuItem9);
 
-        jMenu30.setText("Conta");
-        jMenu28.add(jMenu30);
+        jRadioButtonMenuItem10.setSelected(true);
+        jRadioButtonMenuItem10.setText("Transações");
+        jRadioButtonMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu28.add(jRadioButtonMenuItem10);
 
-        jMenu32.setText("Receita");
-        jMenu28.add(jMenu32);
+        jRadioButtonMenuItem11.setSelected(true);
+        jRadioButtonMenuItem11.setText("Receitas");
+        jRadioButtonMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu28.add(jRadioButtonMenuItem11);
 
-        jMenu34.setText("Despesa");
-        jMenu28.add(jMenu34);
+        jRadioButtonMenuItem12.setSelected(true);
+        jRadioButtonMenuItem12.setText("Despesas");
+        jRadioButtonMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu28.add(jRadioButtonMenuItem12);
 
-        jMenu33.setText("Transferência");
-        jMenu28.add(jMenu33);
+        jRadioButtonMenuItem13.setSelected(true);
+        jRadioButtonMenuItem13.setText("Transferências");
+        jRadioButtonMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu28.add(jRadioButtonMenuItem13);
 
         jMenuBar3.add(jMenu28);
 
         jMenu35.setText("Ajuda");
 
-        jMenu36.setText("Sobre");
-        jMenu35.add(jMenu36);
+        jRadioButtonMenuItem14.setSelected(true);
+        jRadioButtonMenuItem14.setText("Sobre");
+        jRadioButtonMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu35.add(jRadioButtonMenuItem14);
 
         jMenuBar3.add(jMenu35);
 
@@ -205,10 +295,6 @@ private static Principal instancia;
         telaTransacoes.setVisible(true);
     }//GEN-LAST:event_btTransacoesActionPerformed
 
-    private void jMenu20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu20ActionPerformed
-
     private void btConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfiguracoesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btConfiguracoesActionPerformed
@@ -220,6 +306,72 @@ private static Principal instancia;
         telaConta.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_btContasActionPerformed
+
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+        Usuario telaUsuario = new Usuario();
+        this.setEnabled(false);
+        telaUsuario.setVisible(true);
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+
+    private void jRadioButtonMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem3ActionPerformed
+        Conta telaConta = new Conta();
+        this.setEnabled(false);
+        telaConta.setVisible(true);
+    }//GEN-LAST:event_jRadioButtonMenuItem3ActionPerformed
+
+    private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
+        Categoria telaCategoria = new Categoria();
+        this.setEnabled(false);
+        telaCategoria.setVisible(true);
+    }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
+
+    private void jRadioButtonMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem4ActionPerformed
+        ITransacao telaITransacao = new ITransacao();
+        this.setEnabled(false);
+        telaITransacao.setVisible(true);
+    }//GEN-LAST:event_jRadioButtonMenuItem4ActionPerformed
+
+    private void jRadioButtonMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonMenuItem15ActionPerformed
+
+    private void jRadioButtonMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem16ActionPerformed
+       System.exit(0);
+    }//GEN-LAST:event_jRadioButtonMenuItem16ActionPerformed
+
+    private void jRadioButtonMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem8ActionPerformed
+
+    }//GEN-LAST:event_jRadioButtonMenuItem8ActionPerformed
+
+    private void jRadioButtonMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem9ActionPerformed
+
+    }//GEN-LAST:event_jRadioButtonMenuItem9ActionPerformed
+
+    private void jRadioButtonMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem10ActionPerformed
+
+    }//GEN-LAST:event_jRadioButtonMenuItem10ActionPerformed
+
+    private void jRadioButtonMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem11ActionPerformed
+
+    }//GEN-LAST:event_jRadioButtonMenuItem11ActionPerformed
+
+    private void jRadioButtonMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem12ActionPerformed
+
+    }//GEN-LAST:event_jRadioButtonMenuItem12ActionPerformed
+
+    private void jRadioButtonMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem13ActionPerformed
+
+    }//GEN-LAST:event_jRadioButtonMenuItem13ActionPerformed
+
+    private void jRadioButtonMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonMenuItem14ActionPerformed
+
+    private void btContas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContas1ActionPerformed
+        Categoria telaCategoria = new Categoria();
+        this.setEnabled(false);
+        telaCategoria.setVisible(true);
+    }//GEN-LAST:event_btContas1ActionPerformed
 
     public static Principal getInstance(){ // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
         if(instancia==null)
@@ -263,30 +415,32 @@ private static Principal instancia;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCategoria;
     private javax.swing.JButton btConfiguracoes;
     private javax.swing.JButton btContas;
+    private javax.swing.JButton btContas1;
     private javax.swing.JButton btSair;
     private javax.swing.JButton btTransacoes;
     private javax.swing.JMenu jMenu19;
-    private javax.swing.JMenu jMenu20;
-    private javax.swing.JMenu jMenu21;
-    private javax.swing.JMenu jMenu22;
-    private javax.swing.JMenu jMenu23;
     private javax.swing.JMenu jMenu24;
-    private javax.swing.JMenu jMenu25;
-    private javax.swing.JMenu jMenu26;
-    private javax.swing.JMenu jMenu27;
     private javax.swing.JMenu jMenu28;
-    private javax.swing.JMenu jMenu29;
-    private javax.swing.JMenu jMenu30;
-    private javax.swing.JMenu jMenu31;
-    private javax.swing.JMenu jMenu32;
-    private javax.swing.JMenu jMenu33;
-    private javax.swing.JMenu jMenu34;
     private javax.swing.JMenu jMenu35;
-    private javax.swing.JMenu jMenu36;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanelMenuPrincipal;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem10;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem11;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem12;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem13;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem14;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem15;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem16;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem5;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem6;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem7;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem8;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
