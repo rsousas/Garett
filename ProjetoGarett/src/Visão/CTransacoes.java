@@ -57,6 +57,7 @@ public class CTransacoes extends javax.swing.JFrame {
         jRadioButtonMenuItem14 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Lista de Transação");
         setLocation(new java.awt.Point(725, 295));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -292,7 +293,8 @@ public class CTransacoes extends javax.swing.JFrame {
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
         ITransacao telaTransacao = new ITransacao();
-        telaTransacao.setVisible(true);       
+        telaTransacao.setVisible(true); 
+        dispose();
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
