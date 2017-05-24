@@ -305,9 +305,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btContasActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
-        Usuario telaUsuario = new Usuario();
-        this.setEnabled(false);
+       Usuario telaUsuario = new Usuario();
         telaUsuario.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
     private void jRadioButtonMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem3ActionPerformed
@@ -318,14 +318,14 @@ public class Principal extends javax.swing.JFrame {
 
     private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
         Categoria telaCategoria = new Categoria();
-        this.setEnabled(false);
         telaCategoria.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
 
     private void jRadioButtonMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem4ActionPerformed
         ITransacao telaITransacao = new ITransacao();
-        this.setEnabled(false);
         telaITransacao.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jRadioButtonMenuItem4ActionPerformed
 
     private void jRadioButtonMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem15ActionPerformed
@@ -366,8 +366,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void btContas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContas1ActionPerformed
         Categoria telaCategoria = new Categoria();
-        this.setEnabled(false);
         telaCategoria.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btContas1ActionPerformed
 
     public static Principal getInstance() { // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
