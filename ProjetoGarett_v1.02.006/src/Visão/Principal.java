@@ -94,6 +94,7 @@ private static Principal instancia;
         jRadioButtonMenuItem14 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Easy Personal Finances Garrett ");
 
         jPanelMenuPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
@@ -672,9 +673,9 @@ private static Principal instancia;
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
     private void jRadioButtonMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem3ActionPerformed
-        Conta2 telaConta = new Conta2();
-        this.setEnabled(false);
+        Conta telaConta = new Conta();
         telaConta.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jRadioButtonMenuItem3ActionPerformed
 
     private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
@@ -684,8 +685,8 @@ private static Principal instancia;
     }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
 
     private void jRadioButtonMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem4ActionPerformed
-        Principal telaIPrincipal = new Principal();
-        telaIPrincipal.setVisible(true);
+        ITransacao telaTransacao = new ITransacao();
+        telaTransacao.setVisible(true);  
         dispose();
     }//GEN-LAST:event_jRadioButtonMenuItem4ActionPerformed
 
