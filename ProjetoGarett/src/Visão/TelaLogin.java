@@ -49,6 +49,7 @@ public class TelaLogin extends javax.swing.JFrame {
         txtPassowrdSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fundotelaLogin.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
         getContentPane().setLayout(null);
 
         btAcessar.setText("Acessar");
@@ -58,7 +59,7 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btAcessar);
-        btAcessar.setBounds(120, 180, 80, 30);
+        btAcessar.setBounds(130, 180, 80, 30);
 
         btSair.setText("Sair");
         btSair.addActionListener(new java.awt.event.ActionListener() {
@@ -67,25 +68,25 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btSair);
-        btSair.setBounds(210, 180, 70, 30);
+        btSair.setBounds(220, 180, 70, 30);
 
         lbUsuario.setText("Usuário:");
         getContentPane().add(lbUsuario);
-        lbUsuario.setBounds(60, 40, 50, 14);
+        lbUsuario.setBounds(70, 40, 50, 14);
 
         lbSenha.setText("Senha:");
         getContentPane().add(lbSenha);
-        lbSenha.setBounds(60, 100, 50, 14);
+        lbSenha.setBounds(70, 100, 50, 14);
         getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(60, 60, 220, 30);
+        txtUsuario.setBounds(70, 60, 220, 30);
         getContentPane().add(pswSenha);
-        pswSenha.setBounds(60, 120, 220, 30);
+        pswSenha.setBounds(70, 120, 220, 30);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Esqueceu a senha?");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(140, 150, 140, 14);
+        jLabel2.setBounds(150, 150, 140, 14);
 
         jButton1.setBackground(new java.awt.Color(51, 51, 255));
         jButton1.setText("Cadastrar?");

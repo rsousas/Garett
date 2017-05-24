@@ -45,6 +45,7 @@ public class IUsuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Usuário");
         getContentPane().setLayout(null);
         getContentPane().add(txtNome);
         txtNome.setBounds(43, 46, 299, 30);

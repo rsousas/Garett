@@ -54,6 +54,7 @@ public class Principal extends javax.swing.JFrame {
         jRadioButtonMenuItem14 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Easy Personal Finances Garrett");
 
         jPanelMenuPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
