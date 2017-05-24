@@ -1,22 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Visão;
 
-/**
- *
- * @author renat
- */
+import Controle.CConexaoBD;
+
 public class Principal extends javax.swing.JFrame {
-private static Principal instancia;
+
+    CConexaoBD conexao = new CConexaoBD();
+
+    private static Principal instancia;
 
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        conexao.conecta();
     }
 
     /**
@@ -300,7 +297,7 @@ private static Principal instancia;
     }//GEN-LAST:event_btConfiguracoesActionPerformed
 
     private void btContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContasActionPerformed
-                              
+
         Conta telaConta = new Conta();
         this.setEnabled(false);
         telaConta.setVisible(true);
@@ -373,12 +370,13 @@ private static Principal instancia;
         telaCategoria.setVisible(true);
     }//GEN-LAST:event_btContas1ActionPerformed
 
-    public static Principal getInstance(){ // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
-        if(instancia==null)
-            instancia = new Principal();        
+    public static Principal getInstance() { // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
+        if (instancia == null) {
+            instancia = new Principal();
+        }
         return instancia;
     }
-            
+
     /**
      * @param args the command line arguments
      */
