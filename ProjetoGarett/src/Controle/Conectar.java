@@ -5,7 +5,7 @@
  */
 package Controle;
 
-import com.mysql.jdbc.Statement;
+//import mysql.jdbc.Statement;
 
 /**
  *
