@@ -299,8 +299,8 @@ public class Principal extends javax.swing.JFrame {
     private void btContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContasActionPerformed
 
         Conta telaConta = new Conta();
-        this.setEnabled(false);
         telaConta.setVisible(true);
+        dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_btContasActionPerformed
 
