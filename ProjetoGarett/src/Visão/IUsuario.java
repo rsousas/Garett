@@ -5,15 +5,20 @@
  */
 package Visão;
 
+import Controle.CConexaoBD;
+import Controle.CUsuario;
+import Modelo.MUsuario;
+
 /**
  *
  * @author renat
  */
 public class IUsuario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form IUsuario
-     */
+    MUsuario modUsuario = new MUsuario();
+    CUsuario usuario = new CUsuario();
+    CConexaoBD conexao = new CConexaoBD();
+
     public IUsuario() {
         initComponents();
     }
@@ -27,21 +32,75 @@ public class IUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtNome = new javax.swing.JTextField();
+        lbNome = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        lbUsuario = new javax.swing.JLabel();
+        pswSenha = new javax.swing.JPasswordField();
+        lbSenha = new javax.swing.JLabel();
+        lbConfirmaSenha = new javax.swing.JLabel();
+        pswConfirmaSenha = new javax.swing.JPasswordField();
+        btSalvar = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+        getContentPane().add(txtNome);
+        txtNome.setBounds(43, 46, 299, 30);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        lbNome.setText("*Nome:");
+        getContentPane().add(lbNome);
+        lbNome.setBounds(38, 26, 50, 14);
+        getContentPane().add(txtUsuario);
+        txtUsuario.setBounds(43, 103, 299, 30);
 
-        pack();
+        lbUsuario.setText("*Usuário:");
+        getContentPane().add(lbUsuario);
+        lbUsuario.setBounds(38, 84, 59, 14);
+        getContentPane().add(pswSenha);
+        pswSenha.setBounds(43, 161, 140, 30);
+
+        lbSenha.setText("*Senha:");
+        getContentPane().add(lbSenha);
+        lbSenha.setBounds(43, 141, 52, 14);
+
+        lbConfirmaSenha.setText("*Confirmar Senha:");
+        getContentPane().add(lbConfirmaSenha);
+        lbConfirmaSenha.setBounds(201, 141, 130, 14);
+        getContentPane().add(pswConfirmaSenha);
+        pswConfirmaSenha.setBounds(201, 161, 141, 30);
+
+        btSalvar.setText("Salvar");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btSalvar);
+        btSalvar.setBounds(267, 199, 75, 23);
+
+        btCancelar.setText("Sair");
+        getContentPane().add(btCancelar);
+        btCancelar.setBounds(210, 199, 51, 23);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fundotelaLogin.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 390, 280);
+
+        setSize(new java.awt.Dimension(402, 285));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        modUsuario.setNome(txtNome.getText());
+        modUsuario.setUsuario(txtUsuario.getText());
+        modUsuario.setSenha(pswSenha.getText());
+        modUsuario.setSenhaConfirma(pswConfirmaSenha.getText());
+        if (usuario.validaCampos(modUsuario)) {
+            usuario.Salvar(modUsuario);
+        }
+    }//GEN-LAST:event_btSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +138,16 @@ public class IUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btSalvar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbConfirmaSenha;
+    private javax.swing.JLabel lbNome;
+    private javax.swing.JLabel lbSenha;
+    private javax.swing.JLabel lbUsuario;
+    private javax.swing.JPasswordField pswConfirmaSenha;
+    private javax.swing.JPasswordField pswSenha;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

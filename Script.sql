@@ -2,7 +2,7 @@ create schema GARETT;
 
 create table USUARIO
 (
-CODUSU integer not null,
+CODUSU integer not null AUTO_INCREMENT,
 NOMEUSU varchar(50) not null,
 IDUSU varchar(20) not null,
 SENHAUSU varchar(15) not null,

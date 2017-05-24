@@ -1,6 +1,6 @@
 package Controle;
 
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class ConexaoBD {
+public class CConexaoBD {
 
     public static String status = "Não conectou...";
     public Statement stm;
@@ -25,7 +25,7 @@ public class ConexaoBD {
             try {
                 Class.forName(driver);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CConexaoBD.class.getName()).log(Level.SEVERE, null, ex);
             }
             conexao = DriverManager.getConnection(caminho, usuario, senha);
 
@@ -57,5 +57,14 @@ public class ConexaoBD {
         desconecta();
         conecta();
         return conexao;
+    }
+
+    public void executaSql(String sql) {
+        try {
+            stm = conexao.createStatement(rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_READ_ONLY);
+            rs = stm.executeQuery(sql);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Executar SQL.\nErro:" + ex.getMessage());
+        }
     }
 }

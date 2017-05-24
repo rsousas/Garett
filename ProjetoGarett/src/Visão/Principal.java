@@ -1,10 +1,10 @@
 package Visão;
 
-import Controle.ConexaoBD;
+import Controle.CConexaoBD;
 
 public class Principal extends javax.swing.JFrame {
 
-    ConexaoBD conexao = new ConexaoBD();
+    CConexaoBD conexao = new CConexaoBD();
 
     private static Principal instancia;
 

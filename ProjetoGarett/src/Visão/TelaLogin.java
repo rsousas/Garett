@@ -5,11 +5,19 @@
  */
 package Visão;
 
+import Controle.CConexaoBD;
+import Controle.CUsuario;
+import Modelo.MUsuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author renat
  */
 public class TelaLogin extends javax.swing.JFrame {
+
+    MUsuario modUsuario = new MUsuario();
+    CUsuario usuario = new CUsuario();
 
     /**
      * Creates new form TelaLogin
@@ -33,7 +41,7 @@ public class TelaLogin extends javax.swing.JFrame {
         lbUsuario = new javax.swing.JLabel();
         lbSenha = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        pswSenha = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -70,8 +78,8 @@ public class TelaLogin extends javax.swing.JFrame {
         lbSenha.setBounds(60, 100, 50, 14);
         getContentPane().add(txtUsuario);
         txtUsuario.setBounds(60, 60, 220, 30);
-        getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(60, 120, 220, 30);
+        getContentPane().add(pswSenha);
+        pswSenha.setBounds(60, 120, 220, 30);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Esqueceu a senha?");
@@ -81,6 +89,11 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(51, 51, 255));
         jButton1.setText("Cadastrar?");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1);
         jButton1.setBounds(0, 250, 370, 30);
 
@@ -93,14 +106,27 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAcessarActionPerformed
-        Principal telaPrincipal = new Principal();
-        telaPrincipal.setVisible(true);
-        dispose();
+        modUsuario.setUsuario(txtUsuario.getText());
+        modUsuario.setSenha(pswSenha.getText());
+        if (usuario.validaLogin(modUsuario) == true) {
+            Principal telaPrincipal = new Principal();
+            telaPrincipal.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showConfirmDialog(null, "Dados Incorretos!");
+            txtUsuario.requestFocus();
+        }
     }//GEN-LAST:event_btAcessarActionPerformed
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btSairActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        IUsuario telaCadUsuario = new IUsuario();
+        telaCadUsuario.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,9 +169,9 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lbSenha;
     private javax.swing.JLabel lbUsuario;
+    private javax.swing.JPasswordField pswSenha;
     private javax.swing.JLabel txtPassowrdSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
