@@ -302,8 +302,8 @@ public class CTransacoes extends javax.swing.JFrame {
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         Principal telaPrincipal = new Principal();
-        this.setEnabled(false);
         telaPrincipal.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btSairActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
@@ -313,7 +313,7 @@ public class CTransacoes extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
     private void jRadioButtonMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem3ActionPerformed
-        Conta telaConta = new Conta();
+        Conta2 telaConta = new Conta2();
         this.setEnabled(false);
         telaConta.setVisible(true);
     }//GEN-LAST:event_jRadioButtonMenuItem3ActionPerformed
