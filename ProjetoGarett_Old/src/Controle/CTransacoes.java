@@ -31,21 +31,9 @@ public class CTransacoes {
         }
         return true;
     }
-    
-        public void Salvar(MTransacoes transac) {
-        conexao.conecta();
-        try {
-            PreparedStatement pst = conexao.conexao.prepareStatement("insert into TRANSACAO (CODTRA, DESCRTRA, DATA, PAGO, LEMBRETE, NOTA, VALOR, TIPO, CODCAT, CODCON, CODUSU, CODTRATRANSF) values(?,?,?,?,?,?,?,?,?,?,?,?,)");
-            pst.setString(1, conta.getDescricao());
-            pst.setFloat(2, conta.getSaldo());
-            pst.setString(3, Integer.toString(conta.getAtivo()));
-            pst.setString(4, conta.getUsuario());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir Conta:\nErro:" + ex);
-        }
-        conexao.desconecta();
+
+    public void Salvar(MTransacoes transac) {
+
     }
 
     public boolean verificaSeNumerico(String valor) {
