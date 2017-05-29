@@ -11,9 +11,9 @@ primary key (CODUSU)
 
 create table CONTA
 (
-CODCON integer not null,
+CODCON integer not null AUTO_INCREMENT,
 DESCRCON varchar(50) not null,
-SALDOCON real not null,
+SALDOCON real not null, 
 ATIVOCON integer not null,
 CODUSU integer not null,
 primary key (CODCON),
@@ -22,7 +22,7 @@ foreign key (CODUSU) references USUARIO (CODUSU)
 
 create table CATEGORIA
 (
-CODCAT integer not null,
+CODCAT integer not null AUTO_INCREMENT,
 DESCRCAT varchar(50) not null,
 CODCATPAI integer,
 ATIVOCAT integer not null,
@@ -33,7 +33,7 @@ foreign key (CODUSU) references USUARIO (CODUSU)
 
 create table TRANSACAO
 (
-CODTRA integer not null, 
+CODTRA integer not null AUTO_INCREMENT, 
 DESCRTRA varchar(50) not null,
 DATA date not null,
 PAGO integer not null,
@@ -49,5 +49,5 @@ primary key (CODTRA),
 foreign key (CODCAT) references CATEGORIA (CODCAT),
 foreign key (CODCON) references CONTA (CODCON),
 foreign key (CODUSU) references USUARIO (CODUSU),
-foreign key (CODTRATRANSF) references TRANSACAO (CODTRATRANSF),
+foreign key (CODTRATRANSF) references TRANSACAO (CODTRATRANSF)
 );
