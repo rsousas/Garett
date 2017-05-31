@@ -282,7 +282,7 @@ public class ITransacao extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(395, 513));
+        setSize(new java.awt.Dimension(395, 500));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

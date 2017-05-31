@@ -16,6 +16,8 @@ public class Categoria extends javax.swing.JFrame {
 
     public Categoria() {
         initComponents();
+        btEditar.setEnabled(false);
+        btExcluir.setEnabled(false);
         preencheTabela("select * from CATEGORIA  natural join USUARIO where IDUSU = " + usuario + " order by CODCAT");
     }
 
@@ -35,6 +37,7 @@ public class Categoria extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

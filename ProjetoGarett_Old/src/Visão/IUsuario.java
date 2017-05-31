@@ -46,6 +46,7 @@ public class IUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Usuário");
+        setResizable(false);
         getContentPane().setLayout(null);
 
         lbNome.setText("*Nome:");
@@ -94,7 +95,7 @@ public class IUsuario extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 390, 260);
 
-        setSize(new java.awt.Dimension(402, 297));
+        setSize(new java.awt.Dimension(390, 290));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

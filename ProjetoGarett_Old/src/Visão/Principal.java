@@ -3,9 +3,9 @@ package Visão;
 import Controle.CConexaoBD;
 
 public class Principal extends javax.swing.JFrame {
-
+    
     CConexaoBD conexao = new CConexaoBD();
-
+    
     private static Principal instancia;
 
     /**
@@ -13,6 +13,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        btConfiguracoes.setEnabled(false);
         conexao.conecta();
     }
 
@@ -326,7 +327,7 @@ public class Principal extends javax.swing.JFrame {
         this.setEnabled(false);
         telaCategoria.setVisible(true);
     }//GEN-LAST:event_btCategoriaActionPerformed
-
+    
     public static Principal getInstance() { // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
         if (instancia == null) {
             instancia = new Principal();

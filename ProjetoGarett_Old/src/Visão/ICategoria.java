@@ -27,6 +27,7 @@ public class ICategoria extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Categoria");
+        setResizable(false);
 
         lbDescricao.setText("*Descrição:");
 
@@ -96,7 +97,7 @@ public class ICategoria extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(405, 157));
+        setSize(new java.awt.Dimension(385, 145));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

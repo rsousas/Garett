@@ -24,6 +24,8 @@ public class Conta extends javax.swing.JFrame {
 
     public Conta() {
         initComponents();
+        btEditar.setEnabled(false);
+        btExcluir.setEnabled(false);
         preencheTabela("select * from CONTA  natural join USUARIO where IDUSU = " + usuario + " order by CODCON");
     }
 
@@ -49,6 +51,7 @@ public class Conta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Contas");
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
