@@ -133,7 +133,7 @@ public class IConta extends javax.swing.JFrame {
             conta.Salvar(modConta);
             Conta telaConta = Conta.getInstance();
             telaConta.limpaTabela();
-            telaConta.preencheTabela("select * from CONTA  natural join USUARIO where IDUSU = " + usuario + " order by CODCON");
+            telaConta.preencheTabela("select * from CONTA  natural join USUARIO where CODUSU = " + usuario + " order by CODCON");
             telaConta.setVisible(true);
             dispose();
         } else {

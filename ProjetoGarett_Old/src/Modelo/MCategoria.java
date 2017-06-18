@@ -1,12 +1,20 @@
 package Modelo;
 
 public class MCategoria {
-    
+
     private Integer codcat;
     private String descricao;
     private Integer codigoPai;
     private boolean ativo;
     private String usuario;
+
+    public Integer getCodcat() {
+        return codcat;
+    }
+
+    public void setCodcat(Integer codcat) {
+        this.codcat = codcat;
+    }
 
     public String getDescricao() {
         return descricao;
@@ -43,19 +51,4 @@ public class MCategoria {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-
-    /**
-     * @return the codcat
-     */
-    public Integer getCodcat() {
-        return codcat;
-    }
-
-    /**
-     * @param codcat the codcat to set
-     */
-    public void setCodcat(Integer codcat) {
-        this.codcat = codcat;
-    }
-
 }

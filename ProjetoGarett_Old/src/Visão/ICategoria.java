@@ -9,9 +9,19 @@ public class ICategoria extends javax.swing.JFrame {
     MCategoria modCategoria = new MCategoria();
     CCategoria categoria = new CCategoria();
     String usuario = TelaLogin.getUsuario();
+    private boolean isEdit;
+    private Integer codCat;
 
     public ICategoria() {
         initComponents();
+    }
+
+    public ICategoria(MCategoria categ) {
+        initComponents();
+        txtDescricao.setText(categ.getDescricao());
+        cxbAtiva.setSelected(categ.getAtivo() == 1);
+        codCat = categ.getCodcat();
+        isEdit = true;
     }
 
     @SuppressWarnings("unchecked")
@@ -106,11 +116,16 @@ public class ICategoria extends javax.swing.JFrame {
         modCategoria.setCodigoPai(0);
         modCategoria.setAtivo(cxbAtiva.isSelected());
         modCategoria.setUsuario(usuario);
-        if (categoria.validaCampos(modCategoria)) {
-            categoria.Salvar(modCategoria);
+        if (categoria.validaCampos(modCategoria, isEdit)) {
+            if (!isEdit) {
+                categoria.Salvar(modCategoria);
+            } else {
+                modCategoria.setCodcat(codCat);
+                categoria.Editar(modCategoria);
+            }
             Categoria telaCategoria = Categoria.getInstance();
             telaCategoria.limpaTabela();
-            telaCategoria.preencheTabela("select * from CATEGORIA  natural join USUARIO where IDUSU = " + usuario + " order by CODCAT");
+            telaCategoria.preencheTabela("select * from CATEGORIA  natural join USUARIO where CODUSU = " + usuario + " order by CODCAT");
             telaCategoria.setVisible(true);
             dispose();
         } else {

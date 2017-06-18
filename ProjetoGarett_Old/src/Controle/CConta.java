@@ -20,7 +20,7 @@ public class CConta {
 
         conexao.conecta();
         try {
-            conexao.executaSql("select CODCON from CONTA where DESCRCON = '" + conta.getDescricao() + " and IDUSU ='" + conta.getUsuario() + "'");
+            conexao.executaSql("select CODCON from CONTA where DESCRCON = '" + conta.getDescricao() + " and CODUSU ='" + conta.getUsuario() + "'");
             conexao.rs.beforeFirst();
             if (conexao.rs.next()) {
                 JOptionPane.showMessageDialog(null, "Já existe esta Conta Cadastrada com código: " + conexao.rs.getString("CODCON"));

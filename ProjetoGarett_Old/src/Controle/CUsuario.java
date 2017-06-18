@@ -20,7 +20,7 @@ public class CUsuario {
 
         conexao.conecta();
         try {
-            conexao.executaSql("SELECT IDUSU FROM usuario WHERE IDUSU = '" + usuario.getUsuario() + "'");
+            conexao.executaSql("SELECT IDUSU FROM usuario WHERE CODUSU = '" + usuario.getUsuario() + "'");
             conexao.rs.beforeFirst();
             if (conexao.rs.next()) {
                 JOptionPane.showMessageDialog(null, "Já existe este usuário!\nTente outro Usuário para Continuar.");

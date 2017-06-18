@@ -1,6 +1,8 @@
 package Visão;
 
+import Controle.CCategoria;
 import Controle.CConexaoBD;
+import Modelo.MCategoria;
 import Modelo.MTabela;
 import Modelo.MUsuario;
 import java.sql.SQLException;
@@ -12,12 +14,12 @@ public class Categoria extends javax.swing.JFrame {
 
     CConexaoBD conexao = new CConexaoBD();
     String usuario = TelaLogin.getUsuario();
+    MCategoria modCategoria = new MCategoria();
+    CCategoria categoria = new CCategoria();
     private static Categoria instancia;
 
     public Categoria() {
         initComponents();
-        btEditar.setEnabled(false);
-        btExcluir.setEnabled(false);
         preencheTabela("select * from CATEGORIA  natural join USUARIO where CODUSU = " + usuario + " order by CODCAT");
     }
 
@@ -138,12 +140,24 @@ public class Categoria extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
-        ICategoria telaCategoria = new ICategoria();
+        modCategoria.setDescricao((String) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 1));
+        modCategoria.setCodigoPai(0);
+        modCategoria.setAtivo(((Integer) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 2)) == 1);
+        modCategoria.setUsuario(usuario);
+        modCategoria.setCodcat((Integer) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 0));
+        ICategoria telaCategoria = new ICategoria(modCategoria);
         telaCategoria.setVisible(true);
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        // TODO add your handling code here:
+        int resposta = 0;
+        resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir?");
+        if (resposta == JOptionPane.YES_OPTION) {
+            modCategoria.setCodcat((Integer) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 0));
+            modCategoria.setUsuario(usuario);
+            categoria.Excluir(modCategoria);
+            preencheTabela("select * from CATEGORIA  natural join USUARIO where CODUSU = " + usuario + " order by CODCAT");
+        }
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
