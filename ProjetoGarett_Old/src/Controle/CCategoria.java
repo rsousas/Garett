@@ -8,19 +8,19 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CCategoria {
-    
+
     CConexaoBD conexao = new CConexaoBD();
-    
+
     public boolean validaCampos(MCategoria categoria) {
-        
+
         if (categoria.getDescricao().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe uma Descrição para continuar!");
             return false;
         }
-        
+
         conexao.conecta();
         try {
-            conexao.executaSql("select CODCAT from CATEGORIA where DESCRCAT = '" + categoria.getDescricao() + "'");
+            conexao.executaSql("select CODCAT from CATEGORIA where DESCRCAT = '" + categoria.getDescricao() + "' and IDUSU ='" + categoria.getUsuario() + "'");
             conexao.rs.beforeFirst();
             if (conexao.rs.next()) {
                 JOptionPane.showMessageDialog(null, "Já existe esta Categoria Cadastrada com código: " + conexao.rs.getString("CODCAT"));
@@ -30,10 +30,10 @@ public class CCategoria {
             Logger.getLogger(CCategoria.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
+
         return true;
     }
-    
+
     public void Salvar(MCategoria categoria) {
         conexao.conecta();
         try {
@@ -46,6 +46,17 @@ public class CCategoria {
             JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir Categoria:\nErro:" + ex);
+        }
+        conexao.desconecta();
+    }
+    
+    public void Excluir(MCategoria categoria){
+        conexao.conecta();
+        try { 
+            PreparedStatement pst = conexao.conexao.prepareStatement("delete from CATEGORIA where CODUSU = ? AND CODCAT = ?");
+            pst.setString(1, categoria.get);
+        } catch (SQLException ex) {
+            Logger.getLogger(CCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
         conexao.desconecta();
     }

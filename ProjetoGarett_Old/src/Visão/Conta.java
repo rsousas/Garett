@@ -26,7 +26,7 @@ public class Conta extends javax.swing.JFrame {
         initComponents();
         btEditar.setEnabled(false);
         btExcluir.setEnabled(false);
-        preencheTabela("select * from CONTA  natural join USUARIO where IDUSU = " + usuario + " order by CODCON");
+        preencheTabela("select * from CONTA  natural join USUARIO where CODUSU = " + usuario + " order by CODCON");
     }
 
     /**

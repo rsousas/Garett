@@ -60,7 +60,7 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btAcessar);
-        btAcessar.setBounds(120, 180, 80, 30);
+        btAcessar.setBounds(190, 240, 80, 30);
 
         btSair.setText("Sair");
         btSair.addActionListener(new java.awt.event.ActionListener() {
@@ -69,21 +69,21 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btSair);
-        btSair.setBounds(210, 180, 70, 30);
+        btSair.setBounds(280, 240, 70, 30);
 
         lbUsuario.setText("Usuário:");
         getContentPane().add(lbUsuario);
-        lbUsuario.setBounds(60, 40, 50, 14);
+        lbUsuario.setBounds(130, 120, 50, 14);
 
         lbSenha.setText("Senha:");
         getContentPane().add(lbSenha);
-        lbSenha.setBounds(60, 100, 50, 14);
+        lbSenha.setBounds(130, 180, 50, 14);
         getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(60, 60, 220, 30);
+        txtUsuario.setBounds(130, 140, 220, 30);
         getContentPane().add(pswSenha);
-        pswSenha.setBounds(60, 120, 220, 30);
+        pswSenha.setBounds(130, 200, 220, 30);
 
-        jButton1.setBackground(new java.awt.Color(51, 51, 255));
+        jButton1.setBackground(new java.awt.Color(0, 204, 204));
         jButton1.setText("Cadastrar?");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,13 +91,13 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(0, 250, 370, 30);
+        jButton1.setBounds(0, 350, 500, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fundotelaLogin.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fundotelaLoginNome.png"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 370, 280);
+        jLabel1.setBounds(0, 0, 500, 380);
 
-        setSize(new java.awt.Dimension(386, 320));
+        setSize(new java.awt.Dimension(507, 408));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

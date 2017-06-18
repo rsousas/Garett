@@ -18,7 +18,7 @@ public class Categoria extends javax.swing.JFrame {
         initComponents();
         btEditar.setEnabled(false);
         btExcluir.setEnabled(false);
-        preencheTabela("select * from CATEGORIA  natural join USUARIO where IDUSU = " + usuario + " order by CODCAT");
+        preencheTabela("select * from CATEGORIA  natural join USUARIO where CODUSU = " + usuario + " order by CODCAT");
     }
 
     @SuppressWarnings("unchecked")

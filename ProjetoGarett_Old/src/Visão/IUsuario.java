@@ -47,6 +47,7 @@ public class IUsuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Usuário");
         setResizable(false);
+        setSize(new java.awt.Dimension(380, 280));
         getContentPane().setLayout(null);
 
         lbNome.setText("*Nome:");
