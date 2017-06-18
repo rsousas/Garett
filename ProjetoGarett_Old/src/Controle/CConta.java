@@ -20,7 +20,7 @@ public class CConta {
 
         conexao.conecta();
         try {
-            conexao.executaSql("select CODCON from CONTA where DESCRCON = '" + conta.getDescricao() + " and CODUSU ='" + conta.getUsuario() + "'");
+            conexao.executaSql("select CODCON from CONTA where DESCRCON = '" + conta.getDescricao() + "' and CODUSU ='" + conta.getUsuario() + "'");
             conexao.rs.beforeFirst();
             if (conexao.rs.next()) {
                 JOptionPane.showMessageDialog(null, "Já existe esta Conta Cadastrada com código: " + conexao.rs.getString("CODCON"));
@@ -36,7 +36,7 @@ public class CConta {
 
     public boolean verificaSeNumerico(String valor) {
         try {
-            Integer.parseInt(valor);
+            Float.parseFloat(valor);
             return true;
         } catch (NumberFormatException ex) {
             return false;
@@ -55,6 +55,36 @@ public class CConta {
             JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir Conta:\nErro:" + ex);
+        }
+        conexao.desconecta();
+    }
+
+    public void Editar(MConta conta) {
+        conexao.conecta();
+        try {
+            PreparedStatement pst = conexao.conexao.prepareStatement("Update CONTA set DESCRCON = ?, SALDOCON = ?, ATIVOCON = ? where CODUSU = ? and CODCON = ?");
+            pst.setString(1, conta.getDescricao());
+            pst.setFloat(2, conta.getSaldo());
+            pst.setString(3, Integer.toString(conta.getAtivo()));
+            pst.setString(4, conta.getUsuario());
+            pst.setString(5, Integer.toString(conta.getCodcon()));
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Sucesso!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Editar Conta:\nErro:" + ex);
+        }
+        conexao.desconecta();
+    }
+
+    public void Excluir(MConta conta) {
+        conexao.conecta();
+        try {
+            PreparedStatement pst = conexao.conexao.prepareStatement("delete from CONTA where CODUSU = ? and CODCON = ?");
+            pst.setString(1, conta.getUsuario());
+            pst.setString(2, Integer.toString(conta.getCodcon()));
+            pst.execute();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir Conta:\nErro:" + ex);
         }
         conexao.desconecta();
     }

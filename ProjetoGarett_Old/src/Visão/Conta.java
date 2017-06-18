@@ -6,6 +6,8 @@
 package Visão;
 
 import Controle.CConexaoBD;
+import Controle.CConta;
+import Modelo.MConta;
 import Modelo.MTabela;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,12 +22,13 @@ public class Conta extends javax.swing.JFrame {
 
     CConexaoBD conexao = new CConexaoBD();
     String usuario = TelaLogin.getUsuario();
+    MConta modConta = new MConta();
+    CConta conta = new CConta();
     private static Conta instancia;
 
     public Conta() {
         initComponents();
         btEditar.setEnabled(false);
-        btExcluir.setEnabled(false);
         preencheTabela("select * from CONTA  natural join USUARIO where CODUSU = " + usuario + " order by CODCON");
     }
 
@@ -152,12 +155,24 @@ public class Conta extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
-        IConta telaConta = new IConta();
+        modConta.setDescricao((String) jTableConta.getValueAt(jTableConta.getSelectedRow(), 1));
+        modConta.setSaldo((String) jTableConta.getValueAt(jTableConta.getSelectedRow(), 2));
+        modConta.setAtivo(((Integer) jTableConta.getValueAt(jTableConta.getSelectedRow(), 3)) == 1);
+        modConta.setUsuario(usuario);
+        modConta.setCodcon((Integer) jTableConta.getValueAt(jTableConta.getSelectedRow(), 0));
+        IConta telaConta = new IConta(modConta);
         telaConta.setVisible(true);
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        // TODO add your handling code here:
+        int resposta = 0;
+        resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir?");
+        if (resposta == JOptionPane.YES_OPTION) {
+            modConta.setCodcon((Integer) jTableConta.getValueAt(jTableConta.getSelectedRow(), 0));
+            modConta.setUsuario(usuario);
+            conta.Excluir(modConta);
+            preencheTabela("select * from CONTA  natural join USUARIO where CODUSU = " + usuario + " order by CODCON");
+        }
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed

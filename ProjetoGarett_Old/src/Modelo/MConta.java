@@ -2,10 +2,19 @@ package Modelo;
 
 public class MConta {
 
+    private Integer codcon;
     private String descricao;
     private Float Saldo;
     private boolean ativo;
     private String usuario;
+
+    public Integer getCodcon() {
+        return codcon;
+    }
+
+    public void setCodcon(Integer codcon) {
+        this.codcon = codcon;
+    }
 
     public String getDescricao() {
         return descricao;

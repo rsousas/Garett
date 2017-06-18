@@ -14,9 +14,20 @@ public class IConta extends javax.swing.JFrame {
     MConta modConta = new MConta();
     CConta conta = new CConta();
     String usuario = TelaLogin.getUsuario();
+    private boolean isEdit;
+    private Integer codCon;
 
     public IConta() {
         initComponents();
+    }
+
+    public IConta(MConta conta) {
+        initComponents();
+        txtDescricao.setText(conta.getDescricao());
+        cxbAtiva.setSelected(conta.getAtivo() == 1);
+        txtSaldo.setText(Float.toString(conta.getSaldo()));
+        codCon = conta.getCodcon();
+        isEdit = true;
     }
 
     /**
@@ -123,14 +134,19 @@ public class IConta extends javax.swing.JFrame {
         modConta.setDescricao(txtDescricao.getText());
         if (conta.verificaSeNumerico(txtSaldo.getText())) {
             modConta.setSaldo(txtSaldo.getText());
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Valor digitado não numérico!");
             txtSaldo.requestFocus();
         }
         modConta.setAtivo(cxbAtiva.isSelected());
         modConta.setUsuario(usuario);
         if (conta.validaCampos(modConta)) {
-            conta.Salvar(modConta);
+            if (!isEdit) {
+                conta.Salvar(modConta);
+            } else {
+                modConta.setCodcon(codCon);
+                conta.Editar(modConta);
+            }
             Conta telaConta = Conta.getInstance();
             telaConta.limpaTabela();
             telaConta.preencheTabela("select * from CONTA  natural join USUARIO where CODUSU = " + usuario + " order by CODCON");
