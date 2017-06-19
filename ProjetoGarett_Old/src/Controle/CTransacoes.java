@@ -53,7 +53,11 @@ public class CTransacoes {
             pst.setDate(2, dataSql);
             pst.setInt(3, transac.getPago());
             pst.setInt(4, transac.getLembrete());
-            pst.setString(5, transac.getNota());
+            if (!transac.getNota().isEmpty()) {
+                pst.setString(5, transac.getNota());
+            } else {
+                pst.setString(5, null);
+            }
             pst.setFloat(6, transac.getValor());
             pst.setString(7, transac.getTipo());
             pst.setInt(8, codCat);

@@ -255,7 +255,8 @@ public class Transacoes extends javax.swing.JFrame {
         jTableTransac.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         conexao.desconecta();
-
+        jTableTransac.setColumnSelectionInterval(0, 0);
+        jTableTransac.setRowSelectionInterval(0, 0);
     }
 
     public void limpaTabela() {

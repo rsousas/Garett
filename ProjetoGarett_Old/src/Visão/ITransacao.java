@@ -44,13 +44,13 @@ public class ITransacao extends javax.swing.JFrame {
         cxbConsolidada.setSelected(transacoes.getPago() == 1);
         switch (transacoes.getTipo()) {
             case "D":
-                cbTipo.setSelectedItem(0);
+                cbTipo.setSelectedIndex(0);
                 break;
             case "R":
-                cbTipo.setSelectedItem(1);
+                cbTipo.setSelectedIndex(1);
                 break;
             case "T":
-                cbTipo.setSelectedItem(2);
+                cbTipo.setSelectedIndex(2);
                 break;
         }
 

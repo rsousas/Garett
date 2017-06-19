@@ -215,7 +215,8 @@ public class Conta extends javax.swing.JFrame {
         jTableConta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         conexao.desconecta();
-
+        jTableConta.setColumnSelectionInterval(0, 0);
+        jTableConta.setRowSelectionInterval(0, 0);
     }
 
     public void limpaTabela() {

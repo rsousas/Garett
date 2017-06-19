@@ -198,7 +198,8 @@ public class Categoria extends javax.swing.JFrame {
         jTableCateg.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         conexao.desconecta();
-
+        jTableCateg.setColumnSelectionInterval(0, 0);
+        jTableCateg.setRowSelectionInterval(0, 0);
     }
 
     public void limpaTabela() {
