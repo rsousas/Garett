@@ -7,6 +7,7 @@ import Modelo.MTransacoes;
 import Modelo.MUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
@@ -20,7 +21,6 @@ public class Transacoes extends javax.swing.JFrame {
 
     public Transacoes() {
         initComponents();
-        btEditar.setEnabled(false);
         preencheTabela("select * from TRANSACAO T natural join CATEGORIA natural join CONTA join USUARIO U on U.CODUSU = T.CODUSU where T.CODUSU = " + usuario + " order by DATA");
     }
 
@@ -146,13 +146,19 @@ public class Transacoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
-        /*modTransacoes.setDescricao((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 1));
-        modTransacoes.setSaldo((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 2));
-        modTransacoes.setAtivo(((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 3)) == 1);
+        modTransacoes.setDescricao((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 0));
+        modTransacoes.setData((Date) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 1));
+        modTransacoes.setConta((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 2));
+        modTransacoes.setCateg((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 3));
+        modTransacoes.setValor(Float.toString((Float) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 4)));
+        modTransacoes.setCodtra((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 5));
+        modTransacoes.setPago(((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 6)) == 1);
+        modTransacoes.setLembrete((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 7));
+        modTransacoes.setNota((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 8));
+        modTransacoes.setTipo((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 9));
         modTransacoes.setUsuario(usuario);
-        modTransacoes.setCodcon((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 0));
-        ITransacao telaTransacao = new ITransacao();
-        telaTransacao.setVisible(true);*/
+        ITransacao telaTransacao = new ITransacao(modTransacoes);
+        telaTransacao.setVisible(true);
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
@@ -180,7 +186,7 @@ public class Transacoes extends javax.swing.JFrame {
 
     public void preencheTabela(String Sql) {
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Descricao", "Data", "Conta", "Categoria", "Valor", "Codigo"};
+        String[] colunas = new String[]{"Descricao", "Data", "Conta", "Categoria", "Valor", "Codigo", "Consolidada", "Lembrete", "Nota", "Tipo"};
         conexao.conecta();
         conexao.executaSql(Sql);
 
@@ -188,7 +194,7 @@ public class Transacoes extends javax.swing.JFrame {
             conexao.rs.beforeFirst();
 
             while (conexao.rs.next()) {
-                dados.add(new Object[]{conexao.rs.getString("DESCRTRA"), conexao.rs.getDate("DATA"), conexao.rs.getString("DESCRCON"), conexao.rs.getString("DESCRCAT"), conexao.rs.getFloat("VALOR"), conexao.rs.getInt("CODTRA")});
+                dados.add(new Object[]{conexao.rs.getString("DESCRTRA"), conexao.rs.getDate("DATA"), conexao.rs.getString("DESCRCON"), conexao.rs.getString("DESCRCAT"), conexao.rs.getFloat("VALOR"), conexao.rs.getInt("CODTRA"), conexao.rs.getInt("PAGO"), conexao.rs.getInt("LEMBRETE"), conexao.rs.getString("NOTA"), conexao.rs.getString("TIPO")});
             }
 
         } catch (SQLException ex) {
@@ -228,6 +234,22 @@ public class Transacoes extends javax.swing.JFrame {
                 .getColumn(5).setPreferredWidth(30);
         jTableTransac.getColumnModel()
                 .getColumn(5).setResizable(false);
+        jTableTransac.getColumnModel()
+                .getColumn(6).setPreferredWidth(5);
+        jTableTransac.getColumnModel()
+                .getColumn(6).setResizable(false);
+        jTableTransac.getColumnModel()
+                .getColumn(7).setPreferredWidth(10);
+        jTableTransac.getColumnModel()
+                .getColumn(7).setResizable(false);
+        jTableTransac.getColumnModel()
+                .getColumn(8).setPreferredWidth(500);
+        jTableTransac.getColumnModel()
+                .getColumn(8).setResizable(false);
+        jTableTransac.getColumnModel()
+                .getColumn(9).setPreferredWidth(5);
+        jTableTransac.getColumnModel()
+                .getColumn(9).setResizable(false);
         jTableTransac.setAutoResizeMode(jTableTransac.AUTO_RESIZE_OFF);
 
         jTableTransac.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

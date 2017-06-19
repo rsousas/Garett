@@ -24,11 +24,40 @@ public class ITransacao extends javax.swing.JFrame {
     MTransacoes modTransac = new MTransacoes();
     CTransacoes Transac = new CTransacoes();
     String usuario = TelaLogin.getUsuario();
+    private boolean isEdit;
+    private Integer codTra;
 
     public ITransacao() {
         initComponents();
         povoaCombos();
         dtData.setDate(new java.util.Date());
+    }
+
+    public ITransacao(MTransacoes transacoes) {
+        initComponents();
+        povoaCombos();
+        txtValor.setText(Float.toString(transacoes.getValor()));
+        txtDescricao.setText(transacoes.getDescricao());
+        dtData.setDate(transacoes.getData());
+        cbConta.setSelectedItem(transacoes.getConta());
+        cbCategoria.setSelectedItem(transacoes.getCateg());
+        cxbConsolidada.setSelected(transacoes.getPago() == 1);
+        switch (transacoes.getTipo()) {
+            case "D":
+                cbTipo.setSelectedItem(0);
+                break;
+            case "R":
+                cbTipo.setSelectedItem(1);
+                break;
+            case "T":
+                cbTipo.setSelectedItem(2);
+                break;
+        }
+
+        spLembrete.setValue(transacoes.getLembrete());
+        pnNota.setText(transacoes.getNota());
+        codTra = transacoes.getCodtra();
+        isEdit = true;
     }
 
     /**
@@ -302,7 +331,7 @@ public class ITransacao extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(395, 512));
+        pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -330,7 +359,12 @@ public class ITransacao extends javax.swing.JFrame {
             }
 
             if (Transac.validaCampos(modTransac)) {
-                Transac.Salvar(modTransac);
+                if (!isEdit) {
+                    Transac.Salvar(modTransac);
+                } else {
+                    modTransac.setCodtra(codTra);
+                    Transac.Editar(modTransac);
+                }
                 Transacoes telaTransacoes = Transacoes.getInstance();
                 telaTransacoes.limpaTabela();
                 telaTransacoes.preencheTabela("select * from TRANSACAO T natural join CATEGORIA natural join CONTA join USUARIO U on U.CODUSU = T.CODUSU where T.CODUSU = " + usuario + " order by DATA");
@@ -346,7 +380,9 @@ public class ITransacao extends javax.swing.JFrame {
     }//GEN-LAST:event_btSalvarNovoActionPerformed
 
     private void btSalvarNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarNovo1ActionPerformed
-        // TODO add your handling code here:
+        Transacoes telaTransacoes = Transacoes.getInstance();
+        telaTransacoes.setEnabled(true);
+        setVisible(false);
     }//GEN-LAST:event_btSalvarNovo1ActionPerformed
 
     private void povoaCombos() {

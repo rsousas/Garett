@@ -67,12 +67,40 @@ public class CTransacoes {
         conexao.desconecta();
     }
 
-    public void Excluir(MTransacoes transacoes) {
+    public void Editar(MTransacoes transac) {
+        int codCat;
+        int codCon;
+        java.sql.Date dataSql = new java.sql.Date(transac.getData().getTime()); // É necessário converter util.Date para sql.Date
+        codCat = buscaCodCategoria(transac.getCateg());
+        codCon = buscaCodConta(transac.getConta());
+        conexao.conecta();
+        try {
+            PreparedStatement pst = conexao.conexao.prepareStatement("Update TRANSACAO set DESCRTRA = ?, DATA = ?, PAGO = ?, LEMBRETE = ?, NOTA = ?, VALOR = ?, TIPO = ?, CODCAT = ?, CODCON = ? where CODUSU = ? and CODTRA = ?");
+            pst.setString(1, transac.getDescricao());
+            pst.setDate(2, dataSql);
+            pst.setInt(3, transac.getPago());
+            pst.setInt(4, transac.getLembrete());
+            pst.setString(5, transac.getNota());
+            pst.setFloat(6, transac.getValor());
+            pst.setString(7, transac.getTipo());
+            pst.setInt(8, codCat);
+            pst.setInt(9, codCon);
+            pst.setString(10, transac.getUsuario());
+            pst.setInt(11, transac.getCodtra());
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Sucesso!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Editar Transação:\nErro:" + ex);
+        }
+        conexao.desconecta();
+    }
+
+    public void Excluir(MTransacoes transac) {
         conexao.conecta();
         try {
             PreparedStatement pst = conexao.conexao.prepareStatement("delete from TRANSACAO where CODUSU = ? and CODTRA = ?");
-            pst.setString(1, transacoes.getUsuario());
-            pst.setString(2, Integer.toString(transacoes.getCodtra()));
+            pst.setString(1, transac.getUsuario());
+            pst.setString(2, Integer.toString(transac.getCodtra()));
             pst.execute();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Excluir Transacao:\nErro:" + ex);
