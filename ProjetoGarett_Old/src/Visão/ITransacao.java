@@ -6,8 +6,11 @@
 package Visão;
 
 import Controle.CTransacoes;
+import Modelo.MComboBox;
 import Modelo.MTransacoes;
 import java.awt.ComponentOrientation;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -24,6 +27,8 @@ public class ITransacao extends javax.swing.JFrame {
 
     public ITransacao() {
         initComponents();
+        povoaCombos();
+        dtData.setDate(new java.util.Date());
     }
 
     /**
@@ -75,6 +80,8 @@ public class ITransacao extends javax.swing.JFrame {
         btSalvarNovo = new javax.swing.JButton();
         btSalvarNovo1 = new javax.swing.JButton();
         spLembrete = new com.toedter.components.JSpinField();
+        cbTipo = new javax.swing.JComboBox<>();
+        lbCategoria1 = new javax.swing.JLabel();
 
         jMenu4.setText("Arquivo");
 
@@ -180,6 +187,10 @@ public class ITransacao extends javax.swing.JFrame {
             }
         });
 
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despesa", "Receita", "Transferência" }));
+
+        lbCategoria1.setText("*Tipo:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -202,20 +213,25 @@ public class ITransacao extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(lbValor, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(155, 155, 155)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(lbData, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(43, 43, 43))
-                                    .addComponent(dtData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(dtData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbLembrete, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbNota, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbConta, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cxbConsolidada, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lbDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cxbConsolidada, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbCategoria1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -254,8 +270,12 @@ public class ITransacao extends javax.swing.JFrame {
                 .addComponent(lbCategoria)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cxbConsolidada)
+                .addGap(4, 4, 4)
+                .addComponent(lbCategoria1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cxbConsolidada)
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addComponent(lbLembrete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -268,7 +288,7 @@ public class ITransacao extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btSalvarNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btSalvarNovo1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -282,41 +302,59 @@ public class ITransacao extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(395, 500));
+        setSize(new java.awt.Dimension(395, 512));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalvarNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarNovoActionPerformed
         if (Transac.verificaSeNumerico(txtValor.getText())) {
             modTransac.setValor(txtValor.getText());
+            modTransac.setDescricao(txtDescricao.getText());
+            modTransac.setData(dtData.getDate());
+            modTransac.setConta(cbConta.getSelectedItem().toString());
+            modTransac.setCateg(cbCategoria.getSelectedItem().toString());
+            modTransac.setPago(cxbConsolidada.isSelected());
+            modTransac.setLembrete(spLembrete.getValue());
+            modTransac.setNota(pnNota.getText());
+            modTransac.setUsuario(usuario);
+            switch (cbTipo.getSelectedIndex()) {
+                case 0:
+                    modTransac.setTipo("D");
+                    break;
+                case 1:
+                    modTransac.setTipo("R");
+                    break;
+                case 2:
+                    modTransac.setTipo("T");
+                    break;
+            }
+
+            if (Transac.validaCampos(modTransac)) {
+                Transac.Salvar(modTransac);
+                Transacoes telaTransacoes = Transacoes.getInstance();
+                telaTransacoes.limpaTabela();
+                telaTransacoes.preencheTabela("select * from TRANSACAO T natural join CATEGORIA natural join CONTA join USUARIO U on U.CODUSU = T.CODUSU where T.CODUSU = " + usuario + " order by DATA");
+                telaTransacoes.setVisible(true);
+                dispose();
+            } else {
+                txtDescricao.requestFocus();
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Valor digitado não numérico!");
             txtValor.requestFocus();
-        }
-        modTransac.setDescricao(txtDescricao.getText());
-        modTransac.setData(dtData.getDateFormatString());
-        modTransac.setCodCon(cbConta.getSelectedItem().toString());
-        modTransac.setCodCat(cbCategoria.getSelectedItem().toString());      
-        modTransac.setPago(cxbConsolidada.isSelected());
-        modTransac.setLembrete(spLembrete.getValue());
-        modTransac.setNota(pnNota.getText());
-        modTransac.setUsuario(usuario);
-        
-        if (Transac.validaCampos(modTransac)) {
-            Transac.Salvar(modTransac);
-            Conta telaConta = Conta.getInstance();
-            telaConta.limpaTabela();
-            telaConta.preencheTabela("select * from CONTA  natural join USUARIO where IDUSU = " + usuario + " order by CODCON");
-            telaConta.setVisible(true);
-            dispose();
-        } else {
-            txtDescricao.requestFocus();
         }
     }//GEN-LAST:event_btSalvarNovoActionPerformed
 
     private void btSalvarNovo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarNovo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btSalvarNovo1ActionPerformed
+
+    private void povoaCombos() {
+        MComboBox mConta = new MComboBox(Transac.buscaContas(usuario));
+        MComboBox mCategoria = new MComboBox(Transac.buscaCategorias(usuario));
+        cbConta.setModel(mConta);
+        cbCategoria.setModel(mCategoria);
+    }
 
     /**
      * @param args the command line arguments
@@ -360,6 +398,7 @@ public class ITransacao extends javax.swing.JFrame {
     private javax.swing.JButton btSalvarNovo1;
     private javax.swing.JComboBox<String> cbCategoria;
     private javax.swing.JComboBox<String> cbConta;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JCheckBox cxbConsolidada;
     private com.toedter.calendar.JDateChooser dtData;
     private com.toedter.calendar.JDayChooser jDayChooser1;
@@ -386,6 +425,7 @@ public class ITransacao extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCategoria;
+    private javax.swing.JLabel lbCategoria1;
     private javax.swing.JLabel lbConta;
     private javax.swing.JLabel lbData;
     private javax.swing.JLabel lbDescricao;

@@ -131,29 +131,29 @@ public class IConta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        modConta.setDescricao(txtDescricao.getText());
         if (conta.verificaSeNumerico(txtSaldo.getText())) {
+            modConta.setDescricao(txtDescricao.getText());
             modConta.setSaldo(txtSaldo.getText());
+            modConta.setAtivo(cxbAtiva.isSelected());
+            modConta.setUsuario(usuario);
+            if (conta.validaCampos(modConta)) {
+                if (!isEdit) {
+                    conta.Salvar(modConta);
+                } else {
+                    modConta.setCodcon(codCon);
+                    conta.Editar(modConta);
+                }
+                Conta telaConta = Conta.getInstance();
+                telaConta.limpaTabela();
+                telaConta.preencheTabela("select * from CONTA  natural join USUARIO where CODUSU = " + usuario + " order by CODCON");
+                telaConta.setVisible(true);
+                dispose();
+            } else {
+                txtDescricao.requestFocus();
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Valor digitado não numérico!");
             txtSaldo.requestFocus();
-        }
-        modConta.setAtivo(cxbAtiva.isSelected());
-        modConta.setUsuario(usuario);
-        if (conta.validaCampos(modConta)) {
-            if (!isEdit) {
-                conta.Salvar(modConta);
-            } else {
-                modConta.setCodcon(codCon);
-                conta.Editar(modConta);
-            }
-            Conta telaConta = Conta.getInstance();
-            telaConta.limpaTabela();
-            telaConta.preencheTabela("select * from CONTA  natural join USUARIO where CODUSU = " + usuario + " order by CODCON");
-            telaConta.setVisible(true);
-            dispose();
-        } else {
-            txtDescricao.requestFocus();
         }
     }//GEN-LAST:event_btSalvarActionPerformed
 

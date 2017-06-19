@@ -1,7 +1,9 @@
 package Visão;
 
 import Controle.CConexaoBD;
+import Controle.CTransacoes;
 import Modelo.MTabela;
+import Modelo.MTransacoes;
 import Modelo.MUsuario;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,19 +11,19 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 public class Transacoes extends javax.swing.JFrame {
-    
+
     CConexaoBD conexao = new CConexaoBD();
-    MUsuario usuario = new MUsuario();
-    
+    String usuario = TelaLogin.getUsuario();
+    MTransacoes modTransacoes = new MTransacoes();
+    CTransacoes conta = new CTransacoes();
     private static Transacoes instancia;
-    
+
     public Transacoes() {
         initComponents();
         btEditar.setEnabled(false);
-        btExcluir.setEnabled(false);
-        preencheTabela("select * from TRANSACAO T natural join CATEGORIA natural join CONTA join USUARIO U on U.CODUSU = T.CODUSU where IDUSU = " + usuario.getUsuario() + " order by DATA");
+        preencheTabela("select * from TRANSACAO T natural join CATEGORIA natural join CONTA join USUARIO U on U.CODUSU = T.CODUSU where T.CODUSU = " + usuario + " order by DATA");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -144,12 +146,24 @@ public class Transacoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+        /*modTransacoes.setDescricao((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 1));
+        modTransacoes.setSaldo((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 2));
+        modTransacoes.setAtivo(((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 3)) == 1);
+        modTransacoes.setUsuario(usuario);
+        modTransacoes.setCodcon((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 0));
         ITransacao telaTransacao = new ITransacao();
-        telaTransacao.setVisible(true);
+        telaTransacao.setVisible(true);*/
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        // TODO add your handling code here:
+        int resposta = 0;
+        resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir?");
+        if (resposta == JOptionPane.YES_OPTION) {
+            modTransacoes.setCodtra((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 5));
+            modTransacoes.setUsuario(usuario);
+            conta.Excluir(modTransacoes);
+            preencheTabela("select * from TRANSACAO T natural join CATEGORIA natural join CONTA join USUARIO U on U.CODUSU = T.CODUSU where T.CODUSU = " + usuario + " order by DATA");
+        }
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
@@ -163,27 +177,27 @@ public class Transacoes extends javax.swing.JFrame {
         setVisible(false);
         instancia = null;
     }//GEN-LAST:event_btSairActionPerformed
-    
+
     public void preencheTabela(String Sql) {
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Descricao", "Data", "Conta", "Categoria", "Valor"};
+        String[] colunas = new String[]{"Descricao", "Data", "Conta", "Categoria", "Valor", "Codigo"};
         conexao.conecta();
         conexao.executaSql(Sql);
-        
+
         try {
             conexao.rs.beforeFirst();
-            
+
             while (conexao.rs.next()) {
-                dados.add(new Object[]{conexao.rs.getString("DESCRTRA"), conexao.rs.getDate("DATA"), conexao.rs.getInt("DESCRCON"), conexao.rs.getInt("DESCRCAT"), conexao.rs.getFloat("VALOR")});
+                dados.add(new Object[]{conexao.rs.getString("DESCRTRA"), conexao.rs.getDate("DATA"), conexao.rs.getString("DESCRCON"), conexao.rs.getString("DESCRCAT"), conexao.rs.getFloat("VALOR"), conexao.rs.getInt("CODTRA")});
             }
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Erro ao preencher Tabela!" + ex);
         }
         MTabela tabela = new MTabela(dados, colunas);
-        
+
         jTableTransac.setModel(tabela);
-        
+
         jTableTransac.getColumnModel()
                 .getColumn(0).setPreferredWidth(200);
         jTableTransac.getColumnModel()
@@ -210,21 +224,25 @@ public class Transacoes extends javax.swing.JFrame {
                 .getColumn(4).setResizable(false);
         jTableTransac.getTableHeader()
                 .setReorderingAllowed(false);
+        jTableTransac.getColumnModel()
+                .getColumn(5).setPreferredWidth(30);
+        jTableTransac.getColumnModel()
+                .getColumn(5).setResizable(false);
         jTableTransac.setAutoResizeMode(jTableTransac.AUTO_RESIZE_OFF);
-        
+
         jTableTransac.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+
         conexao.desconecta();
-        
+
     }
-    
+
     public void limpaTabela() {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[0];
         MTabela tabela = new MTabela(dados, colunas);
         jTableTransac.setModel(tabela);
     }
-    
+
     public static Transacoes getInstance() { // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
         if (instancia == null) {
             instancia = new Transacoes();

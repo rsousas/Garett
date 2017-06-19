@@ -49,7 +49,7 @@ public class CConta {
             PreparedStatement pst = conexao.conexao.prepareStatement("insert into CONTA (DESCRCON, SALDOCON, ATIVOCON, CODUSU) values(?, ?, ?, ?)");
             pst.setString(1, conta.getDescricao());
             pst.setFloat(2, conta.getSaldo());
-            pst.setString(3, Integer.toString(conta.getAtivo()));
+            pst.setInt(3, conta.getAtivo());
             pst.setString(4, conta.getUsuario());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Sucesso!");
@@ -65,9 +65,9 @@ public class CConta {
             PreparedStatement pst = conexao.conexao.prepareStatement("Update CONTA set DESCRCON = ?, SALDOCON = ?, ATIVOCON = ? where CODUSU = ? and CODCON = ?");
             pst.setString(1, conta.getDescricao());
             pst.setFloat(2, conta.getSaldo());
-            pst.setString(3, Integer.toString(conta.getAtivo()));
+            pst.setInt(3, conta.getAtivo());
             pst.setString(4, conta.getUsuario());
-            pst.setString(5, Integer.toString(conta.getCodcon()));
+            pst.setInt(5, conta.getCodcon());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {

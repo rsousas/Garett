@@ -39,8 +39,8 @@ public class CCategoria {
         try {
             PreparedStatement pst = conexao.conexao.prepareStatement("insert into CATEGORIA (DESCRCAT, CODCATPAI, ATIVOCAT, CODUSU) values(?, ?, ?, ?)");
             pst.setString(1, categoria.getDescricao());
-            pst.setString(2, Integer.toString(categoria.getCodigoPai()));
-            pst.setString(3, Integer.toString(categoria.getAtivo()));
+            pst.setInt(2, categoria.getCodigoPai());
+            pst.setInt(3, categoria.getAtivo());
             pst.setString(4, categoria.getUsuario());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Sucesso!");
@@ -55,10 +55,10 @@ public class CCategoria {
         try {
             PreparedStatement pst = conexao.conexao.prepareStatement("Update CATEGORIA set DESCRCAT = ?, CODCATPAI = ?, ATIVOCAT = ? where CODUSU = ? and CODCAT = ?");
             pst.setString(1, categoria.getDescricao());
-            pst.setString(2, Integer.toString(categoria.getCodigoPai()));
-            pst.setString(3, Integer.toString(categoria.getAtivo()));
+            pst.setInt(2, categoria.getCodigoPai());
+            pst.setInt(3, categoria.getAtivo());
             pst.setString(4, categoria.getUsuario());
-            pst.setString(5, Integer.toString(categoria.getCodcat()));
+            pst.setInt(5, categoria.getCodcat());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {

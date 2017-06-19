@@ -1,26 +1,28 @@
 package Modelo;
 
+import java.util.Date;
+
 public class MTransacoes {
 
+    private Integer Codtra;
     private String Descricao;
-    private String Data;
+    private Date Data;
     private boolean Pago;
     private Integer Lembrete;
     private String Nota;
     private Float Valor;
     private String Tipo;
-    private String CodCat;
-    private String CodCon;
-    private String CodUsu;
-    private String CodTransf;
+    private String Categ;
+    private String Conta;
+    private Integer CodTransf;
     private String usuario;
 
-    public String getUsuario() {
-        return usuario;
+    public Integer getCodtra() {
+        return Codtra;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setCodtra(Integer Codtra) {
+        this.Codtra = Codtra;
     }
 
     public String getDescricao() {
@@ -31,11 +33,11 @@ public class MTransacoes {
         this.Descricao = Descricao;
     }
 
-    public String getData() {
+    public Date getData() {
         return Data;
     }
 
-    public void setData(String Data) {
+    public void setData(Date Data) {
         this.Data = Data;
     }
 
@@ -83,36 +85,36 @@ public class MTransacoes {
         this.Tipo = Tipo;
     }
 
-    public String getCodCat() {
-        return CodCat;
+    public String getCateg() {
+        return Categ;
     }
 
-    public void setCodCat(String CodCat) {
-        this.CodCat = CodCat;
+    public void setCateg(String Categ) {
+        this.Categ = Categ;
     }
 
-    public String getCodCon() {
-        return CodCon;
+    public String getConta() {
+        return Conta;
     }
 
-    public void setCodCon(String CodCon) {
-        this.CodCon = CodCon;
+    public void setConta(String Conta) {
+        this.Conta = Conta;
     }
 
-    public String getCodUsu() {
-        return CodUsu;
-    }
-
-    public void setCodUsu(String CodUsu) {
-        this.CodUsu = CodUsu;
-    }
-
-    public String getCodTransf() {
+    public Integer getCodTransf() {
         return CodTransf;
     }
 
-    public void setCodTransf(String CodTransf) {
+    public void setCodTransf(Integer CodTransf) {
         this.CodTransf = CodTransf;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
 }
