@@ -12,16 +12,15 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author renat
+ * @author Gabriela Filete
  */
 public class TelaLogin extends javax.swing.JFrame {
-
+    
     MUsuario modUsuario = new MUsuario();
     CUsuario usuario = new CUsuario();
     private static String CodUsu;
-
     /**
-     * Creates new form TelaLogin
+     * Creates new form Login
      */
     public TelaLogin() {
         initComponents();
@@ -36,70 +35,108 @@ public class TelaLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtPassowrdSenha = new javax.swing.JLabel();
-        btAcessar = new javax.swing.JButton();
-        btSair = new javax.swing.JButton();
-        lbUsuario = new javax.swing.JLabel();
-        lbSenha = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
-        pswSenha = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        PainelQ = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-
-        txtPassowrdSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fundotelaLogin.png"))); // NOI18N
+        txtUsuario = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        pswSenha = new javax.swing.JPasswordField();
+        jSeparator3 = new javax.swing.JSeparator();
+        lbSenha = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        btAcessar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        btSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login");
-        setResizable(false);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btAcessar.setText("Acessar");
-        btAcessar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAcessarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btAcessar);
-        btAcessar.setBounds(190, 240, 80, 30);
+        PainelQ.setBackground(new java.awt.Color(0, 0, 0));
+        PainelQ.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btSair.setText("Sair");
-        btSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSairActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btSair);
-        btSair.setBounds(280, 240, 70, 30);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/workstation.png"))); // NOI18N
+        PainelQ.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, -320, 670, 1130));
 
-        lbUsuario.setText("Usuário:");
-        getContentPane().add(lbUsuario);
-        lbUsuario.setBounds(130, 120, 50, 14);
+        getContentPane().add(PainelQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 530, 490));
 
-        lbSenha.setText("Senha:");
-        getContentPane().add(lbSenha);
-        lbSenha.setBounds(130, 180, 50, 14);
-        getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(130, 140, 220, 30);
-        getContentPane().add(pswSenha);
-        pswSenha.setBounds(130, 200, 220, 30);
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setToolTipText("");
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 204));
-        jButton1.setText("Cadastrar?");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(53, 111, 181));
+        jLabel1.setText("E-mail");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+
+        txtUsuario.setForeground(new java.awt.Color(32, 33, 36));
+        txtUsuario.setBorder(null);
+        txtUsuario.setCaretColor(new java.awt.Color(32, 33, 36));
+        jPanel2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 310, 30));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 320, -1));
+
+        pswSenha.setForeground(new java.awt.Color(32, 33, 36));
+        pswSenha.setToolTipText("");
+        pswSenha.setBorder(null);
+        pswSenha.setCaretColor(new java.awt.Color(32, 33, 36));
+        jPanel2.add(pswSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 320, 30));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 320, -1));
+
+        lbSenha.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lbSenha.setForeground(new java.awt.Color(53, 111, 181));
+        lbSenha.setText("Senha");
+        jPanel2.add(lbSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
+
+        jButton1.setForeground(new java.awt.Color(153, 153, 153));
+        jButton1.setText("Não possuo uma conta. Cadastrar-me.");
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(0, 350, 500, 30);
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fundotelaLoginNome.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 500, 380);
+        btAcessar.setBackground(new java.awt.Color(225, 91, 78));
+        btAcessar.setForeground(new java.awt.Color(32, 33, 36));
+        btAcessar.setText("Entrar");
+        btAcessar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(225, 91, 78), 2));
+        btAcessar.setContentAreaFilled(false);
+        btAcessar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAcessarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btAcessar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 320, 30));
 
-        setSize(new java.awt.Dimension(507, 408));
-        setLocationRelativeTo(null);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/onlinelogomaker-061817-1509-5100.png"))); // NOI18N
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ic_clear_black_24dp_1x.png"))); // NOI18N
+        btSair.setBorder(null);
+        btSair.setBorderPainted(false);
+        btSair.setContentAreaFilled(false);
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 5, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 430, 490));
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
+                              
+    public static synchronized String getUsuario() {
+        return CodUsu;
+    }
+
+    public void setUsuario(String CodUsu) {
+        this.CodUsu = CodUsu;
+    }
 
     private void btAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAcessarActionPerformed
         modUsuario.setUsuario(txtUsuario.getText());
@@ -113,26 +150,18 @@ public class TelaLogin extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Dados Incorretos!");
             txtUsuario.requestFocus();
-        }
+        }// TODO add your handling code here:
     }//GEN-LAST:event_btAcessarActionPerformed
-
-    public static synchronized String getUsuario() {
-        return CodUsu;
-    }
-
-    public void setUsuario(String CodUsu) {
-        this.CodUsu = CodUsu;
-    }
-
-    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btSairActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         IUsuario telaCadUsuario = new IUsuario();
         telaCadUsuario.setVisible(true);
-        dispose();
+        dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+         System.exit(0); // TODO add your handling code here:
+    }//GEN-LAST:event_btSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +189,13 @@ public class TelaLogin extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -170,14 +206,18 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PainelQ;
     private javax.swing.JButton btAcessar;
     private javax.swing.JButton btSair;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lbSenha;
-    private javax.swing.JLabel lbUsuario;
     private javax.swing.JPasswordField pswSenha;
-    private javax.swing.JLabel txtPassowrdSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

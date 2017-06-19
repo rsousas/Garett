@@ -8,6 +8,7 @@ package Visão;
 import Controle.CConexaoBD;
 import Controle.CUsuario;
 import Modelo.MUsuario;
+import java.awt.Color;
 
 /**
  *
@@ -19,8 +20,12 @@ public class IUsuario extends javax.swing.JFrame {
     CUsuario usuario = new CUsuario();
     CConexaoBD conexao = new CConexaoBD();
 
+    /**
+     * Creates new form Login
+     */
     public IUsuario() {
         initComponents();
+        PainelOverlay.setBackground(new Color(255,255,255,100));
     }
 
     /**
@@ -32,79 +37,128 @@ public class IUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
+        PainelQ = new javax.swing.JPanel();
+        PainelOverlay = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         lbUsuario = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
         txtUsuario = new javax.swing.JTextField();
-        lbSenha = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         pswSenha = new javax.swing.JPasswordField();
-        lbConfirmaSenha = new javax.swing.JLabel();
-        pswConfirmaSenha = new javax.swing.JPasswordField();
-        btSalvar = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        lbSenha = new javax.swing.JLabel();
+        lbNome = new javax.swing.JLabel();
+        btSalvar = new java.awt.Button();
         btCancelar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro de Usuário");
-        setResizable(false);
-        setSize(new java.awt.Dimension(380, 280));
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbNome.setText("*Nome:");
-        getContentPane().add(lbNome);
-        lbNome.setBounds(38, 26, 50, 14);
-        getContentPane().add(txtNome);
-        txtNome.setBounds(43, 46, 299, 30);
+        PainelQ.setBackground(new java.awt.Color(0, 0, 0));
+        PainelQ.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbUsuario.setText("*Usuário:");
-        getContentPane().add(lbUsuario);
-        lbUsuario.setBounds(38, 84, 59, 14);
-        getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(43, 103, 299, 30);
+        PainelOverlay.setBackground(new java.awt.Color(255, 255, 255));
 
-        lbSenha.setText("*Senha:");
-        getContentPane().add(lbSenha);
-        lbSenha.setBounds(43, 141, 52, 14);
-        getContentPane().add(pswSenha);
-        pswSenha.setBounds(43, 161, 140, 30);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/onlinelogomaker-061817-1509-5100.png"))); // NOI18N
 
-        lbConfirmaSenha.setText("*Confirmar Senha:");
-        getContentPane().add(lbConfirmaSenha);
-        lbConfirmaSenha.setBounds(201, 141, 130, 14);
-        getContentPane().add(pswConfirmaSenha);
-        pswConfirmaSenha.setBounds(201, 161, 141, 30);
+        javax.swing.GroupLayout PainelOverlayLayout = new javax.swing.GroupLayout(PainelOverlay);
+        PainelOverlay.setLayout(PainelOverlayLayout);
+        PainelOverlayLayout.setHorizontalGroup(
+            PainelOverlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelOverlayLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jLabel5)
+                .addContainerGap(109, Short.MAX_VALUE))
+        );
+        PainelOverlayLayout.setVerticalGroup(
+            PainelOverlayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelOverlayLayout.createSequentialGroup()
+                .addContainerGap(337, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(68, 68, 68))
+        );
 
-        btSalvar.setText("Salvar");
+        PainelQ.add(PainelOverlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 520, 490));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/workstation.png"))); // NOI18N
+        PainelQ.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, -320, 670, 1130));
+
+        getContentPane().add(PainelQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 530, 490));
+
+        jPanel2.setBackground(new java.awt.Color(32, 33, 36));
+        jPanel2.setToolTipText("");
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbUsuario.setForeground(new java.awt.Color(53, 111, 181));
+        lbUsuario.setText("E-mail");
+        jPanel2.add(lbUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+
+        txtNome.setBackground(new java.awt.Color(32, 33, 36));
+        txtNome.setForeground(new java.awt.Color(255, 255, 255));
+        txtNome.setBorder(null);
+        txtNome.setCaretColor(new java.awt.Color(255, 255, 255));
+        jPanel2.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 310, 30));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 320, -1));
+
+        txtUsuario.setBackground(new java.awt.Color(32, 33, 36));
+        txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        txtUsuario.setBorder(null);
+        txtUsuario.setCaretColor(new java.awt.Color(255, 255, 255));
+        jPanel2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 310, 30));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 320, -1));
+
+        pswSenha.setBackground(new java.awt.Color(32, 33, 36));
+        pswSenha.setForeground(new java.awt.Color(255, 255, 255));
+        pswSenha.setToolTipText("");
+        pswSenha.setBorder(null);
+        pswSenha.setCaretColor(new java.awt.Color(255, 255, 255));
+        jPanel2.add(pswSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 320, 30));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 320, -1));
+
+        lbSenha.setForeground(new java.awt.Color(53, 111, 181));
+        lbSenha.setText("Senha");
+        jPanel2.add(lbSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
+
+        lbNome.setForeground(new java.awt.Color(53, 111, 181));
+        lbNome.setText("Nome");
+        jPanel2.add(lbNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+
+        btSalvar.setActionCommand("acCadastrar");
+        btSalvar.setBackground(new java.awt.Color(130, 130, 130));
+        btSalvar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btSalvar.setForeground(new java.awt.Color(255, 255, 255));
+        btSalvar.setLabel("Cadastrar");
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSalvarActionPerformed(evt);
             }
         });
-        getContentPane().add(btSalvar);
-        btSalvar.setBounds(40, 210, 80, 30);
+        jPanel2.add(btSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 320, 30));
 
-        btCancelar.setText("Sair");
+        btCancelar.setForeground(new java.awt.Color(225, 91, 78));
+        btCancelar.setText("Já estou registrado.");
+        btCancelar.setBorder(null);
+        btCancelar.setBorderPainted(false);
+        btCancelar.setContentAreaFilled(false);
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btCancelar);
-        btCancelar.setBounds(130, 210, 80, 30);
+        jPanel2.add(btCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fundotelaLogin.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 390, 260);
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 430, 490));
 
-        setSize(new java.awt.Dimension(390, 290));
-        setLocationRelativeTo(null);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         modUsuario.setNome(txtNome.getText());
         modUsuario.setUsuario(txtUsuario.getText());
         modUsuario.setSenha(pswSenha.getText());
-        modUsuario.setSenhaConfirma(pswConfirmaSenha.getText());
         if (usuario.validaCampos(modUsuario)) {
             usuario.Salvar(modUsuario);
             TelaLogin telaLogin = new TelaLogin();
@@ -112,15 +166,15 @@ public class IUsuario extends javax.swing.JFrame {
             dispose();
         } else {
             txtNome.requestFocus();
-        }
+        }// TODO add your handling code here:
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         TelaLogin telaLogin = new TelaLogin();
         telaLogin.setVisible(true);
-        dispose();
+        dispose();// TODO add your handling code here:
     }//GEN-LAST:event_btCancelarActionPerformed
-
+                                          
     /**
      * @param args the command line arguments
      */
@@ -147,6 +201,21 @@ public class IUsuario extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(IUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -157,14 +226,19 @@ public class IUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PainelOverlay;
+    private javax.swing.JPanel PainelQ;
     private javax.swing.JButton btCancelar;
-    private javax.swing.JButton btSalvar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lbConfirmaSenha;
+    private java.awt.Button btSalvar;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbSenha;
     private javax.swing.JLabel lbUsuario;
-    private javax.swing.JPasswordField pswConfirmaSenha;
     private javax.swing.JPasswordField pswSenha;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtUsuario;
