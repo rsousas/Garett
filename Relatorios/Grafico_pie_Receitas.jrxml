@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0504a124-511e-4c51-9331-2398da8c01c4">
+	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="P_DTINI" class="java.util.Date"/>
+	<parameter name="P_DTFIM" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT descrcat, SUM(valor) as valor
+FROM v_transacoes
+WHERE codtratransf is null
+AND tipo='1'
+AND codtratransf IS NULL
+AND data >= $P{P_DTINI}
+AND data <= $P{P_DTFIM}
+GROUP BY descrcat, descrconta;]]>
+	</queryString>
+	<field name="descrcat" class="java.lang.String"/>
+	<field name="valor" class="java.lang.Double"/>
+	<variable name="V_VLRTOT_M" class="java.lang.Double" resetType="Group" resetGroup="mes_ano" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="V_VLRTOT_CONTA" class="java.lang.Double" resetType="Group" resetGroup="descrconta" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="V_VLRTOT" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<group name="descrconta">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="mes_ano" minHeightToStartNewPage="20">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="91" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="12" width="553" height="33" uuid="c7ac8f95-e0b8-4852-89dc-c2af3f5a79fe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Receitas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="117" y="46" width="438" height="22" uuid="c2a3f267-a9f2-4992-a8ff-7f60cbcff259"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Easy Personal Finances Garrett]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Column header" x="117" y="72" width="436" height="16" uuid="8ddf8752-6182-44bd-90ab-d05e289437d6"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Período: "+$P{P_DTINI}+" à "+$P{P_DTFIM}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="89" width="555" height="1" uuid="c47d3982-58ef-4d24-8564-28338d89f6b9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="103" y="3" width="80" height="16" uuid="e0625d3d-8b3b-4c99-bcb3-513dae2e0f3e"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="1" y="3" width="102" height="16" uuid="3d1a42ff-328e-407b-a841-1df9061c01f3"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="1" y="0" width="102" height="16" uuid="f00d38a0-8817-45c1-99f7-ca9147ca6866"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descrcat}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Band" pattern="#,##0.00;-#,##0.00">
+				<reportElement style="Column header" x="103" y="0" width="80" height="16" uuid="df517545-f217-419b-a7f3-f3a801832d11"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="1" y="34" width="197" height="16" uuid="20287093-fd08-464d-8626-2878ec2497c4"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Column header" x="434" y="34" width="80" height="16" uuid="ef3e4ee9-44a9-493c-a6de-e8f2b168ab4d"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="514" y="34" width="40" height="16" uuid="03cf97ad-6185-417e-80a6-baee95da751b"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="31" width="555" height="1" uuid="2c7ab6ef-6564-423e-b99e-da29572c242a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="429" splitType="Stretch">
+			<pie3DChart>
+				<chart>
+					<reportElement x="1" y="9" width="553" height="362" uuid="1aa0a932-9b38-4111-81cf-359cc712eb32"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{descrcat}]]></keyExpression>
+					<valueExpression><![CDATA[$F{valor}]]></valueExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF"/>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</summary>
+</jasperReport>

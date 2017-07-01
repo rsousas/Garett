@@ -6,8 +6,8 @@ CODUSU integer not null AUTO_INCREMENT,
 NOMEUSU varchar(50) not null,
 IDUSU varchar(20) not null,
 SENHAUSU varchar(15) not null,
-primary key (CODUSU)
-);
+primary key (CODUSU));
+
 
 create table CONTA
 (
@@ -16,7 +16,7 @@ DESCRCON varchar(50) not null,
 SALDOCON real not null, 
 ATIVOCON integer not null,
 CODUSU integer not null,
-primary key (CODCON),
+primary key (CODCON, CODUSU),
 foreign key (CODUSU) references USUARIO (CODUSU)
 );
 
@@ -27,7 +27,7 @@ DESCRCAT varchar(50) not null,
 CODCATPAI integer,
 ATIVOCAT integer not null,
 CODUSU integer not null,
-primary key (CODCAT),
+primary key (CODCAT, CODUSU),
 foreign key (CODUSU) references USUARIO (CODUSU)
 );
 
@@ -45,7 +45,7 @@ CODCAT integer not null,
 CODCON integer not null,
 CODUSU integer not null,
 CODTRATRANSF integer,
-primary key (CODTRA),
+primary key (CODTRA, CODUSU),
 foreign key (CODCAT) references CATEGORIA (CODCAT),
 foreign key (CODCON) references CONTA (CODCON),
 foreign key (CODUSU) references USUARIO (CODUSU),

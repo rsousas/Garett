@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d4bf0907-72cd-41c5-8878-041af6aeced3">
+	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="P_DTINI" class="java.util.Date"/>
+	<parameter name="P_DTFIM" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT descrconta AS Conta, data as Data, codtratransf AS Transf, mes_ano AS Mes_Ano, valor AS Valor, tipo AS Tipo, pago AS Pago,  descrcat AS Categoria, descrtra as Descricao
+FROM v_transacoes
+WHERE codtratransf IS NOT NULL
+AND data >= $P{P_DTINI}
+AND data <= $P{P_DTFIM}
+ORDER BY data DESC;]]>
+	</queryString>
+	<field name="Conta" class="java.lang.String"/>
+	<field name="Data" class="java.sql.Date"/>
+	<field name="Transf" class="java.lang.Integer"/>
+	<field name="Mes_Ano" class="java.lang.String"/>
+	<field name="Valor" class="java.lang.Double"/>
+	<field name="Tipo" class="java.lang.String"/>
+	<field name="Pago" class="java.lang.String"/>
+	<field name="Categoria" class="java.lang.String"/>
+	<field name="Descricao" class="java.lang.String"/>
+	<variable name="V_VLRTOT_M" class="java.lang.Double" resetType="Group" resetGroup="mes_ano" calculation="Sum">
+		<variableExpression><![CDATA[$F{Valor}]]></variableExpression>
+	</variable>
+	<variable name="V_VLRTOT_CONTA" class="java.lang.Double" resetType="Group" resetGroup="descrconta" calculation="Sum">
+		<variableExpression><![CDATA[$F{Valor}]]></variableExpression>
+	</variable>
+	<variable name="V_VLRTOT" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Valor}]]></variableExpression>
+	</variable>
+	<group name="descrconta">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<textField>
+					<reportElement style="SubTitle" x="0" y="5" width="506" height="18" forecolor="#000000" uuid="b97d3075-cabe-49ea-8228-0adfc60bf094"/>
+					<textElement verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Conta: "+ $F{Conta}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<staticText>
+					<reportElement style="Column header" x="217" y="0" width="103" height="15" uuid="3b41c40f-d4fb-4dbc-820e-b1efa86a4901"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[Total Conta:]]></text>
+				</staticText>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="-2" width="555" height="1" uuid="91291f8d-7d4a-4396-93af-6df1ff2449e9"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#999999"/>
+					</graphicElement>
+				</line>
+				<textField pattern="#,##0.00">
+					<reportElement style="Detail" x="320" y="0" width="74" height="15" uuid="218226f2-a6ff-4186-a839-a38ee679211c"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{V_VLRTOT_CONTA}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="mes_ano" minHeightToStartNewPage="20">
+		<groupExpression><![CDATA[$F{Mes_Ano}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement style="SubTitle" x="0" y="4" width="460" height="20" uuid="59499b20-eaaf-49d0-b0fd-9316da1efd35"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Mes_Ano}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="19">
+				<staticText>
+					<reportElement style="Column header" x="217" y="1" width="103" height="15" uuid="416f5138-2ddc-4528-8940-c56a93c9c6ba"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[Total Mês:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00">
+					<reportElement style="Detail" x="320" y="1" width="74" height="15" uuid="bddccd91-b2aa-438f-8c40-467b5693747d"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{V_VLRTOT_M}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="12" width="555" height="33" uuid="e7390d35-2755-45fe-8b40-48a91161c91f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Transferências]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="117" y="46" width="438" height="22" uuid="1ca7e172-d7dc-431f-9b1d-6f4f8b266e68"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Easy Personal Finances Garrett]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="5c355c10-f1ad-487e-9e4e-22e688b184f7"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="55" height="15" uuid="c4d22c95-4214-4678-8b1b-bbde5414a953"/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="66" y="19" width="179" height="15" uuid="d83b50bb-fd13-4855-85e7-e6d58dcb684b"/>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="320" y="19" width="74" height="15" uuid="119fa8e7-ade9-4e70-b5a4-d85041924238"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="250" y="19" width="55" height="15" uuid="d1188d80-df1a-45ac-a179-e6dc087e8583"/>
+				<text><![CDATA[Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="402" y="19" width="152" height="15" uuid="59cddd1b-5ea0-4512-ab9e-5c798bccee6e"/>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="119feda1-4e16-44a4-8f2e-edc340636c25"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="66" y="0" width="179" height="15" uuid="25cba107-680c-45aa-be61-b1c7ecb1993b"/>
+				<textFieldExpression><![CDATA[$F{Descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="55" height="15" uuid="4c949ab0-e9b4-4985-9db8-eb3a153687f7"/>
+				<textFieldExpression><![CDATA[$F{Data}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement style="Detail" x="320" y="0" width="74" height="15" uuid="da9b1cf3-1133-434a-a799-139ff85a46cd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{Valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="250" y="0" width="55" height="15" uuid="367fc7a9-1d47-4c0b-abed-bf5d08c461bf"/>
+				<textFieldExpression><![CDATA[$F{Pago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="402" y="0" width="152" height="15" uuid="49141135-ea8f-4c83-abde-8677850aa335"/>
+				<textFieldExpression><![CDATA[$F{Categoria}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="31" width="555" height="1" uuid="def0de2f-b8bf-4efd-af87-3634dec794d7"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Column header" x="433" y="34" width="80" height="16" uuid="292a5500-0c2e-447c-aeff-34a4610965b9"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="34" width="40" height="16" uuid="2f6decfe-8551-4c8f-a8f0-7f31a7ad255a"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="34" width="197" height="16" uuid="2f41a24e-df22-4f5d-924e-598bb5f27ac6"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
