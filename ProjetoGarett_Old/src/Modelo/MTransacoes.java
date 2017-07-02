@@ -14,6 +14,7 @@ public class MTransacoes {
     private String Tipo;
     private String Categ;
     private String Conta;
+    private String ContaDest;
     private Integer CodTransf;
     private String usuario;
 
@@ -99,6 +100,14 @@ public class MTransacoes {
 
     public void setConta(String Conta) {
         this.Conta = Conta;
+    }
+
+    public String getContaDest() {
+        return ContaDest;
+    }
+
+    public void setContaDest(String ContaDest) {
+        this.ContaDest = ContaDest;
     }
 
     public Integer getCodTransf() {

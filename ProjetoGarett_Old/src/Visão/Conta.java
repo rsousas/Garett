@@ -28,7 +28,6 @@ public class Conta extends javax.swing.JFrame {
 
     public Conta() {
         initComponents();
-        btEditar.setEnabled(false);
         preencheTabela("select * from CONTA  natural join USUARIO where CODUSU = " + usuario + " order by CODCON");
     }
 
@@ -156,8 +155,8 @@ public class Conta extends javax.swing.JFrame {
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         modConta.setDescricao((String) jTableConta.getValueAt(jTableConta.getSelectedRow(), 1));
-        modConta.setSaldo((String) jTableConta.getValueAt(jTableConta.getSelectedRow(), 2));
-        modConta.setAtivo(((Integer) jTableConta.getValueAt(jTableConta.getSelectedRow(), 3)) == 1);
+        modConta.setSaldo(String.valueOf(jTableConta.getValueAt(jTableConta.getSelectedRow(), 2)));
+        modConta.setAtivo("Sim".equals((String) jTableConta.getValueAt(jTableConta.getSelectedRow(), 3)));
         modConta.setUsuario(usuario);
         modConta.setCodcon((Integer) jTableConta.getValueAt(jTableConta.getSelectedRow(), 0));
         IConta telaConta = new IConta(modConta);
@@ -165,8 +164,8 @@ public class Conta extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        int resposta = 0;
-        resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir?");
+        int resposta;
+        resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir?", "Excluir", JOptionPane.YES_NO_OPTION);
         if (resposta == JOptionPane.YES_OPTION) {
             modConta.setCodcon((Integer) jTableConta.getValueAt(jTableConta.getSelectedRow(), 0));
             modConta.setUsuario(usuario);
@@ -192,12 +191,17 @@ public class Conta extends javax.swing.JFrame {
             conexao.rs.beforeFirst();
 
             while (conexao.rs.next()) {
-                dados.add(new Object[]{conexao.rs.getInt("CODCON"), conexao.rs.getString("DESCRCON"), conexao.rs.getFloat("SALDOCON"), conexao.rs.getInt("ATIVOCON")});
+                dados.add(new Object[]{conexao.rs.getInt("CODCON"), conexao.rs.getString("DESCRCON"), conexao.rs.getFloat("SALDOCON"), conexao.rs.getInt("ATIVOCON") == 1 ? "Sim" : "Não"});
             }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Erro ao preencher Tabela!" + ex);
         }
+
+        if (dados.isEmpty()) {
+            dados.add(new Object[]{' ', ' ', ' ', ' '});
+        }
+
         MTabela tabela = new MTabela(dados, colunas);
 
         jTableConta.setModel(tabela);

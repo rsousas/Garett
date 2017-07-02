@@ -1,10 +1,13 @@
 package Controle;
 
 import Modelo.MTransacoes;
+import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,51 +23,76 @@ public class CTransacoes {
             return false;
         }
 
-        if (transac.getDescricao().isEmpty()) {
+        if (!"T".equals(transac.getTipo()) && transac.getDescricao().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe a Descrição para continuar!");
             return false;
         }
-        if (transac.getConta().isEmpty()) {
+        if (!"T".equals(transac.getTipo()) && transac.getConta().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe uma Conta para continuar!");
             return false;
         }
-        if (transac.getCateg().isEmpty()) {
+
+        if ("T".equals(transac.getTipo()) && transac.getConta().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe uma Conta de Origem para continuar!");
+            return false;
+        }
+
+        if ("T".equals(transac.getTipo()) && transac.getConta().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe uma Conta de Destino para continuar!");
+            return false;
+        }
+
+        if (!"T".equals(transac.getTipo()) && transac.getCateg().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe uma Categoria para continuar!");
             return false;
         }
 
-        if (transac.getTipo().equals("T")) {
-            JOptionPane.showMessageDialog(null, "Operação de transação ainda não implementada!");
-            return false;
-        }
         return true;
     }
 
     public void Salvar(MTransacoes transac) {
+        Calendar lembrete = new GregorianCalendar();
         int codCat;
         int codCon;
+        int codConDest;
+
         java.sql.Date dataSql = new java.sql.Date(transac.getData().getTime()); // É necessário converter util.Date para sql.Date
-        codCat = buscaCodCategoria(transac.getCateg());
+        lembrete.setTime(dataSql);
+        lembrete.add(Calendar.DATE, transac.getLembrete());
+        java.sql.Date dataLembrete = new java.sql.Date(lembrete.getTime().getTime());
         codCon = buscaCodConta(transac.getConta());
+
         conexao.conecta();
         try {
-            PreparedStatement pst = conexao.conexao.prepareStatement("insert into TRANSACAO (DESCRTRA, DATA, PAGO, LEMBRETE, NOTA, VALOR, TIPO, CODCAT, CODCON, CODUSU) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            pst.setString(1, transac.getDescricao());
-            pst.setDate(2, dataSql);
-            pst.setInt(3, transac.getPago());
-            pst.setInt(4, transac.getLembrete());
-            if (!transac.getNota().isEmpty()) {
-                pst.setString(5, transac.getNota());
+            if (!"T".equals(transac.getTipo())) {
+                codCat = buscaCodCategoria(transac.getCateg());
+                PreparedStatement pst = conexao.conexao.prepareStatement("insert into TRANSACAO (DESCRTRA, DATA, PAGO, LEMBRETE, NOTA, VALOR, TIPO, CODCAT, CODCON, CODUSU) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                pst.setString(1, transac.getDescricao());
+                pst.setDate(2, dataSql);
+                pst.setInt(3, transac.getPago());
+                pst.setDate(4, dataLembrete);
+                pst.setString(5, transac.getNota().isEmpty() ? null : transac.getNota());
+                pst.setFloat(6, transac.getValor());
+                pst.setString(7, transac.getTipo());
+                pst.setInt(8, codCat);
+                pst.setInt(9, codCon);
+                pst.setString(10, transac.getUsuario());
+                pst.execute();
             } else {
-                pst.setString(5, null);
+                codConDest = buscaCodConta(transac.getContaDest());
+                CallableStatement cst = conexao.conexao.prepareCall("{call TRANSFERENCIA (?, ?, ?, ?, ?, ?, ?, ?)}");
+                cst.setDate(1, dataSql);
+                cst.setInt(2, transac.getPago());
+                cst.setDate(3, dataLembrete);
+                cst.setString(4, transac.getNota().isEmpty() ? null : transac.getNota());
+                cst.setFloat(5, transac.getValor());
+                cst.setInt(6, codCon);
+                cst.setInt(7, codConDest);
+                cst.setString(8, transac.getUsuario());
+                cst.execute();
             }
-            pst.setFloat(6, transac.getValor());
-            pst.setString(7, transac.getTipo());
-            pst.setInt(8, codCat);
-            pst.setInt(9, codCon);
-            pst.setString(10, transac.getUsuario());
-            pst.execute();
             JOptionPane.showMessageDialog(null, "Sucesso!");
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir Transação:\nErro:" + ex);
         }

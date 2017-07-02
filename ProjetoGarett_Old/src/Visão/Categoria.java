@@ -150,8 +150,8 @@ public class Categoria extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        int resposta = 0;
-        resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir?");
+        int resposta;
+        resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente excluir?", "Excluir", JOptionPane.YES_NO_OPTION);
         if (resposta == JOptionPane.YES_OPTION) {
             modCategoria.setCodcat((Integer) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 0));
             modCategoria.setUsuario(usuario);
@@ -177,12 +177,17 @@ public class Categoria extends javax.swing.JFrame {
             conexao.rs.beforeFirst();
 
             while (conexao.rs.next()) {
-                dados.add(new Object[]{conexao.rs.getInt("CODCAT"), conexao.rs.getString("DESCRCAT"), conexao.rs.getInt("ATIVOCAT")});
+                dados.add(new Object[]{conexao.rs.getInt("CODCAT"), conexao.rs.getString("DESCRCAT"), conexao.rs.getInt("ATIVOCAT") == 1 ? "Sim" : "Não"});
             }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Erro ao preencher Tabela!" + ex);
         }
+
+        if (dados.isEmpty()) {
+            dados.add(new Object[]{' ', ' ', ' '});
+        }
+
         MTabela tabela = new MTabela(dados, colunas);
 
         jTableCateg.setModel(tabela);
