@@ -401,10 +401,9 @@
                 <Component class="javax.swing.JComboBox" name="cbTipo">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
+                      <StringArray count="2">
                         <StringItem index="0" value="Despesa"/>
                         <StringItem index="1" value="Receita"/>
-                        <StringItem index="2" value="Transfer&#xea;ncia"/>
                       </StringArray>
                     </Property>
                   </Properties>

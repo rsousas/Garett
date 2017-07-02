@@ -5,6 +5,7 @@ import java.util.Date;
 public class MTransacoes {
 
     private Integer Codtra;
+    private Integer CodtraDest;
     private String Descricao;
     private Date Data;
     private boolean Pago;
@@ -24,6 +25,14 @@ public class MTransacoes {
 
     public void setCodtra(Integer Codtra) {
         this.Codtra = Codtra;
+    }
+
+    public Integer getCodtraDest() {
+        return CodtraDest;
+    }
+
+    public void setCodtraDest(Integer CodtraDest) {
+        this.CodtraDest = CodtraDest;
     }
 
     public String getDescricao() {

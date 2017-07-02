@@ -136,7 +136,7 @@ public class IConta extends javax.swing.JFrame {
             modConta.setSaldo(txtSaldo.getText());
             modConta.setAtivo(cxbAtiva.isSelected());
             modConta.setUsuario(usuario);
-            if (conta.validaCampos(modConta)) {
+            if (conta.validaCampos(modConta, isEdit)) {
                 if (!isEdit) {
                     conta.Salvar(modConta);
                 } else {

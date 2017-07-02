@@ -26,6 +26,7 @@ public class ITransacao extends javax.swing.JFrame {
     String usuario = TelaLogin.getUsuario();
     private boolean isEdit;
     private Integer codTra;
+    private Integer codTraDest;
 
     public ITransacao() {
         initComponents();
@@ -37,26 +38,37 @@ public class ITransacao extends javax.swing.JFrame {
     public ITransacao(MTransacoes transacoes) {
         initComponents();
         povoaCombos();
-        txtValor.setText(Float.toString(transacoes.getValor()));
-        txtDescricao.setText(transacoes.getDescricao());
-        dtData.setDate(transacoes.getData());
-        cbConta.setSelectedItem(transacoes.getConta());
-        cbCategoria.setSelectedItem(transacoes.getCateg());
-        cxbConsolidada.setSelected(transacoes.getPago() == 1);
-        switch (transacoes.getTipo()) {
-            case "D":
-                cbTipo.setSelectedIndex(0);
-                break;
-            case "R":
-                cbTipo.setSelectedIndex(1);
-                break;
-            case "T":
-                cbTipo.setSelectedIndex(2);
-                break;
+        if (!"T".equals(transacoes.getTipo())) {
+            jTabbedPane.setSelectedIndex(0);
+            jTabbedPane.setEnabledAt(1, false);
+            txtValor.setText(Float.toString(transacoes.getValor()));
+            txtDescricao.setText(transacoes.getDescricao());
+            dtData.setDate(transacoes.getData());
+            cbConta.setSelectedItem(transacoes.getConta());
+            cbCategoria.setSelectedItem(transacoes.getCateg());
+            cxbConsolidada.setSelected(transacoes.getPago() == 1);
+            switch (transacoes.getTipo()) {
+                case "D":
+                    cbTipo.setSelectedIndex(0);
+                    break;
+                case "R":
+                    cbTipo.setSelectedIndex(1);
+                    break;
+            }
+            spLembrete.setValue(transacoes.getLembrete());
+            pnNota.setText(transacoes.getNota());
+        } else {
+            jTabbedPane.setSelectedIndex(1);
+            jTabbedPane.setEnabledAt(0, false);
+            t_txtValor.setText(Float.toString(transacoes.getValor()));
+            t_dtData.setDate(transacoes.getData());
+            t_cbConta.setSelectedItem(transacoes.getConta());
+            t_cbContaDest.setSelectedItem(transacoes.getContaDest());
+            t_cxbConsolidada.setSelected(transacoes.getPago() == 1);
+            t_spLembrete.setValue(transacoes.getLembrete());
+            t_pnNota.setText(transacoes.getNota());
+            codTraDest = transacoes.getCodtraDest();
         }
-
-        spLembrete.setValue(transacoes.getLembrete());
-        pnNota.setText(transacoes.getNota());
         codTra = transacoes.getCodtra();
         isEdit = true;
     }
@@ -228,7 +240,7 @@ public class ITransacao extends javax.swing.JFrame {
 
         lbCategoria1.setText("*Tipo:");
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despesa", "Receita", "Transferência" }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despesa", "Receita" }));
 
         cxbConsolidada.setSelected(true);
         cxbConsolidada.setText("Consolidada");
@@ -487,7 +499,7 @@ public class ITransacao extends javax.swing.JFrame {
                     }
                     Transacoes telaTransacoes = Transacoes.getInstance();
                     telaTransacoes.limpaTabela();
-                    telaTransacoes.preencheTabela("select * from TRANSACAO T natural join CATEGORIA natural join CONTA join USUARIO U on U.CODUSU = T.CODUSU where T.CODUSU = " + usuario + " order by DATA");
+                    telaTransacoes.preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.CODUSU = " + usuario + " order by CODTRA, DATA");
                     telaTransacoes.setVisible(true);
                     dispose();
                 } else {
@@ -514,11 +526,12 @@ public class ITransacao extends javax.swing.JFrame {
                         Transac.Salvar(modTransac);
                     } else {
                         modTransac.setCodtra(codTra);
+                        modTransac.setCodtraDest(codTraDest);
                         Transac.Editar(modTransac);
                     }
                     Transacoes telaTransacoes = Transacoes.getInstance();
                     telaTransacoes.limpaTabela();
-                    telaTransacoes.preencheTabela("select * from TRANSACAO T natural join CATEGORIA natural join CONTA join USUARIO U on U.CODUSU = T.CODUSU where T.CODUSU = " + usuario + " order by DATA");
+                    telaTransacoes.preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.CODUSU = " + usuario + " order by CODTRA, DATA");
                     telaTransacoes.setVisible(true);
                     dispose();
                 } else {
@@ -544,7 +557,7 @@ public class ITransacao extends javax.swing.JFrame {
         cbConta.setModel(mConta);
         cbCategoria.setModel(mCategoria);
         t_cbConta.setModel(mConta);
-        t_cbContaDest.setModel(mContaDesp);        
+        t_cbContaDest.setModel(mContaDesp);
     }
 
     /**

@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ProjetoGarett.jar" size="1842083" download="eager" />
+    <jar href="ProjetoGarett.jar" size="1843274" download="eager" />
     <jar href="lib\AbsoluteLayout.jar" size="2520" download="eager" />
     <jar href="lib\jcalendar-1.3.3.jar" size="126603" download="eager" />
     <jar href="lib\mysql-connector-java-5.0.8-bin.jar" size="540852" download="eager" />

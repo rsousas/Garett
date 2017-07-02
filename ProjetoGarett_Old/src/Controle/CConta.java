@@ -11,26 +11,26 @@ public class CConta {
 
     CConexaoBD conexao = new CConexaoBD();
 
-    public boolean validaCampos(MConta conta) {
+    public boolean validaCampos(MConta conta, boolean isEdit) {
 
         if (conta.getDescricao().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe uma Descrição para continuar!");
             return false;
         }
-
-        conexao.conecta();
-        try {
-            conexao.executaSql("select CODCON from CONTA where DESCRCON = '" + conta.getDescricao() + "' and CODUSU ='" + conta.getUsuario() + "'");
-            conexao.rs.beforeFirst();
-            if (conexao.rs.next()) {
-                JOptionPane.showMessageDialog(null, "Já existe esta Conta Cadastrada com código: " + conexao.rs.getString("CODCON"));
+        if (!isEdit) {
+            conexao.conecta();
+            try {
+                conexao.executaSql("select CODCON from CONTA where DESCRCON = '" + conta.getDescricao() + "' and CODUSU ='" + conta.getUsuario() + "'");
+                conexao.rs.beforeFirst();
+                if (conexao.rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Já existe esta Conta Cadastrada com código: " + conexao.rs.getString("CODCON"));
+                    return false;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CConta.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(CConta.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         }
-
         return true;
     }
 

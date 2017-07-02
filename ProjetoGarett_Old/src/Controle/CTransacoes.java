@@ -80,7 +80,7 @@ public class CTransacoes {
                 pst.execute();
             } else {
                 codConDest = buscaCodConta(transac.getContaDest());
-                CallableStatement cst = conexao.conexao.prepareCall("{call TRANSFERENCIA (?, ?, ?, ?, ?, ?, ?, ?)}");
+                CallableStatement cst = conexao.conexao.prepareCall("{call I_TRANSFERENCIA (?, ?, ?, ?, ?, ?, ?, ?)}");
                 cst.setDate(1, dataSql);
                 cst.setInt(2, transac.getPago());
                 cst.setDate(3, dataLembrete);
@@ -100,26 +100,49 @@ public class CTransacoes {
     }
 
     public void Editar(MTransacoes transac) {
+        Calendar lembrete = new GregorianCalendar();
         int codCat;
         int codCon;
+        int codConDest;
+
         java.sql.Date dataSql = new java.sql.Date(transac.getData().getTime()); // É necessário converter util.Date para sql.Date
-        codCat = buscaCodCategoria(transac.getCateg());
+        lembrete.setTime(dataSql);
+        lembrete.add(Calendar.DATE, transac.getLembrete());
+        java.sql.Date dataLembrete = new java.sql.Date(lembrete.getTime().getTime());
         codCon = buscaCodConta(transac.getConta());
         conexao.conecta();
         try {
-            PreparedStatement pst = conexao.conexao.prepareStatement("Update TRANSACAO set DESCRTRA = ?, DATA = ?, PAGO = ?, LEMBRETE = ?, NOTA = ?, VALOR = ?, TIPO = ?, CODCAT = ?, CODCON = ? where CODUSU = ? and CODTRA = ?");
-            pst.setString(1, transac.getDescricao());
-            pst.setDate(2, dataSql);
-            pst.setInt(3, transac.getPago());
-            pst.setInt(4, transac.getLembrete());
-            pst.setString(5, transac.getNota());
-            pst.setFloat(6, transac.getValor());
-            pst.setString(7, transac.getTipo());
-            pst.setInt(8, codCat);
-            pst.setInt(9, codCon);
-            pst.setString(10, transac.getUsuario());
-            pst.setInt(11, transac.getCodtra());
-            pst.execute();
+            if (!"T".equals(transac.getTipo())) {
+                codCat = buscaCodCategoria(transac.getCateg());
+                PreparedStatement pst = conexao.conexao.prepareStatement("Update TRANSACAO set DESCRTRA = ?, DATA = ?, PAGO = ?, LEMBRETE = ?, NOTA = ?, VALOR = ?, TIPO = ?, CODCAT = ?, CODCON = ? where CODUSU = ? and CODTRA = ?");
+                pst.setString(1, transac.getDescricao());
+                pst.setDate(2, dataSql);
+                pst.setInt(3, transac.getPago());
+                pst.setDate(4, dataLembrete);
+                pst.setString(5, transac.getNota());
+                pst.setFloat(6, transac.getValor());
+                pst.setString(7, transac.getTipo());
+                pst.setInt(8, codCat);
+                pst.setInt(9, codCon);
+                pst.setString(10, transac.getUsuario());
+                pst.setInt(11, transac.getCodtra());
+                pst.execute();
+            } else {
+                codConDest = buscaCodConta(transac.getContaDest());
+                CallableStatement cst = conexao.conexao.prepareCall("{call U_TRANSFERENCIA (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+                cst.setDate(1, dataSql);
+                cst.setInt(2, transac.getPago());
+                cst.setDate(3, dataLembrete);
+                cst.setString(4, transac.getNota().isEmpty() ? null : transac.getNota());
+                cst.setFloat(5, transac.getValor());
+                cst.setInt(6, codCon);
+                cst.setInt(7, codConDest);
+                cst.setInt(8, transac.getCodtra());
+                cst.setInt(9, transac.getCodtraDest());
+                cst.setString(10, transac.getUsuario());
+                cst.execute();
+
+            }
             JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Editar Transação:\nErro:" + ex);
@@ -194,6 +217,32 @@ public class CTransacoes {
             conexao.rs.beforeFirst();
             while (conexao.rs.next()) {
                 dados.add(conexao.rs.getString("DESCRCON"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CTransacoes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dados;
+    }
+
+    public ArrayList buscaTransacDestino(Integer codtra, String usuario) {
+        ArrayList dados = new ArrayList();
+        conexao.conecta();
+        conexao.executaSql("select coalesce(CODTRA, 0) CODTRA, CODCON  \n"
+                + "from TRANSACAO \n"
+                + "where (CODTRATRANSF =  " + codtra + " OR CODTRA =  " + codtra + ") AND \n"
+                + "       CODUSU = '" + usuario + "' AND \n"
+                + "       TIPO = \"D\"\n"
+                + "UNION ALL\n"
+                + "select coalesce(CODTRA, 0) CODTRA, CODCON \n"
+                + "from TRANSACAO \n"
+                + "where (CODTRATRANSF =  " + codtra + " OR CODTRA =  " + codtra + ") AND \n"
+                + "       CODUSU = '" + usuario + "' AND \n"
+                + "       TIPO = \"R\";");
+        try {
+            conexao.rs.beforeFirst();
+            while (conexao.rs.next()) {
+                dados.add(conexao.rs.getInt("CODTRA"));
+                dados.add(conexao.rs.getInt("CODCON"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CTransacoes.class.getName()).log(Level.SEVERE, null, ex);

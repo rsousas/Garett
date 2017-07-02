@@ -6,9 +6,12 @@ import Modelo.MTabela;
 import Modelo.MTransacoes;
 import Modelo.MUsuario;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
@@ -17,6 +20,7 @@ public class Transacoes extends javax.swing.JFrame {
     CConexaoBD conexao = new CConexaoBD();
     String usuario = TelaLogin.getUsuario();
     MTransacoes modTransacoes = new MTransacoes();
+    CTransacoes Transac = new CTransacoes();
     CTransacoes conta = new CTransacoes();
     private static Transacoes instancia;
 
@@ -147,16 +151,37 @@ public class Transacoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = new java.util.Date();
+        Date dataLembrete = new java.util.Date();
+        Long lembrete;
+        ArrayList dadosTransferencia;
+        dadosTransferencia = Transac.buscaTransacDestino((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 5), usuario);
+        if (jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 10).equals(0)) {
+            modTransacoes.setCodtra((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 5));
+            modTransacoes.setConta((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 2));
+        } else {
+            modTransacoes.setCodtra((Integer) dadosTransferencia.get(0));
+            modTransacoes.setConta(dadosTransferencia.get(1).toString());
+            modTransacoes.setCodtraDest((Integer) dadosTransferencia.get(2));
+            modTransacoes.setContaDest(dadosTransferencia.get(3).toString());
+        }
+
+        try {
+            data = formato.parse((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 1));
+            dataLembrete = formato.parse((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 7));
+        } catch (ParseException ex) {
+            Logger.getLogger(Transacoes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lembrete = dataLembrete.getTime() - data.getTime();
         modTransacoes.setDescricao((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 0));
-        modTransacoes.setData((Date) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 1));
-        modTransacoes.setConta((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 2));
+        modTransacoes.setData(data);
         modTransacoes.setCateg((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 3));
         modTransacoes.setValor(Float.toString((Float) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 4)));
-        modTransacoes.setCodtra((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 5));
-        modTransacoes.setPago(((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 6)) == 1);
-        modTransacoes.setLembrete((Integer) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 7));
+        modTransacoes.setPago(((boolean) "Sim".equals(jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 6))));
+        modTransacoes.setLembrete(Integer.valueOf(lembrete.toString()));
         modTransacoes.setNota((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 8));
-        modTransacoes.setTipo((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 9));
+        modTransacoes.setTipo(jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 10).equals(0)? (String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 9) : "T");
         modTransacoes.setUsuario(usuario);
         ITransacao telaTransacao = new ITransacao(modTransacoes);
         telaTransacao.setVisible(true);
@@ -187,7 +212,7 @@ public class Transacoes extends javax.swing.JFrame {
 
     public void preencheTabela(String Sql) {
         ArrayList dados = new ArrayList();
-        String[] colunas = new String[]{"Descricao", "Data", "Conta", "Categoria", "Valor", "Codigo", "Consolidada", "Lembrete", "Nota", "Tipo"};
+        String[] colunas = new String[]{"Descricao", "Data", "Conta", "Categoria", "Valor", "Codigo", "Consolidada", "Lembrete", "Nota", "Tipo", ""};
         String formato = "dd/MM/yyyy";
         SimpleDateFormat dataFormatada = new SimpleDateFormat(formato);
 
@@ -198,7 +223,7 @@ public class Transacoes extends javax.swing.JFrame {
             conexao.rs.beforeFirst();
 
             while (conexao.rs.next()) {
-                dados.add(new Object[]{conexao.rs.getString("DESCRTRA"), dataFormatada.format(conexao.rs.getDate("DATA")), conexao.rs.getString("DESCRCON"), conexao.rs.getString("DESCRCAT"), conexao.rs.getFloat("VALOR"), conexao.rs.getInt("CODTRA"), conexao.rs.getInt("PAGO") == 1 ? "Sim" : "Não", dataFormatada.format(conexao.rs.getDate("LEMBRETE")), conexao.rs.getString("NOTA"), "D".equals(conexao.rs.getString("TIPO")) ? "Despesa" : "Receita"});
+                dados.add(new Object[]{conexao.rs.getString("DESCRTRA"), dataFormatada.format(conexao.rs.getDate("DATA")), conexao.rs.getString("DESCRCON"), conexao.rs.getString("DESCRCAT"), conexao.rs.getFloat("VALOR"), conexao.rs.getInt("CODTRA"), conexao.rs.getInt("PAGO") == 1 ? "Sim" : "Não", dataFormatada.format(conexao.rs.getDate("LEMBRETE")), conexao.rs.getString("NOTA"), "D".equals(conexao.rs.getString("TIPO")) ? "Despesa" : "Receita", conexao.rs.getInt("CODTRATRANSF")});
             }
 
         } catch (SQLException ex) {
@@ -230,6 +255,8 @@ public class Transacoes extends javax.swing.JFrame {
         jTableTransac.getColumnModel().getColumn(8).setPreferredWidth(500);
         jTableTransac.getColumnModel().getColumn(9).setPreferredWidth(80);
         jTableTransac.getColumnModel().getColumn(9).setResizable(false);
+        jTableTransac.getColumnModel().getColumn(10).setPreferredWidth(0);
+        jTableTransac.getColumnModel().getColumn(10).setResizable(false);
         jTableTransac.getTableHeader().setReorderingAllowed(false);
         jTableTransac.setAutoResizeMode(jTableTransac.AUTO_RESIZE_OFF);
 

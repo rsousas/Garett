@@ -52,9 +52,8 @@ foreign key (CODUSU) references USUARIO (CODUSU),
 foreign key (CODTRATRANSF) references TRANSACAO (CODTRATRANSF)
 );
 
-CREATE PROCEDURE transferencia (IN t_data DATE, IN t_pago INT, IN T_lembrete DATE, IN T_nota VARCHAR(100), IN T_valor REAL, IN T_codconpartida INT, IN T_codcondestino INT, IN T_codusu INT)
+CREATE PROCEDURE I_transferencia (IN t_data DATE, IN t_pago INT, IN T_lembrete DATE, IN T_nota VARCHAR(100), IN T_valor REAL, IN T_codconpartida INT, IN T_codcondestino INT, IN T_codusu INT)
 BEGIN
-
   select DESCRCON 
   from CONTA
   where CODCON = T_codcondestino
@@ -86,4 +85,90 @@ BEGIN
   DESCRTRA = concat(DESCRTRA, " - ", @CODTRADEST)
   WHERE CODTRA = @CODTRAPART AND
         CODUSU = T_codusu;
-END
+END;
+
+CREATE PROCEDURE U_transferencia (IN t_data DATE, IN t_pago INT, IN T_lembrete DATE, IN T_nota VARCHAR(100), IN T_valor REAL, IN T_codconpartida INT, IN T_codcondestino INT,IN T_codtrapartida INT, IN T_codtradestino INT, IN T_codusu INT)
+BEGIN
+  select DESCRCON 
+  from CONTA
+  where CODCON = T_codcondestino
+  into @DESCRCON;
+
+	UPDATE TRANSACAO SET 
+  DESCRTRA = concat("Transferência para ", @DESCRCON, " - ", T_codtradestino),
+  DATA = t_data, 
+  PAGO = t_pago, 
+  LEMBRETE = T_lembrete,
+  NOTA = T_nota,
+  VALOR = T_valor,
+  CODCON= T_codconpartida
+  WHERE CODTRA = T_codtrapartida AND
+  CODUSU = T_codusu;
+
+  select DESCRCON 
+  from CONTA
+  where CODCON = T_codconpartida
+  into @DESCRCON;
+
+	UPDATE TRANSACAO SET 
+  DESCRTRA = concat("Transferência de ", @DESCRCON, " - ", T_codtrapartida),
+  DATA = t_data, 
+  PAGO = t_pago, 
+  LEMBRETE = T_lembrete,
+  NOTA = T_nota,
+  VALOR = T_valor,
+  CODCON= T_codcondestino
+  WHERE CODTRA = T_codtradestino AND
+  CODUSU = T_codusu;
+END;
+
+CREATE TRIGGER AI_AtualizaCusto AFTER INSERT
+ON transacao
+FOR EACH ROW
+BEGIN
+  IF (NEW.TIPO = 'D') THEN
+    UPDATE conta 
+    SET saldocon = saldocon + NEW.VALOR
+    WHERE CODUSU = NEW.CODUSU AND
+          CODCON = NEW.CODCON;
+  ELSE
+    UPDATE conta 
+    SET saldocon = saldocon - NEW.VALOR
+    WHERE CODUSU = NEW.CODUSU AND
+          CODCON = NEW.CODCON;  
+  END IF;
+END;
+
+CREATE TRIGGER AU_AtualizaCusto AFTER UPDATE
+ON transacao
+FOR EACH ROW
+BEGIN
+  IF (NEW.TIPO = 'D') THEN
+    UPDATE conta 
+    SET saldocon = saldocon + (NEW.VALOR - OLD.VALOR)
+    WHERE CODUSU = NEW.CODUSU AND
+          CODCON = NEW.CODCON;
+  ELSE
+    UPDATE conta 
+    SET saldocon = saldocon - (NEW.VALOR - OLD.VALOR)
+    WHERE CODUSU = NEW.CODUSU AND
+          CODCON = NEW.CODCON;  
+  END IF;
+END;
+
+CREATE TRIGGER AD_AtualizaCusto AFTER DELETE
+ON transacao
+FOR EACH ROW
+BEGIN
+  IF (OLD.TIPO = 'D') THEN
+    UPDATE conta 
+    SET saldocon = saldocon - OLD.VALOR
+    WHERE CODUSU = OLD.CODUSU AND
+          CODCON = OLD.CODCON;
+  ELSE
+    UPDATE conta 
+    SET saldocon = saldocon + OLD.VALOR
+    WHERE CODUSU = OLD.CODUSU AND
+          CODCON = OLD.CODCON;  
+  END IF;
+END;
