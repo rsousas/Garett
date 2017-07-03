@@ -37,11 +37,10 @@ public class CCategoria {
     public void Salvar(MCategoria categoria) {
         conexao.conecta();
         try {
-            PreparedStatement pst = conexao.conexao.prepareStatement("insert into CATEGORIA (DESCRCAT, CODCATPAI, ATIVOCAT, CODUSU) values(?, ?, ?, ?)");
+            PreparedStatement pst = conexao.conexao.prepareStatement("insert into CATEGORIA (DESCRCAT, ATIVOCAT, CODUSU) values(?, ?, ?)");
             pst.setString(1, categoria.getDescricao());
-            pst.setInt(2, categoria.getCodigoPai());
-            pst.setInt(3, categoria.getAtivo());
-            pst.setString(4, categoria.getUsuario());
+            pst.setInt(2, categoria.getAtivo());
+            pst.setString(3, categoria.getUsuario());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {
@@ -53,12 +52,11 @@ public class CCategoria {
     public void Editar(MCategoria categoria) {
         conexao.conecta();
         try {
-            PreparedStatement pst = conexao.conexao.prepareStatement("Update CATEGORIA set DESCRCAT = ?, CODCATPAI = ?, ATIVOCAT = ? where CODUSU = ? and CODCAT = ?");
+            PreparedStatement pst = conexao.conexao.prepareStatement("Update CATEGORIA set DESCRCAT = ?, ATIVOCAT = ? where CODUSU = ? and CODCAT = ?");
             pst.setString(1, categoria.getDescricao());
-            pst.setInt(2, categoria.getCodigoPai());
-            pst.setInt(3, categoria.getAtivo());
-            pst.setString(4, categoria.getUsuario());
-            pst.setInt(5, categoria.getCodcat());
+            pst.setInt(2, categoria.getAtivo());
+            pst.setString(3, categoria.getUsuario());
+            pst.setInt(4, categoria.getCodcat());
             pst.execute();
             JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {

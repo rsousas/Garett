@@ -1,0 +1,90 @@
+Transações
+select DESCRCONTA Conta, DATA Data, MES_ANO Mes_Ano, VALOR Valor, TIPO Tipo,
+PAGO Pago, DESCRCAT Categoria, DESCRTRA Descricao
+from V_TRANSACOES
+where DATA >= $P{P_DTINI}
+and DATA <= $P{P_DTFIM}
+and CODUSU = $P{P_CODUSU}
+order by DATA desc;
+
+Receitas
+select DESCRCONTA as Conta, DATA AS Data, MES_ANO as Mes_Ano, 
+VALOR as Valor, TIPO as Tipo, PAGO as Pago, DESCRCAT as Categoria, DESCRTRA as Descricao
+from V_TRANSACOES
+where CODUSU = $P{CODUSU}
+and DATA >= $P{P_DTINI}
+and DATA <= $P{P_DTFIM}
+and TIPO = 'R'
+order by DATA desc;
+
+Despesas
+select DESCRCONTA as Conta, DATA AS Data, MES_ANO as Mes_Ano, 
+VALOR as Valor, TIPO as Tipo, PAGO as Pago, DESCRCAT as Categoria, DESCRTRA AS Descricao
+from V_TRANSACOES
+where CODUSU = $P{P_CODUSU}
+and DATA >= $P{P_DTINI}
+and DATA <= $P{P_DTFIM}
+and TIPO = 'D'
+order by DATA desc;
+
+Transferências
+select DESCRCONTA as Conta, DATA AS Data, MES_ANO as Mes_Ano, 
+VALOR as Valor, TIPO as Tipo, PAGO as Pago, DESCRCAT as Categoria, DESCRTRA AS Descricao
+from V_TRANSACOES
+where CODUSU = $P{P_CODUSU}
+and DATA >= $P{P_DTINI}
+and DATA <= $P{P_DTFIM}
+and TIPO = 'T'
+order by DATA desc;
+
+Contas
+select CODCON, DESCRCON, ATIVO from V_CONTAS;
+ 
+Categorias
+select CODCAT, DESCRCAT, ATIVO from V_CATEGORIAS;
+
+
+Gráficos
+
+Grafico_Barras_Despesas.jrxml
+select DESCRCAT, sum(VALOR) * (-1) AS VALOR
+from V_TRANSACOES
+where CODUSU = $P{P_CODUSU}
+and TIPO = 'D'
+and DATA >= $P{P_DTINI}
+and DATA <= $P{P_DTFIM}
+group by DESCRCAT, DESCRCONTA;
+
+ 
+Grafico_pie_Despesas.jrxml
+select DESCRCAT, sum(VALOR) * (-1) AS VALOR
+from V_TRANSACOES
+where CODUSU = $P{P_CODUSU}
+and TIPO = 'D'
+and DATA >= $P{P_DTINI}
+and DATA <= $P{P_DTFIM}
+group by DESCRCAT, DESCRCONTA;
+ 
+ 
+Grafico_Barras_Receitas.jrxml
+select DESCRCAT, sum(VALOR) AS VALOR
+from V_TRANSACOES
+where CODUSU = $P{P_CODUSU}
+and TIPO = 'R'
+and DATA >= $P{P_DTINI}
+and DATA <= $P{P_DTFIM}
+group by DESCRCAT, DESCRCONTA;
+ 
+Grafico_pie_Receitas.jrxml
+select DESCRCAT, sum(VALOR) AS VALOR
+from V_TRANSACOES
+where CODUSU = $P{P_CODUSU}
+and TIPO = 'R'
+and DATA >= $P{P_DTINI}
+and DATA <= $P{P_DTFIM}
+group by DESCRCAT, DESCRCONTA;
+
+
+
+
+

@@ -113,7 +113,6 @@ public class ICategoria extends javax.swing.JFrame {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         modCategoria.setDescricao(txtDescricao.getText());
-        modCategoria.setCodigoPai(0);
         modCategoria.setAtivo(cxbAtiva.isSelected());
         modCategoria.setUsuario(usuario);
         if (categoria.validaCampos(modCategoria, isEdit)) {

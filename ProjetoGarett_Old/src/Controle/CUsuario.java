@@ -38,9 +38,6 @@ public class CUsuario {
         if (usuario.getSenha().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe a Senha para continuar!");
             return false;
-        } else if (!usuario.getSenha().equals(usuario.getSenhaConfirma())) {
-            JOptionPane.showMessageDialog(null, "As senhas informadas são diferentes!");
-            return false;
         }
         return true;
     }

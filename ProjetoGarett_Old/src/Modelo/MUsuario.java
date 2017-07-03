@@ -14,7 +14,6 @@ public class MUsuario {
     private String nome;
     private String usuario;
     private String senha;
-    private String senhaConfirma;
 
     public String getNome() {
         return nome;
@@ -39,13 +38,4 @@ public class MUsuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public String getSenhaConfirma() {
-        return senhaConfirma;
-    }
-
-    public void setSenhaConfirma(String senhaConfirma) {
-        this.senhaConfirma = senhaConfirma;
-    }
-
 }

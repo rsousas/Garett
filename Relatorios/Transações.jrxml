@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3ab0d5c-b597-449d-871d-048f58ba29b4">
-	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
@@ -9,21 +9,35 @@
 	<style name="Detail" fontName="Arial" fontSize="12"/>
 	<parameter name="P_DTINI" class="java.util.Date"/>
 	<parameter name="P_DTFIM" class="java.util.Date"/>
+	<parameter name="P_CODUSU" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT descrconta AS Conta, data as Data, codtratransf AS Transf, mes_ano AS Mes_Ano, valor AS Valor, tipo AS Tipo, pago AS Pago,  descrcat AS Categoria, descrtra as Descricao
-FROM v_transacoes
-WHERE codtratransf is null
-AND data >= $P{P_DTINI}
-AND data <= $P{P_DTFIM}
-ORDER BY data DESC;]]>
+		<![CDATA[select DESCRCONTA Conta, DATA Data, MES_ANO Mes_Ano, VALOR Valor, TIPO Tipo,
+PAGO Pago, DESCRCAT Categoria, DESCRTRA Descricao
+from V_TRANSACOES
+where DATA >= $P{P_DTINI}
+and DATA <= $P{P_DTFIM}
+and CODUSU = $P{P_CODUSU}
+order by DATA desc;
+]]>
 	</queryString>
 	<field name="Conta" class="java.lang.String"/>
-	<field name="Data" class="java.sql.Date"/>
-	<field name="Transf" class="java.lang.Integer"/>
-	<field name="Mes_Ano" class="java.lang.String"/>
-	<field name="Valor" class="java.lang.Double"/>
-	<field name="Tipo" class="java.lang.String"/>
-	<field name="Pago" class="java.lang.String"/>
+	<field name="Data" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Mes_Ano" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Valor" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Pago" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="Categoria" class="java.lang.String"/>
 	<field name="Descricao" class="java.lang.String"/>
 	<variable name="V_VLRTOT_M" class="java.lang.Double" resetType="Group" resetGroup="mes_ano" calculation="Sum">

@@ -4,7 +4,6 @@ public class MCategoria {
 
     private Integer codcat;
     private String descricao;
-    private Integer codigoPai;
     private boolean ativo;
     private String usuario;
 
@@ -22,14 +21,6 @@ public class MCategoria {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Integer getCodigoPai() {
-        return codigoPai;
-    }
-
-    public void setCodigoPai(Integer codigoPai) {
-        this.codigoPai = codigoPai;
     }
 
     public Integer getAtivo() {
