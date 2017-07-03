@@ -174,7 +174,7 @@ begin
   end IF;
 
   IF NOT(OLD.CODTRATRANSF = NULL) THEN
-    select CODTRA from transacao where codtransf = OLD.CODTRATRANSF
+    select CODTRA from transacao where codtra = OLD.CODTRATRANSF
     into @codtra;
     IF NOT(@codtra = NULL) THEN
       DELETE FROM transacao WHERE codtra = @codtra;
