@@ -143,7 +143,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAcessarActionPerformed
         modUsuario.setUsuario(txtUsuario.getText());
         modUsuario.setSenha(pswSenha.getText());
-        if (usuario.validaLogin(modUsuario) == true) {
+       if (usuario.validaLogin(modUsuario) == true) {
             setUsuario(usuario.buscaCodigoUsu(modUsuario));
             Principal telaPrincipal = Principal.getInstance();
             telaPrincipal.setExtendedState(6);
