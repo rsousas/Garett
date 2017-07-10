@@ -45,6 +45,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableTransac = new javax.swing.JTable();
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu19 = new javax.swing.JMenu();
         btMenuTransacoes = new javax.swing.JRadioButtonMenuItem();
@@ -70,12 +72,13 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btNovaTransacao.setText("+ Nova Transação");
+        btNovaTransacao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 208, 91), 3));
         btNovaTransacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btNovaTransacaoActionPerformed(evt);
             }
         });
-        jPanel1.add(btNovaTransacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 610, 140, 40));
+        jPanel1.add(btNovaTransacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 570, 140, 40));
 
         jPanelMenuPrincipal.setBackground(new java.awt.Color(234, 237, 239));
         jPanelMenuPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -198,7 +201,32 @@ public class Principal extends javax.swing.JFrame {
         jTable1.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 430, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 390, 300));
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setBorder(null);
+
+        jTableTransac.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTableTransac.setForeground(new java.awt.Color(102, 102, 102));
+        jTableTransac.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"", "", "", null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTableTransac.setGridColor(new java.awt.Color(255, 255, 255));
+        jTableTransac.setRowHeight(26);
+        jTableTransac.setSelectionBackground(new java.awt.Color(50, 74, 94));
+        jTableTransac.setShowHorizontalLines(false);
+        jTableTransac.setShowVerticalLines(false);
+        jScrollPane2.setViewportView(jTableTransac);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 620, 300));
 
         jMenu19.setText("Arquivo");
 
@@ -474,6 +502,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem8;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableTransac;
     // End of variables declaration//GEN-END:variables
 }
