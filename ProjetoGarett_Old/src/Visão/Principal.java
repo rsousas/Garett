@@ -78,7 +78,7 @@ public class Principal extends javax.swing.JFrame {
                 btNovaTransacaoActionPerformed(evt);
             }
         });
-        jPanel1.add(btNovaTransacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 570, 140, 40));
+        jPanel1.add(btNovaTransacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 550, 140, 40));
 
         jPanelMenuPrincipal.setBackground(new java.awt.Color(234, 237, 239));
         jPanelMenuPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
