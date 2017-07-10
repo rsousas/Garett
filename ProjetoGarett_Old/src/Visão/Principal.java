@@ -19,7 +19,6 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        btConfiguracoes.setEnabled(false);
         preencheTabelaLembretes();
         preencheTabelaTransac();
         totalGasto();
@@ -39,10 +38,8 @@ public class Principal extends javax.swing.JFrame {
         btTransacoes = new javax.swing.JButton();
         btContas = new javax.swing.JButton();
         btCategoria = new javax.swing.JButton();
-        btConfiguracoes = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -112,17 +109,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanelMenuPrincipal.add(btCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 2, -1, 110));
 
-        btConfiguracoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/wrench.png"))); // NOI18N
-        btConfiguracoes.setToolTipText("");
-        btConfiguracoes.setBorder(null);
-        btConfiguracoes.setContentAreaFilled(false);
-        btConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btConfiguracoesActionPerformed(evt);
-            }
-        });
-        jPanelMenuPrincipal.add(btConfiguracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 2, -1, 110));
-
         btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/open-door.png"))); // NOI18N
         btSair.setBorder(null);
         btSair.setContentAreaFilled(false);
@@ -131,19 +117,16 @@ public class Principal extends javax.swing.JFrame {
                 btSairActionPerformed(evt);
             }
         });
-        jPanelMenuPrincipal.add(btSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 2, -1, 110));
+        jPanelMenuPrincipal.add(btSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, 110));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/onlinelogomaker-061817-1509-5100.png"))); // NOI18N
         jPanelMenuPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(767, 34, -1, -1));
-
-        jLabel3.setText("Configurações");
-        jPanelMenuPrincipal.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 107, -1, -1));
 
         jLabel4.setText("Categorias");
         jPanelMenuPrincipal.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 107, -1, -1));
 
         jLabel5.setText("Sair");
-        jPanelMenuPrincipal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 107, -1, -1));
+        jPanelMenuPrincipal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
 
         jLabel6.setText("Contas");
         jPanelMenuPrincipal.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 107, -1, -1));
@@ -427,7 +410,7 @@ public class Principal extends javax.swing.JFrame {
 
         jTableLembrete.setModel(tabela);
 
-        jTableLembrete.getColumnModel().getColumn(0).setPreferredWidth(400);
+        jTableLembrete.getColumnModel().getColumn(0).setPreferredWidth(380);
         jTableLembrete.getColumnModel().getColumn(0).setResizable(false);
         jTableLembrete.getTableHeader().setReorderingAllowed(false);
         jTableLembrete.setAutoResizeMode(jTableLembrete.AUTO_RESIZE_OFF);
@@ -481,9 +464,17 @@ public class Principal extends javax.swing.JFrame {
     public void totalGasto() {
         conexao.conecta();
         if (cxbSaldoAcumulado.isSelected()) {
-            conexao.executaSql("select format(sum(T.VALOR),2,'de_DE') VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE());");
+            conexao.executaSql("SELECT sum(VALOR) valor\n"
+                    + "from(\n"
+                    + "select format(sum(T.VALOR),2,'de_DE') VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE()) and T.TIPO = 'R'\n"
+                    + "union all\n"
+                    + "select format(sum(T.VALOR),2,'de_DE')*(-1) VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE()) and T.TIPO = 'D') dados;");
         } else {
-            conexao.executaSql("select format(sum(T.VALOR),2,'de_DE') VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "';");
+            conexao.executaSql("SELECT sum(VALOR) valor\n"
+                    + "from(\n"
+                    + "select format(sum(T.VALOR),2,'de_DE') VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and T.TIPO = 'R'\n"
+                    + "union all\n"
+                    + "select format(sum(T.VALOR),2,'de_DE')*(-1) VALOR from TRANSACAO T where T.CODUSU = CODUSU and T.TIPO = 'D') dados;");
         }
         try {
             conexao.rs.first();
@@ -547,7 +538,6 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCategoria;
-    private javax.swing.JButton btConfiguracoes;
     private javax.swing.JButton btContas;
     private javax.swing.JRadioButtonMenuItem btMenuCategoria;
     private javax.swing.JRadioButtonMenuItem btMenuConta;
@@ -558,7 +548,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JCheckBox cxbSaldoAcumulado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

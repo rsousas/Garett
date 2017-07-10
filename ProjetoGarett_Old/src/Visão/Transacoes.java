@@ -5,6 +5,7 @@ import Controle.CTransacoes;
 import Modelo.MTabela;
 import Modelo.MTransacoes;
 import Modelo.MUsuario;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,9 +60,14 @@ public class Transacoes extends javax.swing.JFrame {
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Transações");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -203,6 +209,9 @@ public class Transacoes extends javax.swing.JFrame {
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         Principal telaPrincipal = Principal.getInstance();
         this.dispose();
+        telaPrincipal.preencheTabelaLembretes();
+        telaPrincipal.preencheTabelaTransac();
+        telaPrincipal.totalGasto();
         telaPrincipal.setVisible(true);
         instancia = null;
     }//GEN-LAST:event_btSairActionPerformed
@@ -274,6 +283,16 @@ public class Transacoes extends javax.swing.JFrame {
         limpaTabela();
         preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.CODTRATRANSF is not null and T.CODUSU = " + usuario + " order by CODTRA, DATA");
     }//GEN-LAST:event_btTransferenciaActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Principal telaPrincipal = Principal.getInstance();
+        this.dispose();
+        telaPrincipal.preencheTabelaLembretes();
+        telaPrincipal.preencheTabelaTransac();
+        telaPrincipal.totalGasto();
+        telaPrincipal.setVisible(true);
+        instancia = null;
+    }//GEN-LAST:event_formWindowClosed
 
     public void preencheTabela(String Sql) {
         ArrayList dados = new ArrayList();

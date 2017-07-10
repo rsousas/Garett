@@ -8,8 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ProjetoGarett.jar" size="1894345" download="eager" />
+    <jar href="ProjetoGarett.jar" size="1895280" download="eager" />
     <jar href="lib\AbsoluteLayout.jar" size="2520" download="eager" />
+    <jar href="lib\beansbinding-1.2.1.jar" size="631289" download="eager" />
     <jar href="lib\com-jaspersoft-ireport-addons.jar" size="369475" download="eager" />
     <jar href="lib\com-jaspersoft-ireport-components.jar" size="1910683" download="eager" />
     <jar href="lib\com-jaspersoft-ireport-designer-standalone.jar" size="200048" download="eager" />

@@ -52,10 +52,15 @@ public class Conta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableConta = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Contas");
         setBackground(new java.awt.Color(234, 237, 239));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -97,7 +102,7 @@ public class Conta extends javax.swing.JFrame {
                 btSairActionPerformed(evt);
             }
         });
-        jPanel1.add(btSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 6, -1, -1));
+        jPanel1.add(btSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
 
         jLabel1.setText("Excluir");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 107, -1, -1));
@@ -183,6 +188,13 @@ public class Conta extends javax.swing.JFrame {
         telaPrincipal.setVisible(true);
         instancia = null;
     }//GEN-LAST:event_btSairActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Principal telaPrincipal = Principal.getInstance();
+        this.dispose();
+        telaPrincipal.setVisible(true);
+        instancia = null;
+    }//GEN-LAST:event_formWindowClosed
 
     public void preencheTabela(String Sql) {
         ArrayList dados = new ArrayList();

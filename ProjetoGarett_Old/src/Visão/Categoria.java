@@ -39,8 +39,13 @@ public class Categoria extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCateg = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -167,6 +172,13 @@ public class Categoria extends javax.swing.JFrame {
         telaPrincipal.setVisible(true);
         instancia = null;
     }//GEN-LAST:event_btSairActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Principal telaPrincipal = Principal.getInstance();
+        this.dispose();
+        telaPrincipal.setVisible(true);
+        instancia = null;
+    }//GEN-LAST:event_formWindowClosed
 
     public void preencheTabela(String Sql) {
         ArrayList dados = new ArrayList();
