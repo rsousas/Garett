@@ -55,7 +55,7 @@ public class ITransacao extends javax.swing.JFrame {
                     cbTipo.setSelectedIndex(1);
                     break;
             }
-            spLembrete.setValue(transacoes.getLembrete());
+            spParcelar.setValue(transacoes.getLembrete());
             pnNota.setText(transacoes.getNota());
         } else {
             jTabbedPane.setSelectedIndex(1);
@@ -122,7 +122,7 @@ public class ITransacao extends javax.swing.JFrame {
         lbCategoria1 = new javax.swing.JLabel();
         cbTipo = new javax.swing.JComboBox<>();
         cxbConsolidada = new javax.swing.JCheckBox();
-        spLembrete = new com.toedter.components.JSpinField();
+        spParcelar = new com.toedter.components.JSpinField();
         lbLembrete = new javax.swing.JLabel();
         lbNota = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -130,10 +130,8 @@ public class ITransacao extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        nParcelas = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel5 = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
+        cxbParcelar = new javax.swing.JCheckBox();
+        spLembrete1 = new com.toedter.components.JSpinField();
         jPanel3 = new javax.swing.JPanel();
         t_lbValor = new javax.swing.JLabel();
         t_txtValor = new javax.swing.JTextField();
@@ -217,7 +215,6 @@ public class ITransacao extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nova Transação");
-        setPreferredSize(new java.awt.Dimension(400, 510));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -290,7 +287,10 @@ public class ITransacao extends javax.swing.JFrame {
         cxbConsolidada.setSelected(true);
         cxbConsolidada.setText("Consolidada");
         jPanel2.add(cxbConsolidada, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 94, -1));
-        jPanel2.add(spLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 62, -1));
+
+        spParcelar.setEnabled(false);
+        spParcelar.setMinimum(0);
+        jPanel2.add(spParcelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 40, -1));
 
         lbLembrete.setText("Lembrete:");
         jPanel2.add(lbLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 69, -1));
@@ -308,18 +308,17 @@ public class ITransacao extends javax.swing.JFrame {
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 226, -1));
         jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 245, -1));
 
-        nParcelas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        nParcelas.setBorder(null);
-        jPanel2.add(nParcelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(338, 220, 30, -1));
+        cxbParcelar.setBackground(new java.awt.Color(255, 255, 255));
+        cxbParcelar.setText("Parcelar em:");
+        cxbParcelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxbParcelarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cxbParcelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, -1, -1));
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Parcelar em");
-        jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
-
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("X");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 224, 10, -1));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 50, -1));
+        spLembrete1.setMinimum(0);
+        jPanel2.add(spLembrete1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 62, -1));
 
         jTabbedPane.addTab("Despesa/Receita", jPanel2);
 
@@ -404,6 +403,7 @@ public class ITransacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalvarNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarNovoActionPerformed
+        double valor;
         if (jTabbedPane.getSelectedIndex() == 0) {
             if (Transac.verificaSeNumerico(txtValor.getText())) {
                 modTransac.setValor(txtValor.getText());
@@ -412,7 +412,7 @@ public class ITransacao extends javax.swing.JFrame {
                 modTransac.setConta(cbConta.getSelectedItem().toString());
                 modTransac.setCateg(cbCategoria.getSelectedItem().toString());
                 modTransac.setPago(cxbConsolidada.isSelected());
-                modTransac.setLembrete(spLembrete.getValue());
+                modTransac.setLembrete(spParcelar.getValue());
                 modTransac.setNota(pnNota.getText());
                 modTransac.setUsuario(usuario);
                 switch (cbTipo.getSelectedIndex()) {
@@ -426,7 +426,14 @@ public class ITransacao extends javax.swing.JFrame {
 
                 if (Transac.validaCampos(modTransac)) {
                     if (!isEdit) {
-                        Transac.Salvar(modTransac);
+                        if (cxbParcelar.isSelected() && (spParcelar.getValue() > 0)) {
+                            modTransac.setValor(String.valueOf(Float.parseFloat(txtValor.getText())/spParcelar.getValue()));
+                            for (int i = 0; i < spParcelar.getValue(); i++) {
+                                Transac.Salvar(modTransac);
+                            }
+                        } else {
+                            Transac.Salvar(modTransac);
+                        }
                     } else {
                         modTransac.setCodtra(codTra);
                         Transac.Editar(modTransac);
@@ -484,6 +491,10 @@ public class ITransacao extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_btSalvarNovo1ActionPerformed
 
+    private void cxbParcelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxbParcelarActionPerformed
+        spParcelar.setEnabled(cxbParcelar.isSelected());
+    }//GEN-LAST:event_cxbParcelarActionPerformed
+
     private void povoaCombos() {
         MComboBox mConta = new MComboBox(Transac.buscaContas(usuario));
         MComboBox mContaDesp = new MComboBox(Transac.buscaContas(usuario));
@@ -538,14 +549,13 @@ public class ITransacao extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbConta;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JCheckBox cxbConsolidada;
+    private javax.swing.JCheckBox cxbParcelar;
     private com.toedter.calendar.JDateChooser dtData;
-    private javax.swing.JCheckBox jCheckBox1;
     private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
@@ -573,7 +583,6 @@ public class ITransacao extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -585,9 +594,9 @@ public class ITransacao extends javax.swing.JFrame {
     private javax.swing.JLabel lbLembrete;
     private javax.swing.JLabel lbNota;
     private javax.swing.JLabel lbValor;
-    private javax.swing.JTextField nParcelas;
     private javax.swing.JTextPane pnNota;
-    private com.toedter.components.JSpinField spLembrete;
+    private com.toedter.components.JSpinField spLembrete1;
+    private com.toedter.components.JSpinField spParcelar;
     private javax.swing.JComboBox<String> t_cbConta;
     private javax.swing.JComboBox<String> t_cbContaDest;
     private javax.swing.JCheckBox t_cxbConsolidada;

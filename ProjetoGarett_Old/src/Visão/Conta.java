@@ -179,8 +179,8 @@ public class Conta extends javax.swing.JFrame {
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         Principal telaPrincipal = Principal.getInstance();
-        telaPrincipal.setEnabled(true);
-        setVisible(false);
+        this.dispose();
+        telaPrincipal.setVisible(true);
         instancia = null;
     }//GEN-LAST:event_btSairActionPerformed
 
@@ -208,13 +208,13 @@ public class Conta extends javax.swing.JFrame {
         MTabela tabela = new MTabela(dados, colunas);
 
         jTableConta.setModel(tabela);
-        jTableConta.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jTableConta.getColumnModel().getColumn(0).setPreferredWidth(100);
         jTableConta.getColumnModel().getColumn(0).setResizable(false);
-        jTableConta.getColumnModel().getColumn(1).setPreferredWidth(320);
+        jTableConta.getColumnModel().getColumn(1).setPreferredWidth(630);
         jTableConta.getColumnModel().getColumn(1).setResizable(false);
-        jTableConta.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTableConta.getColumnModel().getColumn(2).setPreferredWidth(120);
         jTableConta.getColumnModel().getColumn(2).setResizable(false);
-        jTableConta.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTableConta.getColumnModel().getColumn(3).setPreferredWidth(120);
         jTableConta.getColumnModel().getColumn(3).setResizable(false);
         jTableConta.getTableHeader().setReorderingAllowed(false);
         jTableConta.setAutoResizeMode(jTableConta.AUTO_RESIZE_OFF);

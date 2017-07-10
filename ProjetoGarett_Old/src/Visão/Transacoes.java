@@ -48,9 +48,9 @@ public class Transacoes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTransac = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btTransferencia = new javax.swing.JButton();
+        btReceitas = new javax.swing.JButton();
+        btDespesas = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
         jMenu1.setText("File");
@@ -143,20 +143,35 @@ public class Transacoes extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton3.setText("Transferências");
-        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 168, 52), 2));
-        jButton3.setContentAreaFilled(false);
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 1, 80, -1));
+        btTransferencia.setText("Transferências");
+        btTransferencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 168, 52), 2));
+        btTransferencia.setContentAreaFilled(false);
+        btTransferencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTransferenciaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 1, 80, -1));
 
-        jButton1.setText("Receitas");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(144, 223, 170), 2));
-        jButton1.setContentAreaFilled(false);
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(795, 1, 80, -1));
+        btReceitas.setText("Receitas");
+        btReceitas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(144, 223, 170), 2));
+        btReceitas.setContentAreaFilled(false);
+        btReceitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btReceitasActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btReceitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(795, 1, 80, -1));
 
-        jButton2.setText("Despesas");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 112, 88), 2));
-        jButton2.setContentAreaFilled(false);
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 1, 80, -1));
+        btDespesas.setText("Despesas");
+        btDespesas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 112, 88), 2));
+        btDespesas.setContentAreaFilled(false);
+        btDespesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDespesasActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btDespesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 1, 80, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Filtrar por:");
@@ -187,8 +202,8 @@ public class Transacoes extends javax.swing.JFrame {
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         Principal telaPrincipal = Principal.getInstance();
-        telaPrincipal.setEnabled(true);
-        setVisible(false);
+        this.dispose();
+        telaPrincipal.setVisible(true);
         instancia = null;
     }//GEN-LAST:event_btSairActionPerformed
 
@@ -245,6 +260,21 @@ public class Transacoes extends javax.swing.JFrame {
         telaTransacao.setVisible(true);
     }//GEN-LAST:event_btNovoActionPerformed
 
+    private void btDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDespesasActionPerformed
+        limpaTabela();
+        preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.TIPO = 'D' and T.CODTRATRANSF is null and T.CODUSU = " + usuario + " order by CODTRA, DATA");
+    }//GEN-LAST:event_btDespesasActionPerformed
+
+    private void btReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReceitasActionPerformed
+        limpaTabela();
+        preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.TIPO = 'R' and T.CODTRATRANSF is null and T.CODUSU = " + usuario + " order by CODTRA, DATA");
+    }//GEN-LAST:event_btReceitasActionPerformed
+
+    private void btTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTransferenciaActionPerformed
+limpaTabela();
+        preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.CODTRATRANSF is not null and T.CODUSU = " + usuario + " order by CODTRA, DATA");
+    }//GEN-LAST:event_btTransferenciaActionPerformed
+
     public void preencheTabela(String Sql) {
         ArrayList dados = new ArrayList();
         String[] colunas = new String[]{"Descricao", "Data", "Conta", "Categoria", "Valor", "Codigo", "Consolidada", "Lembrete", "Nota", "Tipo", ""};
@@ -273,7 +303,7 @@ public class Transacoes extends javax.swing.JFrame {
         jTableTransac.setModel(tabela);
 
         jTableTransac.getColumnModel().getColumn(0).setPreferredWidth(200);
-        jTableTransac.getColumnModel().getColumn(1).setPreferredWidth(80);
+        jTableTransac.getColumnModel().getColumn(1).setPreferredWidth(90);
         jTableTransac.getColumnModel().getColumn(1).setResizable(false);
         jTableTransac.getColumnModel().getColumn(2).setPreferredWidth(200);
         jTableTransac.getColumnModel().getColumn(2).setResizable(false);
@@ -281,14 +311,14 @@ public class Transacoes extends javax.swing.JFrame {
         jTableTransac.getColumnModel().getColumn(3).setResizable(false);
         jTableTransac.getColumnModel().getColumn(4).setPreferredWidth(200);
         jTableTransac.getColumnModel().getColumn(4).setResizable(false);
-        jTableTransac.getColumnModel().getColumn(5).setPreferredWidth(80);
+        jTableTransac.getColumnModel().getColumn(5).setPreferredWidth(90);
         jTableTransac.getColumnModel().getColumn(5).setResizable(false);
-        jTableTransac.getColumnModel().getColumn(6).setPreferredWidth(90);
+        jTableTransac.getColumnModel().getColumn(6).setPreferredWidth(100);
         jTableTransac.getColumnModel().getColumn(6).setResizable(false);
-        jTableTransac.getColumnModel().getColumn(7).setPreferredWidth(80);
+        jTableTransac.getColumnModel().getColumn(7).setPreferredWidth(90);
         jTableTransac.getColumnModel().getColumn(7).setResizable(false);
         jTableTransac.getColumnModel().getColumn(8).setPreferredWidth(500);
-        jTableTransac.getColumnModel().getColumn(9).setPreferredWidth(80);
+        jTableTransac.getColumnModel().getColumn(9).setPreferredWidth(90);
         jTableTransac.getColumnModel().getColumn(9).setResizable(false);
         jTableTransac.getColumnModel().getColumn(10).setPreferredWidth(0);
         jTableTransac.getColumnModel().getColumn(10).setResizable(false);
@@ -352,13 +382,13 @@ public class Transacoes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btDespesas;
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btNovo;
+    private javax.swing.JButton btReceitas;
     private javax.swing.JButton btSair;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btTransferencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

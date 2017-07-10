@@ -163,8 +163,8 @@ public class Categoria extends javax.swing.JFrame {
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         Principal telaPrincipal = Principal.getInstance();
-        telaPrincipal.setEnabled(true);
-        setVisible(false);
+        this.dispose();
+        telaPrincipal.setVisible(true);
         instancia = null;
     }//GEN-LAST:event_btSairActionPerformed
 
@@ -192,11 +192,11 @@ public class Categoria extends javax.swing.JFrame {
         MTabela tabela = new MTabela(dados, colunas);
 
         jTableCateg.setModel(tabela);
-        jTableCateg.getColumnModel().getColumn(0).setPreferredWidth(80);
+        jTableCateg.getColumnModel().getColumn(0).setPreferredWidth(100);
         jTableCateg.getColumnModel().getColumn(0).setResizable(false);
-        jTableCateg.getColumnModel().getColumn(1).setPreferredWidth(320);
+        jTableCateg.getColumnModel().getColumn(1).setPreferredWidth(750);
         jTableCateg.getColumnModel().getColumn(1).setResizable(false);
-        jTableCateg.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTableCateg.getColumnModel().getColumn(2).setPreferredWidth(120);
         jTableCateg.getColumnModel().getColumn(2).setResizable(false);
         jTableCateg.getTableHeader().setReorderingAllowed(false);
         jTableCateg.setAutoResizeMode(jTableCateg.AUTO_RESIZE_OFF);

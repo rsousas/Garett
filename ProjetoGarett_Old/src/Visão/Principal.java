@@ -301,7 +301,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btTransacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTransacoesActionPerformed
         Transacoes telaTransacoes = Transacoes.getInstance();
-        this.setEnabled(false);
+        this.setVisible(false);
         telaTransacoes.setVisible(true);
     }//GEN-LAST:event_btTransacoesActionPerformed
 
@@ -311,7 +311,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContasActionPerformed
         Conta telaConta = Conta.getInstance();
-        this.setEnabled(false);
+        this.setVisible(false);
         telaConta.setVisible(true);
     }//GEN-LAST:event_btContasActionPerformed
 
@@ -351,7 +351,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCategoriaActionPerformed
         Categoria telaCategoria = Categoria.getInstance();
-        this.setEnabled(false);
+        this.setVisible(false);
         telaCategoria.setVisible(true);
     }//GEN-LAST:event_btCategoriaActionPerformed
     
