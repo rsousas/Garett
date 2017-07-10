@@ -76,6 +76,18 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+<<<<<<< HEAD
+=======
+        btNovaTransacao.setText("+ Nova Transação");
+        btNovaTransacao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 208, 91), 3));
+        btNovaTransacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNovaTransacaoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btNovaTransacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 550, 140, 40));
+
+>>>>>>> 19e4ef52666377e8c29183b9efeaec4c426fb3ed
         jPanelMenuPrincipal.setBackground(new java.awt.Color(234, 237, 239));
         jPanelMenuPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

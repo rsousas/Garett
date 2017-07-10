@@ -7,7 +7,11 @@
     <offline-allowed/>
   </information>
   <resources>
+    <jfx:javafx-runtime version="2.2+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+  </resources>
+  <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="ProjetoGarett.jar" size="1895280" download="eager" />
     <jar href="lib\AbsoluteLayout.jar" size="2520" download="eager" />
     <jar href="lib\beansbinding-1.2.1.jar" size="631289" download="eager" />
@@ -24,6 +28,13 @@
     <jar href="lib\jcalendar-1.3.3.jar" size="126603" download="eager" />
     <jar href="lib\jxSwing-src.jar" size="648154" download="eager" />
     <jar href="lib\mysql-connector-java-5.0.8-bin.jar" size="540852" download="eager" />
+=======
+    <jar href="ProjetoGarett.jar" size="1909588" download="eager" />
+    <jar href="lib/AbsoluteLayout.jar" size="2520" download="eager" />
+    <jar href="lib/jcalendar-1.3.3.jar" size="126603" download="eager" />
+    <jar href="lib/jxSwing-src.jar" size="648154" download="eager" />
+    <jar href="lib/mysql-connector-java-5.0.8-bin.jar" size="540852" download="eager" />
+>>>>>>> 19e4ef52666377e8c29183b9efeaec4c426fb3ed
   </resources>
   <applet-desc  width="800" height="600" main-class="Visão.TelaLogin"  name="ProjetoGarett" >
   </applet-desc>
