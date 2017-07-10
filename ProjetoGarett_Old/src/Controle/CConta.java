@@ -52,7 +52,6 @@ public class CConta {
             pst.setInt(3, conta.getAtivo());
             pst.setString(4, conta.getUsuario());
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir Conta:\nErro:" + ex);
         }

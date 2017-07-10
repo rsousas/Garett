@@ -14,6 +14,8 @@ public class ICategoria extends javax.swing.JFrame {
 
     public ICategoria() {
         initComponents();
+        cxbAtiva.setEnabled(false);
+        txtDescricao.requestFocus();
     }
 
     public ICategoria(MCategoria categ) {
@@ -22,6 +24,7 @@ public class ICategoria extends javax.swing.JFrame {
         cxbAtiva.setSelected(categ.getAtivo() == 1);
         codCat = categ.getCodcat();
         isEdit = true;
+        txtDescricao.requestFocus();
     }
 
     @SuppressWarnings("unchecked")

@@ -444,7 +444,7 @@ public class Principal extends javax.swing.JFrame {
         String[] colunas = new String[]{"Descricao", "Valor"};
 
         conexao.conecta();
-        conexao.executaSql("select T.DESCRTRA, T.VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE()) ORDER BY T.VALOR desc limit 5;");
+        conexao.executaSql("select T.DESCRTRA, T.VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE()) ORDER BY T.VALOR desc limit 7;");
 
         try {
             conexao.rs.beforeFirst();
@@ -464,7 +464,7 @@ public class Principal extends javax.swing.JFrame {
 
         jTableTransac.setModel(tabela);
 
-        jTableTransac.getColumnModel().getColumn(0).setPreferredWidth(500);
+        jTableTransac.getColumnModel().getColumn(0).setPreferredWidth(470);
         jTableTransac.getColumnModel().getColumn(0).setResizable(false);
         jTableTransac.getColumnModel().getColumn(1).setPreferredWidth(150);
         jTableTransac.getColumnModel().getColumn(1).setResizable(false);

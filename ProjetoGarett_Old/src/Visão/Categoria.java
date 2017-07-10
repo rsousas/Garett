@@ -143,7 +143,7 @@ public class Categoria extends javax.swing.JFrame {
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         modCategoria.setDescricao((String) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 1));
-        modCategoria.setAtivo(((Integer) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 2)) == 1);
+        modCategoria.setAtivo(("Sim".equals((String) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 2))));
         modCategoria.setUsuario(usuario);
         modCategoria.setCodcat((Integer) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 0));
         ICategoria telaCategoria = new ICategoria(modCategoria);

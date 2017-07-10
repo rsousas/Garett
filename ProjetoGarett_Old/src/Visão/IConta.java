@@ -19,6 +19,8 @@ public class IConta extends javax.swing.JFrame {
 
     public IConta() {
         initComponents();
+        cxbAtiva.setEnabled(false);
+        txtDescricao.requestFocus();
     }
 
     public IConta(MConta conta) {
@@ -28,6 +30,7 @@ public class IConta extends javax.swing.JFrame {
         txtSaldo.setText(Float.toString(conta.getSaldo()));
         codCon = conta.getCodcon();
         isEdit = true;
+        txtDescricao.requestFocus();
     }
 
     /**

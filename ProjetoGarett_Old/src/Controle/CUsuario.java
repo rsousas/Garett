@@ -50,7 +50,7 @@ public class CUsuario {
             pst.setString(2, usuario.getNome());
             pst.setString(3, usuario.getSenha());
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Sucesso!");
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir Usuário:\nErro:" + ex);
         }

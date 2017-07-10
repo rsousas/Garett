@@ -91,7 +91,6 @@ public class CTransacoes {
                 cst.setString(8, transac.getUsuario());
                 cst.execute();
             }
-            JOptionPane.showMessageDialog(null, "Sucesso!");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao inserir Transação:\nErro:" + ex);
@@ -143,7 +142,6 @@ public class CTransacoes {
                 cst.execute();
 
             }
-            JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Editar Transação:\nErro:" + ex);
         }
@@ -173,6 +171,7 @@ public class CTransacoes {
     }
 
     private Integer buscaCodCategoria(String categoria) {
+        conexao.conecta();
         conexao.executaSql("select CODCAT from CATEGORIA where DESCRCAT = '" + categoria + "'");
         try {
             conexao.rs.first();
@@ -184,6 +183,7 @@ public class CTransacoes {
     }
 
     private Integer buscaCodConta(String conta) {
+        conexao.conecta();
         conexao.executaSql("select CODCON from CONTA where DESCRCON = '" + conta + "'");
         try {
             conexao.rs.first();

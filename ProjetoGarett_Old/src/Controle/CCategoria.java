@@ -58,7 +58,6 @@ public class CCategoria {
             pst.setString(3, categoria.getUsuario());
             pst.setInt(4, categoria.getCodcat());
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Editar Categoria:\nErro:" + ex);
         }

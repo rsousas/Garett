@@ -33,6 +33,7 @@ public class ITransacao extends javax.swing.JFrame {
         povoaCombos();
         dtData.setDate(new java.util.Date());
         t_dtData.setDate(new java.util.Date());
+        txtDescricao.requestFocus();
     }
 
     public ITransacao(MTransacoes transacoes) {
@@ -57,6 +58,7 @@ public class ITransacao extends javax.swing.JFrame {
             }
             spParcelar.setValue(transacoes.getLembrete());
             pnNota.setText(transacoes.getNota());
+            txtDescricao.requestFocus();
         } else {
             jTabbedPane.setSelectedIndex(1);
             jTabbedPane.setEnabledAt(0, false);
@@ -68,6 +70,7 @@ public class ITransacao extends javax.swing.JFrame {
             t_spLembrete.setValue(transacoes.getLembrete());
             t_pnNota.setText(transacoes.getNota());
             codTraDest = transacoes.getCodtraDest();
+            t_cbConta.requestFocus();
         }
         codTra = transacoes.getCodtra();
         isEdit = true;
@@ -403,7 +406,6 @@ public class ITransacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalvarNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarNovoActionPerformed
-        double valor;
         if (jTabbedPane.getSelectedIndex() == 0) {
             if (Transac.verificaSeNumerico(txtValor.getText())) {
                 modTransac.setValor(txtValor.getText());
