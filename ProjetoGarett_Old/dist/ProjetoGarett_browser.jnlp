@@ -8,8 +8,18 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ProjetoGarett.jar" size="1891925" download="eager" />
+    <jar href="ProjetoGarett.jar" size="1894484" download="eager" />
     <jar href="lib\AbsoluteLayout.jar" size="2520" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport-addons.jar" size="369475" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport-components.jar" size="1910683" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport-designer-standalone.jar" size="200048" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport-hadoop-hive.jar" size="18253" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport-heartbeat.jar" size="26327" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport-jasperserver.jar" size="1459823" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport-mongodb.jar" size="20896" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport-samples.jar" size="34762" download="eager" />
+    <jar href="lib\com-jaspersoft-ireport.jar" size="11859495" download="eager" />
+    <jar href="lib\com-jaspersoft-jrx.jar" size="84379" download="eager" />
     <jar href="lib\jcalendar-1.3.3.jar" size="126603" download="eager" />
     <jar href="lib\jxSwing-src.jar" size="648154" download="eager" />
     <jar href="lib\mysql-connector-java-5.0.8-bin.jar" size="540852" download="eager" />

@@ -249,7 +249,7 @@ public class Transacoes extends javax.swing.JFrame {
         modTransacoes.setPago(((boolean) "Sim".equals(jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 6))));
         modTransacoes.setLembrete(Integer.valueOf(lembrete.toString()));
         modTransacoes.setNota((String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 8));
-        modTransacoes.setTipo(jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 10).equals(0)? (String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 9) : "T");
+        modTransacoes.setTipo(jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 10).equals(0) ? (String) jTableTransac.getValueAt(jTableTransac.getSelectedRow(), 9) : "T");
         modTransacoes.setUsuario(usuario);
         ITransacao telaTransacao = new ITransacao(modTransacoes);
         telaTransacao.setVisible(true);
@@ -271,7 +271,7 @@ public class Transacoes extends javax.swing.JFrame {
     }//GEN-LAST:event_btReceitasActionPerformed
 
     private void btTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTransferenciaActionPerformed
-limpaTabela();
+        limpaTabela();
         preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.CODTRATRANSF is not null and T.CODUSU = " + usuario + " order by CODTRA, DATA");
     }//GEN-LAST:event_btTransferenciaActionPerformed
 

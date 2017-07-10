@@ -1,12 +1,18 @@
 package Visão;
 
 import Controle.CConexaoBD;
+import Modelo.MTabela;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 public class Principal extends javax.swing.JFrame {
-    
+
     CConexaoBD conexao = new CConexaoBD();
-    
+
     private static Principal instancia;
+    String usuario = TelaLogin.getUsuario();
 
     /**
      * Creates new form Principal
@@ -14,7 +20,9 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         btConfiguracoes.setEnabled(false);
-        conexao.conecta();
+        preencheTabelaLembretes();
+        preencheTabelaTransac();
+        totalGasto();
     }
 
     /**
@@ -27,7 +35,6 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btNovaTransacao = new javax.swing.JButton();
         jPanelMenuPrincipal = new javax.swing.JPanel();
         btTransacoes = new javax.swing.JButton();
         btContas = new javax.swing.JButton();
@@ -41,12 +48,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel8 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        cxbSaldoAcumulado = new javax.swing.JCheckBox();
+        jLabelTot = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableTransac = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableLembrete = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu19 = new javax.swing.JMenu();
         btMenuTransacoes = new javax.swing.JRadioButtonMenuItem();
@@ -55,7 +64,6 @@ public class Principal extends javax.swing.JFrame {
         jRadioButtonMenuItem15 = new javax.swing.JRadioButtonMenuItem();
         btMenuSair = new javax.swing.JRadioButtonMenuItem();
         jMenu28 = new javax.swing.JMenu();
-        jRadioButtonMenuItem8 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem9 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem10 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem11 = new javax.swing.JRadioButtonMenuItem();
@@ -70,15 +78,6 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btNovaTransacao.setText("+ Nova Transação");
-        btNovaTransacao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 208, 91), 3));
-        btNovaTransacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btNovaTransacaoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btNovaTransacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 570, 140, 40));
 
         jPanelMenuPrincipal.setBackground(new java.awt.Color(234, 237, 239));
         jPanelMenuPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -159,49 +158,21 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setText("Icon made by Vectors Market from www.flaticon.com ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 650, 1100, -1));
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Saldo acumulado");
-        jCheckBox1.setToolTipText("");
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 140, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 86)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("00,00");
-        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1100, 130));
-
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(null);
-
-        jTable1.setForeground(new java.awt.Color(102, 102, 102));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {""},
-                {""},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Lembrete"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        cxbSaldoAcumulado.setBackground(new java.awt.Color(255, 255, 255));
+        cxbSaldoAcumulado.setText("Saldo acumulado");
+        cxbSaldoAcumulado.setToolTipText("");
+        cxbSaldoAcumulado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxbSaldoAcumuladoActionPerformed(evt);
             }
         });
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setRowHeight(60);
-        jTable1.setSelectionBackground(new java.awt.Color(255, 255, 153));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setShowHorizontalLines(false);
-        jTable1.setShowVerticalLines(false);
-        jScrollPane1.setViewportView(jTable1);
+        jPanel1.add(cxbSaldoAcumulado, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 140, -1, -1));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 390, 300));
+        jLabelTot.setFont(new java.awt.Font("Tahoma", 0, 86)); // NOI18N
+        jLabelTot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTot.setText("00,00");
+        jLabelTot.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel1.add(jLabelTot, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1100, 130));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setBorder(null);
@@ -226,7 +197,38 @@ public class Principal extends javax.swing.JFrame {
         jTableTransac.setShowVerticalLines(false);
         jScrollPane2.setViewportView(jTableTransac);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 620, 300));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, 620, 220));
+
+        jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setBorder(null);
+
+        jTableLembrete.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTableLembrete.setForeground(new java.awt.Color(102, 102, 102));
+        jTableLembrete.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"", "", "", null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTableLembrete.setGridColor(new java.awt.Color(255, 255, 255));
+        jTableLembrete.setRowHeight(26);
+        jTableLembrete.setSelectionBackground(new java.awt.Color(50, 74, 94));
+        jTableLembrete.setShowHorizontalLines(false);
+        jTableLembrete.setShowVerticalLines(false);
+        jScrollPane3.setViewportView(jTableLembrete);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 400, 220));
+
+        jLabel8.setText("Lembretes:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
+
+        jLabel9.setText("Maiores Transações:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 380, -1, -1));
 
         jMenu19.setText("Arquivo");
 
@@ -278,15 +280,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar3.add(jMenu19);
 
         jMenu28.setText("Relatório");
-
-        jRadioButtonMenuItem8.setSelected(true);
-        jRadioButtonMenuItem8.setText("Usuários");
-        jRadioButtonMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu28.add(jRadioButtonMenuItem8);
 
         jRadioButtonMenuItem9.setSelected(true);
         jRadioButtonMenuItem9.setText("Categorias");
@@ -385,16 +378,6 @@ public class Principal extends javax.swing.JFrame {
         telaConta.setVisible(true);
     }//GEN-LAST:event_btContasActionPerformed
 
-    private void btNovaTransacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaTransacaoActionPerformed
-        ITransacao telaTransacao = new ITransacao();
-        this.setEnabled(false);
-        telaTransacao.setVisible(true);
-    }//GEN-LAST:event_btNovaTransacaoActionPerformed
-
-    private void jRadioButtonMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem8ActionPerformed
-
-    }//GEN-LAST:event_jRadioButtonMenuItem8ActionPerformed
-
     private void jRadioButtonMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem9ActionPerformed
 
     }//GEN-LAST:event_jRadioButtonMenuItem9ActionPerformed
@@ -419,12 +402,107 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jRadioButtonMenuItem14ActionPerformed
 
+    public void preencheTabelaLembretes() {
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"Descricao"};
+
+        conexao.conecta();
+        conexao.executaSql("select T.DESCRTRA from TRANSACAO T where T.CODUSU = '" + usuario + "' and T.LEMBRETE >= CURRENT_DATE() and T.DATA <= CURRENT_DATE();");
+
+        try {
+            conexao.rs.beforeFirst();
+
+            while (conexao.rs.next()) {
+                dados.add(new Object[]{conexao.rs.getString("DESCRTRA")});
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao preencher Tabela de Lembretes!" + ex);
+        }
+        if (dados.isEmpty()) {
+            dados.add(new Object[]{' '});
+        }
+
+        MTabela tabela = new MTabela(dados, colunas);
+
+        jTableLembrete.setModel(tabela);
+
+        jTableLembrete.getColumnModel().getColumn(0).setPreferredWidth(400);
+        jTableLembrete.getColumnModel().getColumn(0).setResizable(false);
+        jTableLembrete.getTableHeader().setReorderingAllowed(false);
+        jTableLembrete.setAutoResizeMode(jTableLembrete.AUTO_RESIZE_OFF);
+
+        jTableLembrete.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        conexao.desconecta();
+        jTableLembrete.setColumnSelectionInterval(0, 0);
+        jTableLembrete.setRowSelectionInterval(0, 0);
+    }
+
+    public void preencheTabelaTransac() {
+        ArrayList dados = new ArrayList();
+        String[] colunas = new String[]{"Descricao", "Valor"};
+
+        conexao.conecta();
+        conexao.executaSql("select T.DESCRTRA, T.VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE()) ORDER BY T.VALOR desc limit 5;");
+
+        try {
+            conexao.rs.beforeFirst();
+
+            while (conexao.rs.next()) {
+                dados.add(new Object[]{conexao.rs.getString("DESCRTRA"), conexao.rs.getFloat("VALOR")});
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao preencher Tabela de Transações!" + ex);
+        }
+        if (dados.isEmpty()) {
+            dados.add(new Object[]{' '});
+        }
+
+        MTabela tabela = new MTabela(dados, colunas);
+
+        jTableTransac.setModel(tabela);
+
+        jTableTransac.getColumnModel().getColumn(0).setPreferredWidth(500);
+        jTableTransac.getColumnModel().getColumn(0).setResizable(false);
+        jTableTransac.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jTableTransac.getColumnModel().getColumn(1).setResizable(false);
+        jTableTransac.getTableHeader().setReorderingAllowed(false);
+        jTableTransac.setAutoResizeMode(jTableTransac.AUTO_RESIZE_OFF);
+
+        jTableTransac.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        conexao.desconecta();
+        jTableTransac.setColumnSelectionInterval(0, 0);
+        jTableTransac.setRowSelectionInterval(0, 0);
+    }
+
+    public void totalGasto() {
+        conexao.conecta();
+        if (cxbSaldoAcumulado.isSelected()) {
+            conexao.executaSql("select format(sum(T.VALOR),2,'de_DE') VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE());");
+        } else {
+            conexao.executaSql("select format(sum(T.VALOR),2,'de_DE') VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "';");
+        }
+        try {
+            conexao.rs.first();
+            jLabelTot.setText(conexao.rs.getString("VALOR"));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao preencher Tabela de Lembretes!" + ex);
+        }
+    }
+
     private void btCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCategoriaActionPerformed
         Categoria telaCategoria = Categoria.getInstance();
         this.setVisible(false);
         telaCategoria.setVisible(true);
     }//GEN-LAST:event_btCategoriaActionPerformed
-    
+
+    private void cxbSaldoAcumuladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxbSaldoAcumuladoActionPerformed
+        totalGasto();
+    }//GEN-LAST:event_cxbSaldoAcumuladoActionPerformed
+
     public static Principal getInstance() { // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
         if (instancia == null) {
             instancia = new Principal();
@@ -475,10 +553,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem btMenuConta;
     private javax.swing.JRadioButtonMenuItem btMenuSair;
     private javax.swing.JRadioButtonMenuItem btMenuTransacoes;
-    private javax.swing.JButton btNovaTransacao;
     private javax.swing.JButton btSair;
     private javax.swing.JButton btTransacoes;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox cxbSaldoAcumulado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -487,6 +564,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelTot;
     private javax.swing.JMenu jMenu19;
     private javax.swing.JMenu jMenu28;
     private javax.swing.JMenu jMenu35;
@@ -499,11 +578,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem13;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem14;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem15;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem8;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableLembrete;
     private javax.swing.JTable jTableTransac;
     // End of variables declaration//GEN-END:variables
 }
