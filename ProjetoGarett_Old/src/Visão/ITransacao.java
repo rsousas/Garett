@@ -506,6 +506,7 @@ public class ITransacao extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Transacoes telaTransacoes = Transacoes.getInstance();
         telaTransacoes.setEnabled(true);
+        telaTransacoes.toFront();
         setVisible(false);
     }//GEN-LAST:event_formWindowClosed
 

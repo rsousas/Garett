@@ -1,4 +1,4 @@
-Transações
+﻿Transações
 select DESCRCONTA Conta, DATA Data, MES_ANO Mes_Ano, VALOR Valor, TIPO Tipo,
 PAGO Pago, DESCRCAT Categoria, DESCRTRA Descricao
 from V_TRANSACOES
@@ -67,7 +67,7 @@ group by DESCRCAT, DESCRCONTA;
  
  
 Grafico_Barras_Receitas.jrxml
-select DESCRCAT, sum(VALOR) AS VALOR
+select DESCRCAT as descrcat, sum(VALOR) AS valor
 from V_TRANSACOES
 where CODUSU = $P{P_CODUSU}
 and TIPO = 'R'

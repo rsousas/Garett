@@ -30,7 +30,7 @@ public class CConexaoBD {
             conexao = DriverManager.getConnection(caminho, usuario, senha);
 
             if (conexao != null) {
-                status = ("STATUS--->Conectado com sucesso!");
+                status = "";
             } else {
                 status = ("STATUS--->Não foi possivel realizar conexão");
             }
@@ -45,7 +45,7 @@ public class CConexaoBD {
         try {
             conexao.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Desconectat BD:\n" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao Desconectar BD:\n" + ex.getMessage());
         }
     }
 

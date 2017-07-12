@@ -293,6 +293,7 @@ public class Transacoes extends javax.swing.JFrame {
         telaPrincipal.preencheTabelaTransac();
         telaPrincipal.totalGasto();
         telaPrincipal.setVisible(true);
+        telaPrincipal.toFront();
         instancia = null;
     }//GEN-LAST:event_formWindowClosed
 

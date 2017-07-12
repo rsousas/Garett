@@ -191,6 +191,7 @@ public class IConta extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Conta telaConta = Conta.getInstance();
         telaConta.setEnabled(true);
+        telaConta.toFront();
         setVisible(false);
     }//GEN-LAST:event_formWindowClosed
 

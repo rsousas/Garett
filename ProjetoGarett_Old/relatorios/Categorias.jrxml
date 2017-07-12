@@ -3,18 +3,23 @@
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.9487171000000014"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="457"/>
 	<property name="ireport.y" value="0"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
 	<queryString>
-		<![CDATA[SELECT * FROM V_CATEGORIAS]]>
+		<![CDATA[select * from V_CATEGORIAS;]]>
 	</queryString>
-	<field name="codcat" class="java.lang.Integer"/>
-	<field name="descrcat" class="java.lang.String"/>
-	<field name="codcatpai" class="java.lang.Integer"/>
-	<field name="Ativo" class="java.lang.String"/>
+	<field name="CODCAT" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DESCRCAT" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ATIVO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -116,7 +121,7 @@
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{codcat}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{CODCAT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement key="textField" x="67" y="1" width="266" height="17" forecolor="#000000" backcolor="#FFFFFF" uuid="7eeee7d6-f26e-4c2c-9a6a-a69f095a53b7"/>
@@ -129,7 +134,7 @@
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{descrcat}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{DESCRCAT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement key="textField" x="333" y="1" width="107" height="17" forecolor="#000000" backcolor="#FFFFFF" uuid="bcedab57-956c-4949-b1bd-4fc287fe3497"/>
@@ -142,7 +147,7 @@
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Ativo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ATIVO}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

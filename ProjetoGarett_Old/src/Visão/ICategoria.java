@@ -135,6 +135,7 @@ public class ICategoria extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Categoria telaCategoria = Categoria.getInstance();
         telaCategoria.setEnabled(true);
+        telaCategoria.toFront();
         setVisible(false);
     }//GEN-LAST:event_formWindowClosed
 

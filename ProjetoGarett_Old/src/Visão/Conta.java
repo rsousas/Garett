@@ -195,6 +195,7 @@ public class Conta extends javax.swing.JFrame {
         Principal telaPrincipal = Principal.getInstance();
         this.dispose();
         telaPrincipal.setVisible(true);
+        telaPrincipal.toFront();
         instancia = null;
     }//GEN-LAST:event_formWindowClosed
 

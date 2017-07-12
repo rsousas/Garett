@@ -4,8 +4,13 @@ import Controle.CConexaoBD;
 import Modelo.MTabela;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -19,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        System.setProperty("java.awt.headless", "true");
         preencheTabelaLembretes();
         preencheTabelaTransac();
         totalGasto();
@@ -58,16 +64,20 @@ public class Principal extends javax.swing.JFrame {
         btMenuTransacoes = new javax.swing.JRadioButtonMenuItem();
         btMenuConta = new javax.swing.JRadioButtonMenuItem();
         btMenuCategoria = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem15 = new javax.swing.JRadioButtonMenuItem();
         btMenuSair = new javax.swing.JRadioButtonMenuItem();
         jMenu28 = new javax.swing.JMenu();
-        jRadioButtonMenuItem9 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem10 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem11 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem12 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem13 = new javax.swing.JRadioButtonMenuItem();
-        jMenu35 = new javax.swing.JMenu();
-        jRadioButtonMenuItem14 = new javax.swing.JRadioButtonMenuItem();
+        jrbCategorias = new javax.swing.JRadioButtonMenuItem();
+        jrbConta = new javax.swing.JRadioButtonMenuItem();
+        jrbTransacoes = new javax.swing.JRadioButtonMenuItem();
+        jrbReceitas = new javax.swing.JRadioButtonMenuItem();
+        jrbDespesas = new javax.swing.JRadioButtonMenuItem();
+        jrbTransferencias = new javax.swing.JRadioButtonMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jrbGrafReceita = new javax.swing.JRadioButtonMenuItem();
+        jrbGrafDespesas = new javax.swing.JRadioButtonMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jrbPReceitas = new javax.swing.JRadioButtonMenuItem();
+        jrbPDespesas = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Easy Personal Finances Garrett");
@@ -242,15 +252,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu19.add(btMenuCategoria);
 
-        jRadioButtonMenuItem15.setSelected(true);
-        jRadioButtonMenuItem15.setText("Configurações");
-        jRadioButtonMenuItem15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btConfiguracoesActionPerformed(evt);
-            }
-        });
-        jMenu19.add(jRadioButtonMenuItem15);
-
         btMenuSair.setSelected(true);
         btMenuSair.setText("Sair");
         btMenuSair.addActionListener(new java.awt.event.ActionListener() {
@@ -264,65 +265,105 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu28.setText("Relatório");
 
-        jRadioButtonMenuItem9.setSelected(true);
-        jRadioButtonMenuItem9.setText("Categorias");
-        jRadioButtonMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        jrbCategorias.setSelected(true);
+        jrbCategorias.setText("Categorias");
+        jrbCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem9ActionPerformed(evt);
+                jrbCategoriasActionPerformed(evt);
             }
         });
-        jMenu28.add(jRadioButtonMenuItem9);
+        jMenu28.add(jrbCategorias);
 
-        jRadioButtonMenuItem10.setSelected(true);
-        jRadioButtonMenuItem10.setText("Transações");
-        jRadioButtonMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        jrbConta.setSelected(true);
+        jrbConta.setText("Conta");
+        jrbConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem10ActionPerformed(evt);
+                jrbContaActionPerformed(evt);
             }
         });
-        jMenu28.add(jRadioButtonMenuItem10);
+        jMenu28.add(jrbConta);
 
-        jRadioButtonMenuItem11.setSelected(true);
-        jRadioButtonMenuItem11.setText("Receitas");
-        jRadioButtonMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+        jrbTransacoes.setSelected(true);
+        jrbTransacoes.setText("Transações");
+        jrbTransacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem11ActionPerformed(evt);
+                jrbTransacoesActionPerformed(evt);
             }
         });
-        jMenu28.add(jRadioButtonMenuItem11);
+        jMenu28.add(jrbTransacoes);
 
-        jRadioButtonMenuItem12.setSelected(true);
-        jRadioButtonMenuItem12.setText("Despesas");
-        jRadioButtonMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+        jrbReceitas.setSelected(true);
+        jrbReceitas.setText("Receitas");
+        jrbReceitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem12ActionPerformed(evt);
+                jrbReceitasActionPerformed(evt);
             }
         });
-        jMenu28.add(jRadioButtonMenuItem12);
+        jMenu28.add(jrbReceitas);
 
-        jRadioButtonMenuItem13.setSelected(true);
-        jRadioButtonMenuItem13.setText("Transferências");
-        jRadioButtonMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+        jrbDespesas.setSelected(true);
+        jrbDespesas.setText("Despesas");
+        jrbDespesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem13ActionPerformed(evt);
+                jrbDespesasActionPerformed(evt);
             }
         });
-        jMenu28.add(jRadioButtonMenuItem13);
+        jMenu28.add(jrbDespesas);
+
+        jrbTransferencias.setSelected(true);
+        jrbTransferencias.setText("Transferências");
+        jrbTransferencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbTransferenciasActionPerformed(evt);
+            }
+        });
+        jMenu28.add(jrbTransferencias);
+
+        jMenu1.setText("Grafico Barras");
+
+        jrbGrafReceita.setSelected(true);
+        jrbGrafReceita.setText("Receitas");
+        jrbGrafReceita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbGrafReceitaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jrbGrafReceita);
+
+        jrbGrafDespesas.setSelected(true);
+        jrbGrafDespesas.setText("Despesas");
+        jrbGrafDespesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbGrafDespesasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jrbGrafDespesas);
+
+        jMenu28.add(jMenu1);
+
+        jMenu2.setText("Grafico Pizza");
+
+        jrbPReceitas.setSelected(true);
+        jrbPReceitas.setText("Receitas");
+        jrbPReceitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbPReceitasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jrbPReceitas);
+
+        jrbPDespesas.setSelected(true);
+        jrbPDespesas.setText("Despesas");
+        jrbPDespesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbPDespesasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jrbPDespesas);
+
+        jMenu28.add(jMenu2);
 
         jMenuBar3.add(jMenu28);
-
-        jMenu35.setText("Ajuda");
-
-        jRadioButtonMenuItem14.setSelected(true);
-        jRadioButtonMenuItem14.setText("Sobre");
-        jRadioButtonMenuItem14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem14ActionPerformed(evt);
-            }
-        });
-        jMenu35.add(jRadioButtonMenuItem14);
-
-        jMenuBar3.add(jMenu35);
 
         setJMenuBar(jMenuBar3);
 
@@ -349,41 +390,98 @@ public class Principal extends javax.swing.JFrame {
         Transacoes telaTransacoes = Transacoes.getInstance();
         this.setVisible(false);
         telaTransacoes.setVisible(true);
+        telaTransacoes.toFront();
     }//GEN-LAST:event_btTransacoesActionPerformed
-
-    private void btConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfiguracoesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btConfiguracoesActionPerformed
 
     private void btContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btContasActionPerformed
         Conta telaConta = Conta.getInstance();
         this.setVisible(false);
         telaConta.setVisible(true);
+        telaConta.toFront();
     }//GEN-LAST:event_btContasActionPerformed
 
-    private void jRadioButtonMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem9ActionPerformed
+    private void jrbCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbCategoriasActionPerformed
+        try {
+            conexao.conecta();
+            conexao.executaSql("select * from V_CATEGORIAS;");
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Categorias.jasper", new HashMap(), jrRS);
+            JasperViewer jv = new JasperViewer(jpPrint, false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro =" + erro);
+        }
+    }//GEN-LAST:event_jrbCategoriasActionPerformed
 
-    }//GEN-LAST:event_jRadioButtonMenuItem9ActionPerformed
+    private void jrbTransacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTransacoesActionPerformed
+        try {
+            conexao.conecta();
+            conexao.executaSql("SELECT DESCRCONTA Conta, DATA Data, MES_ANO Mes_Ano, VALOR Valor, TIPO Tipo,\n"
+                    + "PAGO Pago, DESCRCAT Categoria, DESCRTRA Descricao from v_transacoes order by DATA desc;");
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Transacoes.jasper", new HashMap(), jrRS);
+            JasperViewer jv = new JasperViewer(jpPrint, false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro =" + erro);
+        }
+    }//GEN-LAST:event_jrbTransacoesActionPerformed
 
-    private void jRadioButtonMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem10ActionPerformed
+    private void jrbReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbReceitasActionPerformed
+        try {
+            conexao.conecta();
+            conexao.executaSql("select DESCRCONTA as Conta, DATA AS Data, MES_ANO as Mes_Ano, \n"
+                    + "VALOR as Valor, TIPO as Tipo, PAGO as Pago, DESCRCAT as Categoria, DESCRTRA as Descricao\n"
+                    + "from V_TRANSACOES\n"
+                    + "where TIPO = 'R'\n"
+                    + "order by DATA desc;");
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Receitas.jasper", new HashMap(), jrRS);
+            JasperViewer jv = new JasperViewer(jpPrint, false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro =" + erro);
+        }
+    }//GEN-LAST:event_jrbReceitasActionPerformed
 
-    }//GEN-LAST:event_jRadioButtonMenuItem10ActionPerformed
+    private void jrbDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbDespesasActionPerformed
+        try {
+            conexao.conecta();
+            conexao.executaSql("select DESCRCONTA as Conta, DATA AS Data, MES_ANO as Mes_Ano, \n"
+                    + "VALOR as Valor, TIPO as Tipo, PAGO as Pago, DESCRCAT as Categoria, DESCRTRA as Descricao\n"
+                    + "from V_TRANSACOES\n"
+                    + "where TIPO = 'D'\n"
+                    + "order by DATA desc;");
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Despesas.jasper", new HashMap(), jrRS);
+            JasperViewer jv = new JasperViewer(jpPrint, false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro =" + erro);
+        }
+    }//GEN-LAST:event_jrbDespesasActionPerformed
 
-    private void jRadioButtonMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem11ActionPerformed
-
-    }//GEN-LAST:event_jRadioButtonMenuItem11ActionPerformed
-
-    private void jRadioButtonMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem12ActionPerformed
-
-    }//GEN-LAST:event_jRadioButtonMenuItem12ActionPerformed
-
-    private void jRadioButtonMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem13ActionPerformed
-
-    }//GEN-LAST:event_jRadioButtonMenuItem13ActionPerformed
-
-    private void jRadioButtonMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem14ActionPerformed
-
-    }//GEN-LAST:event_jRadioButtonMenuItem14ActionPerformed
+    private void jrbTransferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTransferenciasActionPerformed
+        try {
+            conexao.conecta();
+            conexao.executaSql("select DESCRCONTA as Conta, DATA AS Data, MES_ANO as Mes_Ano, \n"
+                    + "VALOR as Valor, TIPO as Tipo, PAGO as Pago, DESCRCAT as Categoria, DESCRTRA as Descricao\n"
+                    + "from V_TRANSACOES\n"
+                    + "where TIPO = 'T'\n"
+                    + "order by DATA desc;");
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Transferencias.jasper", new HashMap(), jrRS);
+            JasperViewer jv = new JasperViewer(jpPrint, false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro =" + erro);
+        }
+    }//GEN-LAST:event_jrbTransferenciasActionPerformed
 
     public void preencheTabelaLembretes() {
         ArrayList dados = new ArrayList();
@@ -486,11 +584,94 @@ public class Principal extends javax.swing.JFrame {
         Categoria telaCategoria = Categoria.getInstance();
         this.setVisible(false);
         telaCategoria.setVisible(true);
+        telaCategoria.toFront();
     }//GEN-LAST:event_btCategoriaActionPerformed
 
     private void cxbSaldoAcumuladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxbSaldoAcumuladoActionPerformed
         totalGasto();
     }//GEN-LAST:event_cxbSaldoAcumuladoActionPerformed
+
+    private void jrbContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbContaActionPerformed
+        try {
+            conexao.conecta();
+            conexao.executaSql("select CODCON, DESCRCON, ATIVO from V_CONTAS;");
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Contas.jasper", new HashMap(), jrRS);
+            JasperViewer jv = new JasperViewer(jpPrint, false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro =" + erro);
+        }
+    }//GEN-LAST:event_jrbContaActionPerformed
+
+    private void jrbGrafReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbGrafReceitaActionPerformed
+        try {
+            conexao.conecta();
+            conexao.executaSql("select DESCRCAT as descrcat, sum(VALOR) AS valor\n"
+                    + "from V_TRANSACOES\n"
+                    + "where TIPO = 'R'\n"
+                    + "group by DESCRCAT, DESCRCONTA;");
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Grafico_Barras_Receitas.jasper", new HashMap(), jrRS);
+            JasperViewer jv = new JasperViewer(jpPrint, false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro =" + erro);
+        }
+    }//GEN-LAST:event_jrbGrafReceitaActionPerformed
+
+    private void jrbGrafDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbGrafDespesasActionPerformed
+        try {
+            conexao.conecta();
+            conexao.executaSql("select DESCRCAT as descrcat, sum(VALOR) AS valor\n"
+                    + "from V_TRANSACOES\n"
+                    + "where TIPO = 'D'\n"
+                    + "group by DESCRCAT, DESCRCONTA;");
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Grafico_Barras_Despesas.jasper", new HashMap(), jrRS);
+            JasperViewer jv = new JasperViewer(jpPrint, false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro =" + erro);
+        }
+    }//GEN-LAST:event_jrbGrafDespesasActionPerformed
+
+    private void jrbPReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPReceitasActionPerformed
+        try {
+            conexao.conecta();
+            conexao.executaSql("select DESCRCAT as descrcat, sum(VALOR) AS valor\n"
+                    + "from V_TRANSACOES\n"
+                    + "where TIPO = 'R'\n"
+                    + "group by DESCRCAT, DESCRCONTA;");
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Grafico_pie_Receitas.jasper", new HashMap(), jrRS);
+            JasperViewer jv = new JasperViewer(jpPrint, false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro =" + erro);
+        }
+    }//GEN-LAST:event_jrbPReceitasActionPerformed
+
+    private void jrbPDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPDespesasActionPerformed
+                try {
+            conexao.conecta();
+            conexao.executaSql("select DESCRCAT as descrcat, sum(VALOR)*(-1) AS valor\n"
+                    + "from V_TRANSACOES\n"
+                    + "where TIPO = 'D'\n"
+                    + "group by DESCRCAT, DESCRCONTA;");
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
+            JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Grafico_pie_Despesas.jasper", new HashMap(), jrRS);
+            JasperViewer jv = new JasperViewer(jpPrint, false);
+            jv.setVisible(true);
+            jv.toFront();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro =" + erro);
+        }
+    }//GEN-LAST:event_jrbPDespesasActionPerformed
 
     public static Principal getInstance() { // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)
         if (instancia == null) {
@@ -553,22 +734,26 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelTot;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu19;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu28;
-    private javax.swing.JMenu jMenu35;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelMenuPrincipal;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem10;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem11;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem12;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem13;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem14;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem15;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableLembrete;
     private javax.swing.JTable jTableTransac;
+    private javax.swing.JRadioButtonMenuItem jrbCategorias;
+    private javax.swing.JRadioButtonMenuItem jrbConta;
+    private javax.swing.JRadioButtonMenuItem jrbDespesas;
+    private javax.swing.JRadioButtonMenuItem jrbGrafDespesas;
+    private javax.swing.JRadioButtonMenuItem jrbGrafReceita;
+    private javax.swing.JRadioButtonMenuItem jrbPDespesas;
+    private javax.swing.JRadioButtonMenuItem jrbPReceitas;
+    private javax.swing.JRadioButtonMenuItem jrbReceitas;
+    private javax.swing.JRadioButtonMenuItem jrbTransacoes;
+    private javax.swing.JRadioButtonMenuItem jrbTransferencias;
     // End of variables declaration//GEN-END:variables
 }
