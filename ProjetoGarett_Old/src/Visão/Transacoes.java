@@ -228,6 +228,7 @@ public class Transacoes extends javax.swing.JFrame {
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+        this.setEnabled(false);
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = new java.util.Date();
         Date dataLembrete = new java.util.Date();
@@ -265,6 +266,7 @@ public class Transacoes extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
+        this.setEnabled(false);
         ITransacao telaTransacao = new ITransacao();
         telaTransacao.setVisible(true);
     }//GEN-LAST:event_btNovoActionPerformed

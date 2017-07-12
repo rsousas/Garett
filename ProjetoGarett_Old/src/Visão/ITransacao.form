@@ -125,7 +125,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Nova Transa&#xe7;&#xe3;o"/>
+    <Property name="title" type="java.lang.String" value="Transa&#xe7;&#xe3;o"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -134,6 +134,9 @@
     <SyntheticProperty name="generateSize" type="boolean" value="true"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -403,11 +406,12 @@
                 <Component class="com.toedter.components.JSpinField" name="spParcelar">
                   <Properties>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="maximum" type="int" value="60"/>
                     <Property name="minimum" type="int" value="0"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="330" y="220" width="40" height="-1"/>
+                      <AbsoluteConstraints x="335" y="220" width="45" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -492,6 +496,7 @@
                 </Component>
                 <Component class="com.toedter.components.JSpinField" name="spLembrete1">
                   <Properties>
+                    <Property name="maximum" type="int" value="60"/>
                     <Property name="minimum" type="int" value="0"/>
                   </Properties>
                   <Constraints>

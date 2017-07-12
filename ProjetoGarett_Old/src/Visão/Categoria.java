@@ -40,6 +40,7 @@ public class Categoria extends javax.swing.JFrame {
         jTableCateg = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Categoria");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -142,11 +143,13 @@ public class Categoria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
+        this.setEnabled(false);
         ICategoria telaCategoria = new ICategoria();
         telaCategoria.setVisible(true);
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+       this.setEnabled(false);
         modCategoria.setDescricao((String) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 1));
         modCategoria.setAtivo(("Sim".equals((String) jTableCateg.getValueAt(jTableCateg.getSelectedRow(), 2))));
         modCategoria.setUsuario(usuario);

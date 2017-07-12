@@ -157,11 +157,13 @@ public class Conta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
+        this.setEnabled(false);
         IConta telaConta = new IConta();
         telaConta.setVisible(true);
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+        this.setEnabled(false);
         modConta.setDescricao((String) jTableConta.getValueAt(jTableConta.getSelectedRow(), 1));
         modConta.setSaldo(String.valueOf(jTableConta.getValueAt(jTableConta.getSelectedRow(), 2)));
         modConta.setAtivo("Sim".equals((String) jTableConta.getValueAt(jTableConta.getSelectedRow(), 3)));

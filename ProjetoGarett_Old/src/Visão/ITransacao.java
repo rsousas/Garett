@@ -49,14 +49,13 @@ public class ITransacao extends javax.swing.JFrame {
             cbCategoria.setSelectedItem(transacoes.getCateg());
             cxbConsolidada.setSelected(transacoes.getPago() == 1);
             switch (transacoes.getTipo()) {
-                case "D":
+                case "Despesa":
                     cbTipo.setSelectedIndex(0);
                     break;
-                case "R":
+                case "Receita":
                     cbTipo.setSelectedIndex(1);
                     break;
             }
-            spParcelar.setValue(transacoes.getLembrete());
             pnNota.setText(transacoes.getNota());
             txtDescricao.requestFocus();
         } else {
@@ -217,8 +216,13 @@ public class ITransacao extends javax.swing.JFrame {
         jLabel3.setText("Conta");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Nova Transação");
+        setTitle("Transação");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -292,8 +296,9 @@ public class ITransacao extends javax.swing.JFrame {
         jPanel2.add(cxbConsolidada, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 94, -1));
 
         spParcelar.setEnabled(false);
+        spParcelar.setMaximum(60);
         spParcelar.setMinimum(0);
-        jPanel2.add(spParcelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 40, -1));
+        jPanel2.add(spParcelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 220, 45, -1));
 
         lbLembrete.setText("Lembrete:");
         jPanel2.add(lbLembrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 69, -1));
@@ -320,6 +325,7 @@ public class ITransacao extends javax.swing.JFrame {
         });
         jPanel2.add(cxbParcelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, -1, -1));
 
+        spLembrete1.setMaximum(60);
         spLembrete1.setMinimum(0);
         jPanel2.add(spLembrete1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 62, -1));
 
@@ -496,6 +502,12 @@ public class ITransacao extends javax.swing.JFrame {
     private void cxbParcelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxbParcelarActionPerformed
         spParcelar.setEnabled(cxbParcelar.isSelected());
     }//GEN-LAST:event_cxbParcelarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Transacoes telaTransacoes = Transacoes.getInstance();
+        telaTransacoes.setEnabled(true);
+        setVisible(false);
+    }//GEN-LAST:event_formWindowClosed
 
     private void povoaCombos() {
         MComboBox mConta = new MComboBox(Transac.buscaContas(usuario));

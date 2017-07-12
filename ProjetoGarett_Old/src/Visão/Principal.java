@@ -76,18 +76,6 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-<<<<<<< HEAD
-=======
-        btNovaTransacao.setText("+ Nova Transação");
-        btNovaTransacao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 208, 91), 3));
-        btNovaTransacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btNovaTransacaoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btNovaTransacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 550, 140, 40));
-
->>>>>>> 19e4ef52666377e8c29183b9efeaec4c426fb3ed
         jPanelMenuPrincipal.setBackground(new java.awt.Color(234, 237, 239));
         jPanelMenuPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -402,13 +390,13 @@ public class Principal extends javax.swing.JFrame {
         String[] colunas = new String[]{"Descricao"};
 
         conexao.conecta();
-        conexao.executaSql("select T.DESCRTRA from TRANSACAO T where T.CODUSU = '" + usuario + "' and T.LEMBRETE >= CURRENT_DATE() and T.DATA <= CURRENT_DATE();");
+        conexao.executaSql("select T.NOTA from TRANSACAO T where T.CODUSU = '" + usuario + "' and T.LEMBRETE >= CURRENT_DATE() and T.DATA <= CURRENT_DATE();");
 
         try {
             conexao.rs.beforeFirst();
 
             while (conexao.rs.next()) {
-                dados.add(new Object[]{conexao.rs.getString("DESCRTRA")});
+                dados.add(new Object[]{conexao.rs.getString("NOTA")});
             }
 
         } catch (SQLException ex) {
@@ -422,10 +410,11 @@ public class Principal extends javax.swing.JFrame {
 
         jTableLembrete.setModel(tabela);
 
-        jTableLembrete.getColumnModel().getColumn(0).setPreferredWidth(380);
+        jTableLembrete.getColumnModel().getColumn(0).setPreferredWidth(400);
         jTableLembrete.getColumnModel().getColumn(0).setResizable(false);
+
         jTableLembrete.getTableHeader().setReorderingAllowed(false);
-        jTableLembrete.setAutoResizeMode(jTableLembrete.AUTO_RESIZE_OFF);
+        jTableLembrete.setAutoResizeMode(jTableLembrete.AUTO_RESIZE_ALL_COLUMNS);
 
         jTableLembrete.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -476,17 +465,14 @@ public class Principal extends javax.swing.JFrame {
     public void totalGasto() {
         conexao.conecta();
         if (cxbSaldoAcumulado.isSelected()) {
-            conexao.executaSql("SELECT sum(VALOR) valor\n"
-                    + "from(\n"
-                    + "select format(sum(T.VALOR),2,'de_DE') VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE()) and T.TIPO = 'R'\n"
-                    + "union all\n"
-                    + "select format(sum(T.VALOR),2,'de_DE')*(-1) VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE()) and T.TIPO = 'D') dados;");
+            conexao.executaSql("select format(sum(C.SALDOCON),2,'de_DE') VALOR from CONTA C where C.CODUSU = '" + usuario + "';");
         } else {
-            conexao.executaSql("SELECT sum(VALOR) valor\n"
+            conexao.executaSql("select format(sum(dados.VALOR),2,'de_DE') VALOR\n"
                     + "from(\n"
-                    + "select format(sum(T.VALOR),2,'de_DE') VALOR from TRANSACAO T where T.CODUSU = '" + usuario + "' and T.TIPO = 'R'\n"
+                    + "select sum(T.VALOR)*(-1) VALOR from TRANSACAO T where T.TIPO = 'D' and T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE())\n"
                     + "union all\n"
-                    + "select format(sum(T.VALOR),2,'de_DE')*(-1) VALOR from TRANSACAO T where T.CODUSU = CODUSU and T.TIPO = 'D') dados;");
+                    + "select sum(T.VALOR) VALOR from TRANSACAO T where T.TIPO = 'D' and T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE())\n"
+                    + ") dados");
         }
         try {
             conexao.rs.first();
