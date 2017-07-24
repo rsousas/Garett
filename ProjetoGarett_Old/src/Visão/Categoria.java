@@ -90,8 +90,8 @@ public class Categoria extends javax.swing.JFrame {
         });
         jPanel1.add(btSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 9, -1, -1));
 
-        jLabel2.setText("+ Nova Conta");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 107, -1, -1));
+        jLabel2.setText("+ Nova Categoria");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 107, -1, -1));
 
         jLabel3.setText("Editar");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 107, -1, -1));

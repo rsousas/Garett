@@ -185,7 +185,7 @@ end;
 create view V_TRANSFERENCIAS as
   select concat('Transferência de ', CO.DESCRCON, ' para ', CT.DESCRCON) DESCRICAO, T.DESCRTRA DESCRORIGEM, T.DATA, 
     concat(monthname(T.DATA),'/',year(T.DATA)) as MES_ANO,
-    T.PAGO, T.LEMBRETE, T.NOTA, T.VALOR, CO.DESCRCON CONTAORIGEM, TF.DESCRTRA DESCRDESTINO, CT.DESCRCON CONTADESTINO
+    T.PAGO, T.LEMBRETE, T.NOTA, T.VALOR, CO.DESCRCON CONTAORIGEM, TF.DESCRTRA DESCRDESTINO, CT.DESCRCON CONTADESTINO, T.CODUSU
   from TRANSACAO T
   join TRANSACAO TF on TF.CODTRA = T.CODTRATRANSF and TF.CODUSU = T.CODUSU
   inner join CONTA CO on T.CODCON = CO.CODCON and T.CODUSU = CO.CODUSU
@@ -195,7 +195,7 @@ create view V_TRANSFERENCIAS as
   order by T.DATA desc;  
   
 create or replace view V_TRANSACOES as 
-  select DESCRTRA, DATA, MES_ANO, LEMBRETE, NOTA, VALOR, TIPO, PAGO, DESCRCAT, DESCRCONTA, CONTADESTINO
+  select DESCRTRA, DATA, MES_ANO, LEMBRETE, NOTA, VALOR, TIPO, PAGO, DESCRCAT, DESCRCONTA, CONTADESTINO, CODUSU
   from (
   select T.CODTRA, T.DESCRTRA, T.DATA,
       concat(monthname(T.DATA),'/',year(T.DATA)) as MES_ANO,
@@ -203,7 +203,7 @@ create or replace view V_TRANSACOES as
       case when T.TIPO='R' then T.VALOR else T.VALOR * (-1) end as VALOR, 
       T.TIPO,
       case when T.PAGO = 1 then 'Pago' else 'Pendente' end as PAGO, 
-      CA.DESCRCAT, CO.DESCRCON AS DESCRCONTA, '' CONTADESTINO
+      CA.DESCRCAT, CO.DESCRCON AS DESCRCONTA, '' CONTADESTINO, T.CODUSU
     from TRANSACAO T
     inner join CATEGORIA CA on T.CODCAT = CA.CODCAT
     inner join CONTA CO on T.CODCON = CO.CODCON
@@ -214,7 +214,7 @@ create or replace view V_TRANSACOES as
       concat(monthname(T.DATA),'/',year(T.DATA)) as MES_ANO,
       if(T.LEMBRETE = T.DATA, '', T.LEMBRETE) LEMBRETE, T.NOTA, T.VALOR, 'T', 
       case when T.PAGO = 1 then 'Pago' else 'Pendente' end as PAGO, 
-      '', CO.DESCRCON CONTAORIGEM,  CT.DESCRCON CONTADESTINO
+      '', CO.DESCRCON CONTAORIGEM,  CT.DESCRCON CONTADESTINO, T.CODUSU
     from TRANSACAO T
     join TRANSACAO TF on TF.CODTRA = T.CODTRATRANSF and TF.CODUSU = T.CODUSU
     inner join CONTA CO on T.CODCON = CO.CODCON and T.CODUSU = CO.CODUSU
@@ -240,12 +240,12 @@ BEGIN
 END;
 
 create or replace view V_CATEGORIAS as
- select CODCAT, DESCRCAT, 
+ select CODCAT, DESCRCAT, CODUSU,
  case when ATIVOCAT = 1 then 'Sim' else 'Não' end as ATIVO
  from CATEGORIA;
  
 create or replace view V_CONTAS as
-  select CODCON, DESCRCON, 
+  select CODCON, DESCRCON, CODUSU,
   case when ATIVOCON = 1 then 'Sim' else 'Não' end as ATIVO
   from CONTA;
 

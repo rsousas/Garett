@@ -147,9 +147,10 @@ public class TelaLogin extends javax.swing.JFrame {
 
        if (usuario.validaLogin(modUsuario)) {
             setUsuario(usuario.buscaCodigoUsu(modUsuario));
-            Principal telaPrincipal = Principal.getInstance();
-           // telaPrincipal.setExtendedState(6);
+            Principal telaPrincipal = new Principal();
+            // telaPrincipal.setExtendedState(6);
             telaPrincipal.setVisible(true);
+            telaPrincipal.toFront();
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Dados Incorretos!");

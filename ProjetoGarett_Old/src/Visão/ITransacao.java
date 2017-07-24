@@ -297,7 +297,8 @@ public class ITransacao extends javax.swing.JFrame {
 
         spParcelar.setEnabled(false);
         spParcelar.setMaximum(60);
-        spParcelar.setMinimum(0);
+        spParcelar.setMinimum(1);
+        spParcelar.setValue(1);
         jPanel2.add(spParcelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 220, 45, -1));
 
         lbLembrete.setText("Lembrete:");

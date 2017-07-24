@@ -152,6 +152,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 650, 1100, -1));
 
         cxbSaldoAcumulado.setBackground(new java.awt.Color(255, 255, 255));
+        cxbSaldoAcumulado.setSelected(true);
         cxbSaldoAcumulado.setText("Saldo acumulado");
         cxbSaldoAcumulado.setToolTipText("");
         cxbSaldoAcumulado.addActionListener(new java.awt.event.ActionListener() {
@@ -210,7 +211,8 @@ public class Principal extends javax.swing.JFrame {
         ));
         jTableLembrete.setGridColor(new java.awt.Color(255, 255, 255));
         jTableLembrete.setRowHeight(26);
-        jTableLembrete.setSelectionBackground(new java.awt.Color(50, 74, 94));
+        jTableLembrete.setSelectionBackground(new java.awt.Color(255, 255, 153));
+        jTableLembrete.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jTableLembrete.setShowHorizontalLines(false);
         jTableLembrete.setShowVerticalLines(false);
         jScrollPane3.setViewportView(jTableLembrete);
@@ -401,9 +403,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btContasActionPerformed
 
     private void jrbCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbCategoriasActionPerformed
+        this.setEnabled(false);
         try {
             conexao.conecta();
-            conexao.executaSql("select * from V_CATEGORIAS;");
+            conexao.executaSql("select * from V_CATEGORIAS where CODUSU ='" + usuario + "';");
             JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
             JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Categorias.jasper", new HashMap(), jrRS);
             JasperViewer jv = new JasperViewer(jpPrint, false);
@@ -412,13 +415,18 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro =" + erro);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_jrbCategoriasActionPerformed
 
     private void jrbTransacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTransacoesActionPerformed
+        this.setEnabled(false);
         try {
             conexao.conecta();
             conexao.executaSql("SELECT DESCRCONTA Conta, DATA Data, MES_ANO Mes_Ano, VALOR Valor, TIPO Tipo,\n"
-                    + "PAGO Pago, DESCRCAT Categoria, DESCRTRA Descricao from v_transacoes order by DATA desc;");
+                    + "PAGO Pago, DESCRCAT Categoria, DESCRTRA Descricao \n"
+                    + " from v_transacoes \n"
+                    + " where CODUSU ='" + usuario + "'\n"
+                    + " order by DATA desc;");
             JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
             JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Transacoes.jasper", new HashMap(), jrRS);
             JasperViewer jv = new JasperViewer(jpPrint, false);
@@ -427,15 +435,18 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro =" + erro);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_jrbTransacoesActionPerformed
 
     private void jrbReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbReceitasActionPerformed
+        this.setEnabled(false);
         try {
             conexao.conecta();
             conexao.executaSql("select DESCRCONTA as Conta, DATA AS Data, MES_ANO as Mes_Ano, \n"
                     + "VALOR as Valor, TIPO as Tipo, PAGO as Pago, DESCRCAT as Categoria, DESCRTRA as Descricao\n"
                     + "from V_TRANSACOES\n"
                     + "where TIPO = 'R'\n"
+                    + "and CODUSU ='" + usuario + "'\n"
                     + "order by DATA desc;");
             JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
             JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Receitas.jasper", new HashMap(), jrRS);
@@ -445,15 +456,18 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro =" + erro);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_jrbReceitasActionPerformed
 
     private void jrbDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbDespesasActionPerformed
+        this.setEnabled(false);
         try {
             conexao.conecta();
             conexao.executaSql("select DESCRCONTA as Conta, DATA AS Data, MES_ANO as Mes_Ano, \n"
                     + "VALOR as Valor, TIPO as Tipo, PAGO as Pago, DESCRCAT as Categoria, DESCRTRA as Descricao\n"
                     + "from V_TRANSACOES\n"
                     + "where TIPO = 'D'\n"
+                    + "and CODUSU ='" + usuario + "'\n"
                     + "order by DATA desc;");
             JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
             JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Despesas.jasper", new HashMap(), jrRS);
@@ -463,15 +477,18 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro =" + erro);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_jrbDespesasActionPerformed
 
     private void jrbTransferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTransferenciasActionPerformed
+        this.setEnabled(false);
         try {
             conexao.conecta();
             conexao.executaSql("select DESCRCONTA as Conta, DATA AS Data, MES_ANO as Mes_Ano, \n"
                     + "VALOR as Valor, TIPO as Tipo, PAGO as Pago, DESCRCAT as Categoria, DESCRTRA as Descricao\n"
                     + "from V_TRANSACOES\n"
                     + "where TIPO = 'T'\n"
+                    + "and CODUSU ='" + usuario + "'\n"
                     + "order by DATA desc;");
             JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
             JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Transferencias.jasper", new HashMap(), jrRS);
@@ -481,6 +498,7 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro =" + erro);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_jrbTransferenciasActionPerformed
 
     public void preencheTabelaLembretes() {
@@ -488,7 +506,7 @@ public class Principal extends javax.swing.JFrame {
         String[] colunas = new String[]{"Descricao"};
 
         conexao.conecta();
-        conexao.executaSql("select T.NOTA from TRANSACAO T where T.CODUSU = '" + usuario + "' and T.LEMBRETE >= CURRENT_DATE() and T.DATA <= CURRENT_DATE();");
+        conexao.executaSql("select T.NOTA from TRANSACAO T where T.CODUSU = '" + usuario + "' and T.LEMBRETE >= CURRENT_DATE() and T.DATA <= CURRENT_DATE() and T.NOTA <> '';");
 
         try {
             conexao.rs.beforeFirst();
@@ -567,9 +585,9 @@ public class Principal extends javax.swing.JFrame {
         } else {
             conexao.executaSql("select format(sum(dados.VALOR),2,'de_DE') VALOR\n"
                     + "from(\n"
-                    + "select sum(T.VALOR)*(-1) VALOR from TRANSACAO T where T.TIPO = 'D' and T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE())\n"
+                    + "select sum(T.VALOR)*(-1) VALOR from TRANSACAO T where T.TIPO = 'D' and T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE()) AND T.CODTRATRANSF IS NULL\n"
                     + "union all\n"
-                    + "select sum(T.VALOR) VALOR from TRANSACAO T where T.TIPO = 'D' and T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE())\n"
+                    + "select sum(T.VALOR) VALOR from TRANSACAO T where T.TIPO = 'R' and T.CODUSU = '" + usuario + "' and MONTH(T.DATA) = MONTH(CURRENT_DATE()) and YEAR(T.DATA) = YEAR(CURRENT_DATE()) AND T.CODTRATRANSF IS NULL\n"
                     + ") dados");
         }
         try {
@@ -592,9 +610,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cxbSaldoAcumuladoActionPerformed
 
     private void jrbContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbContaActionPerformed
+        this.setEnabled(false);
         try {
             conexao.conecta();
-            conexao.executaSql("select CODCON, DESCRCON, ATIVO from V_CONTAS;");
+            conexao.executaSql("select CODCON, DESCRCON, ATIVO from V_CONTAS where CODUSU ='" + usuario + "';");
             JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
             JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Contas.jasper", new HashMap(), jrRS);
             JasperViewer jv = new JasperViewer(jpPrint, false);
@@ -603,14 +622,17 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro =" + erro);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_jrbContaActionPerformed
 
     private void jrbGrafReceitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbGrafReceitaActionPerformed
+        this.setEnabled(false);
         try {
             conexao.conecta();
             conexao.executaSql("select DESCRCAT as descrcat, sum(VALOR) AS valor\n"
                     + "from V_TRANSACOES\n"
                     + "where TIPO = 'R'\n"
+                    + "and CODUSU ='" + usuario + "'\n"
                     + "group by DESCRCAT, DESCRCONTA;");
             JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
             JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Grafico_Barras_Receitas.jasper", new HashMap(), jrRS);
@@ -620,14 +642,17 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro =" + erro);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_jrbGrafReceitaActionPerformed
 
     private void jrbGrafDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbGrafDespesasActionPerformed
+        this.setEnabled(false);
         try {
             conexao.conecta();
-            conexao.executaSql("select DESCRCAT as descrcat, sum(VALOR) AS valor\n"
+            conexao.executaSql("select DESCRCAT as descrcat, sum(VALOR)*(-1) AS valor\n"
                     + "from V_TRANSACOES\n"
                     + "where TIPO = 'D'\n"
+                    + "and CODUSU ='" + usuario + "'\n"
                     + "group by DESCRCAT, DESCRCONTA;");
             JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
             JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Grafico_Barras_Despesas.jasper", new HashMap(), jrRS);
@@ -637,14 +662,17 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro =" + erro);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_jrbGrafDespesasActionPerformed
 
     private void jrbPReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPReceitasActionPerformed
+        this.setEnabled(false);
         try {
             conexao.conecta();
             conexao.executaSql("select DESCRCAT as descrcat, sum(VALOR) AS valor\n"
                     + "from V_TRANSACOES\n"
                     + "where TIPO = 'R'\n"
+                    + "and CODUSU ='" + usuario + "'\n"
                     + "group by DESCRCAT, DESCRCONTA;");
             JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
             JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Grafico_pie_Receitas.jasper", new HashMap(), jrRS);
@@ -654,14 +682,17 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro =" + erro);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_jrbPReceitasActionPerformed
 
     private void jrbPDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPDespesasActionPerformed
-                try {
+        this.setEnabled(false);
+        try {
             conexao.conecta();
             conexao.executaSql("select DESCRCAT as descrcat, sum(VALOR)*(-1) AS valor\n"
                     + "from V_TRANSACOES\n"
                     + "where TIPO = 'D'\n"
+                    + "and CODUSU ='" + usuario + "'\n"
                     + "group by DESCRCAT, DESCRCONTA;");
             JRResultSetDataSource jrRS = new JRResultSetDataSource(conexao.rs);
             JasperPrint jpPrint = JasperFillManager.fillReport("relatorios/Grafico_pie_Despesas.jasper", new HashMap(), jrRS);
@@ -671,6 +702,7 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro =" + erro);
         }
+        this.setEnabled(true);
     }//GEN-LAST:event_jrbPDespesasActionPerformed
 
     public static Principal getInstance() { // MÉTODO QUE VERIFICA SE A INSTANCIA JÁ ESTÁ CRIADA (SINGLETON)

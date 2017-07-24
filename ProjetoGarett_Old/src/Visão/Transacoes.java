@@ -5,6 +5,7 @@ import Controle.CTransacoes;
 import Modelo.MTabela;
 import Modelo.MTransacoes;
 import Modelo.MUsuario;
+import java.awt.Color;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -49,10 +50,11 @@ public class Transacoes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTransac = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        btTransferencia = new javax.swing.JButton();
+        btTodos = new javax.swing.JButton();
         btReceitas = new javax.swing.JButton();
         btDespesas = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        btTransferencia1 = new javax.swing.JButton();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -112,8 +114,8 @@ public class Transacoes extends javax.swing.JFrame {
         });
         jPanel1.add(btSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 9, -1, -1));
 
-        jLabel2.setText("+ Nova Conta");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 107, -1, -1));
+        jLabel2.setText("+ Nova Transação");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 107, -1, -1));
 
         jLabel3.setText("Editar");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 107, -1, -1));
@@ -149,15 +151,15 @@ public class Transacoes extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btTransferencia.setText("Transferências");
-        btTransferencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 168, 52), 2));
-        btTransferencia.setContentAreaFilled(false);
-        btTransferencia.addActionListener(new java.awt.event.ActionListener() {
+        btTodos.setText("Todos");
+        btTodos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        btTodos.setContentAreaFilled(false);
+        btTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTransferenciaActionPerformed(evt);
+                btTodosActionPerformed(evt);
             }
         });
-        jPanel2.add(btTransferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 1, 80, -1));
+        jPanel2.add(btTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 100, -1));
 
         btReceitas.setText("Receitas");
         btReceitas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(144, 223, 170), 2));
@@ -167,7 +169,7 @@ public class Transacoes extends javax.swing.JFrame {
                 btReceitasActionPerformed(evt);
             }
         });
-        jPanel2.add(btReceitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(795, 1, 80, -1));
+        jPanel2.add(btReceitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 80, -1));
 
         btDespesas.setText("Despesas");
         btDespesas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 112, 88), 2));
@@ -177,11 +179,21 @@ public class Transacoes extends javax.swing.JFrame {
                 btDespesasActionPerformed(evt);
             }
         });
-        jPanel2.add(btDespesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 1, 80, -1));
+        jPanel2.add(btDespesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 80, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Filtrar por:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 1, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, -1, -1));
+
+        btTransferencia1.setText("Transferências");
+        btTransferencia1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 168, 52), 2));
+        btTransferencia1.setContentAreaFilled(false);
+        btTransferencia1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTransferencia1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btTransferencia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -272,19 +284,20 @@ public class Transacoes extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btDespesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDespesasActionPerformed
+        btTransferencia1.setForeground(Color.black);
+        btDespesas.setForeground(new Color(255, 112, 88));
+        btReceitas.setForeground(Color.black);
         limpaTabela();
         preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.TIPO = 'D' and T.CODTRATRANSF is null and T.CODUSU = " + usuario + " order by CODTRA, DATA");
     }//GEN-LAST:event_btDespesasActionPerformed
 
     private void btReceitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReceitasActionPerformed
+        btTransferencia1.setForeground(Color.black);
+        btDespesas.setForeground(Color.black);
+        btReceitas.setForeground(new Color(144, 223, 170));
         limpaTabela();
         preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.TIPO = 'R' and T.CODTRATRANSF is null and T.CODUSU = " + usuario + " order by CODTRA, DATA");
     }//GEN-LAST:event_btReceitasActionPerformed
-
-    private void btTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTransferenciaActionPerformed
-        limpaTabela();
-        preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.CODTRATRANSF is not null and T.CODUSU = " + usuario + " order by CODTRA, DATA");
-    }//GEN-LAST:event_btTransferenciaActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Principal telaPrincipal = Principal.getInstance();
@@ -296,6 +309,22 @@ public class Transacoes extends javax.swing.JFrame {
         telaPrincipal.toFront();
         instancia = null;
     }//GEN-LAST:event_formWindowClosed
+
+    private void btTransferencia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTransferencia1ActionPerformed
+        btTransferencia1.setForeground(new Color(255, 168, 52));
+        btDespesas.setForeground(Color.black);
+        btReceitas.setForeground(Color.black);
+        limpaTabela();
+        preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.TIPO = 'R' and T.CODTRATRANSF is not null and T.CODUSU = " + usuario + " order by CODTRA, DATA");
+    }//GEN-LAST:event_btTransferencia1ActionPerformed
+
+    private void btTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTodosActionPerformed
+        btTransferencia1.setForeground(Color.black);
+        btDespesas.setForeground(Color.black);
+        btReceitas.setForeground(Color.black);
+        limpaTabela();
+        preencheTabela("select * from TRANSACAO T left join CATEGORIA USING(CODCAT) left join CONTA using (CODCON) join USUARIO U on U.CODUSU = T.CODUSU where T.CODUSU = " + usuario + " order by CODTRA, DATA");
+    }//GEN-LAST:event_btTodosActionPerformed
 
     public void preencheTabela(String Sql) {
         ArrayList dados = new ArrayList();
@@ -410,7 +439,8 @@ public class Transacoes extends javax.swing.JFrame {
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btReceitas;
     private javax.swing.JButton btSair;
-    private javax.swing.JButton btTransferencia;
+    private javax.swing.JButton btTodos;
+    private javax.swing.JButton btTransferencia1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

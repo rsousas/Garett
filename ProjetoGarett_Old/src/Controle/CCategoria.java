@@ -42,7 +42,6 @@ public class CCategoria {
             pst.setInt(2, categoria.getAtivo());
             pst.setString(3, categoria.getUsuario());
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Inserir Categoria:\nErro:" + ex);
         }

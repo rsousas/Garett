@@ -10,7 +10,7 @@
 	<parameter name="P_DTINI" class="java.util.Date"/>
 	<parameter name="P_DTFIM" class="java.util.Date"/>
 	<queryString>
-		<![CDATA[select DESCRCAT as descrcat, sum(VALOR) AS valor
+		<![CDATA[select DESCRCAT as descrcat, sum(VALOR)*(-1) AS valor
 from V_TRANSACOES
 where TIPO = 'D'
 and DATA >= $P{P_DTINI}

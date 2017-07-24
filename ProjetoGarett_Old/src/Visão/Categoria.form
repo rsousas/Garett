@@ -130,11 +130,11 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="+ Nova Conta"/>
+            <Property name="text" type="java.lang.String" value="+ Nova Categoria"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="22" y="107" width="-1" height="-1"/>
+              <AbsoluteConstraints x="15" y="107" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

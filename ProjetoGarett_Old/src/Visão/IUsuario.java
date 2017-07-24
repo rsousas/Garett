@@ -168,13 +168,13 @@ public class IUsuario extends javax.swing.JFrame {
             dispose();
         } else {
             txtNome.requestFocus();
-        }// TODO add your handling code here:
+        }
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         TelaLogin telaLogin = new TelaLogin();
         telaLogin.setVisible(true);
-        dispose();// TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btCancelarActionPerformed
                                           
     /**

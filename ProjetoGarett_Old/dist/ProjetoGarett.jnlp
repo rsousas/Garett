@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ProjetoGarett.jar" size="1901980" download="eager" />
+    <jar href="ProjetoGarett.jar" size="1903062" download="eager" />
     <jar href="lib\AbsoluteLayout.jar" size="2520" download="eager" />
     <jar href="lib\ant-1.7.1.jar" size="1323005" download="eager" />
     <jar href="lib\antlr-2.7.6.jar" size="443432" download="eager" />
